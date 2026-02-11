@@ -37,3 +37,6 @@ public struct MapMatchRouteResponse: Codable, Hashable {
         try container.encodeIfPresent(linearReferences, forKey: .linearReferences)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension MapMatchRouteResponse: Identifiable {}

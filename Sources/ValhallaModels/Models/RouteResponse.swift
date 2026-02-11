@@ -33,3 +33,6 @@ public struct RouteResponse: Codable, Hashable {
         try container.encode(trip, forKey: .trip)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension RouteResponse: Identifiable {}

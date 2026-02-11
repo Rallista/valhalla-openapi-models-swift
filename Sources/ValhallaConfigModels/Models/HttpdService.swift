@@ -16,13 +16,15 @@ public struct HttpdService: Codable, Hashable {
     public var listen: String? = "tcp://_*:8002"
     public var loopback: String? = "ipc:///tmp/loopback"
     public var shutdownSeconds: Int? = 1
+    public var timeoutSeconds: Int? = -1
 
-    public init(drainSeconds: Int? = 28, interrupt: String? = "ipc:///tmp/interrupt", listen: String? = "tcp://_*:8002", loopback: String? = "ipc:///tmp/loopback", shutdownSeconds: Int? = 1) {
+    public init(drainSeconds: Int? = 28, interrupt: String? = "ipc:///tmp/interrupt", listen: String? = "tcp://_*:8002", loopback: String? = "ipc:///tmp/loopback", shutdownSeconds: Int? = 1, timeoutSeconds: Int? = -1) {
         self.drainSeconds = drainSeconds
         self.interrupt = interrupt
         self.listen = listen
         self.loopback = loopback
         self.shutdownSeconds = shutdownSeconds
+        self.timeoutSeconds = timeoutSeconds
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -31,6 +33,7 @@ public struct HttpdService: Codable, Hashable {
         case listen
         case loopback
         case shutdownSeconds = "shutdown_seconds"
+        case timeoutSeconds = "timeout_seconds"
     }
 
     // Encodable protocol methods
@@ -42,5 +45,6 @@ public struct HttpdService: Codable, Hashable {
         try container.encodeIfPresent(listen, forKey: .listen)
         try container.encodeIfPresent(loopback, forKey: .loopback)
         try container.encodeIfPresent(shutdownSeconds, forKey: .shutdownSeconds)
+        try container.encodeIfPresent(timeoutSeconds, forKey: .timeoutSeconds)
     }
 }

@@ -11,9 +11,9 @@ import Foundation
 #endif
 
 public struct MatrixResponse: Codable, Hashable {
-    static let sourcesRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
-    static let targetsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
-    static let sourcesToTargetsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let sourcesRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let targetsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let sourcesToTargetsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     /** The list of starting locations */
@@ -55,3 +55,6 @@ public struct MatrixResponse: Codable, Hashable {
         try container.encode(units, forKey: .units)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension MatrixResponse: Identifiable {}

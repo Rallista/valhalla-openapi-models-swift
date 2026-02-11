@@ -24,13 +24,13 @@ public struct RoutingWaypoint: Codable, Hashable {
         case either
     }
 
-    static let headingRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: 360, exclusiveMaximum: false, multipleOf: nil)
-    static let headingToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: 360, exclusiveMaximum: false, multipleOf: nil)
-    static let minimumReachabilityRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    static let radiusRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    static let nodeSnapToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    static let streetSideToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
-    static let streetSideMaxDistanceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let headingRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: 360, exclusiveMaximum: false, multipleOf: nil)
+    public static let headingToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: 360, exclusiveMaximum: false, multipleOf: nil)
+    public static let minimumReachabilityRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let radiusRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let nodeSnapToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let streetSideToleranceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let streetSideMaxDistanceRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     /** The latitude of a point in the shape. */
     public var lat: Double
     /** The longitude of a point in the shape. */

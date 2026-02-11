@@ -47,3 +47,6 @@ public struct LocateObject: Codable, Hashable {
         try container.encodeIfPresent(edges, forKey: .edges)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension LocateObject: Identifiable {}

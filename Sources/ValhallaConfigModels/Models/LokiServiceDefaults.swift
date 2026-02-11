@@ -13,15 +13,19 @@ import Foundation
 public struct LokiServiceDefaults: Codable, Hashable {
     public var headingTolerance: Int? = 60
     public var minimumReachability: Int? = 50
+    public var mvtCacheMinZoom: Int? = 11
+    public var mvtMinZoomRoadClass: [Int]?
     public var nodeSnapTolerance: Int? = 5
     public var radius: Int? = 0
     public var searchCutoff: Int? = 35000
     public var streetSideMaxDistance: Int? = 1000
     public var streetSideTolerance: Int? = 5
 
-    public init(headingTolerance: Int? = 60, minimumReachability: Int? = 50, nodeSnapTolerance: Int? = 5, radius: Int? = 0, searchCutoff: Int? = 35000, streetSideMaxDistance: Int? = 1000, streetSideTolerance: Int? = 5) {
+    public init(headingTolerance: Int? = 60, minimumReachability: Int? = 50, mvtCacheMinZoom: Int? = 11, mvtMinZoomRoadClass: [Int]? = nil, nodeSnapTolerance: Int? = 5, radius: Int? = 0, searchCutoff: Int? = 35000, streetSideMaxDistance: Int? = 1000, streetSideTolerance: Int? = 5) {
         self.headingTolerance = headingTolerance
         self.minimumReachability = minimumReachability
+        self.mvtCacheMinZoom = mvtCacheMinZoom
+        self.mvtMinZoomRoadClass = mvtMinZoomRoadClass
         self.nodeSnapTolerance = nodeSnapTolerance
         self.radius = radius
         self.searchCutoff = searchCutoff
@@ -32,6 +36,8 @@ public struct LokiServiceDefaults: Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case headingTolerance = "heading_tolerance"
         case minimumReachability = "minimum_reachability"
+        case mvtCacheMinZoom = "mvt_cache_min_zoom"
+        case mvtMinZoomRoadClass = "mvt_min_zoom_road_class"
         case nodeSnapTolerance = "node_snap_tolerance"
         case radius
         case searchCutoff = "search_cutoff"
@@ -45,6 +51,8 @@ public struct LokiServiceDefaults: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(headingTolerance, forKey: .headingTolerance)
         try container.encodeIfPresent(minimumReachability, forKey: .minimumReachability)
+        try container.encodeIfPresent(mvtCacheMinZoom, forKey: .mvtCacheMinZoom)
+        try container.encodeIfPresent(mvtMinZoomRoadClass, forKey: .mvtMinZoomRoadClass)
         try container.encodeIfPresent(nodeSnapTolerance, forKey: .nodeSnapTolerance)
         try container.encodeIfPresent(radius, forKey: .radius)
         try container.encodeIfPresent(searchCutoff, forKey: .searchCutoff)

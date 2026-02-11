@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct OptimizedRouteRequest: Codable, Hashable {
-    static let locationsRule = ArrayRule(minItems: 3, maxItems: nil, uniqueItems: false)
+    public static let locationsRule = ArrayRule(minItems: 3, maxItems: nil, uniqueItems: false)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     /** The list of locations. The first and last are assumed to be the start and end points, and all intermediate points are locations that you want to visit along the way. */
@@ -47,3 +47,6 @@ public struct OptimizedRouteRequest: Codable, Hashable {
         try container.encodeIfPresent(directionsOptions, forKey: .directionsOptions)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension OptimizedRouteRequest: Identifiable {}

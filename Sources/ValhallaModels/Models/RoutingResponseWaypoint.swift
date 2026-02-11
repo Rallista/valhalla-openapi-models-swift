@@ -18,7 +18,7 @@ public struct RoutingResponseWaypoint: Codable, Hashable {
         case breakThrough = "break_through"
     }
 
-    static let originalIndexRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
+    public static let originalIndexRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: nil, exclusiveMaximum: false, multipleOf: nil)
     /** The latitude of a point in the shape. */
     public var lat: Double
     /** The longitude of a point in the shape. */

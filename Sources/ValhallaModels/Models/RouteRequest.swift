@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct RouteRequest: Codable, Hashable {
-    static let locationsRule = ArrayRule(minItems: 2, maxItems: nil, uniqueItems: false)
+    public static let locationsRule = ArrayRule(minItems: 2, maxItems: nil, uniqueItems: false)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     public var locations: [RoutingWaypoint]
@@ -55,3 +55,6 @@ public struct RouteRequest: Codable, Hashable {
         try container.encodeIfPresent(directionsOptions, forKey: .directionsOptions)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension RouteRequest: Identifiable {}

@@ -19,6 +19,30 @@ components:
         type:
           type: string
           default: std_out
+    heirarchy_limits:
+      type: object
+      properties:
+        expand_within_distance:
+          type: object
+          properties:
+            0:
+              type: integer
+              default: 100000000
+            1:
+              type: integer
+              default: 20000
+            2:
+              type: integer
+              default: 5000
+        max_up_transitions:
+          type: object
+          properties:
+            1:
+              type: integer
+              default: 400
+            2:
+              type: integer
+              default: 100
     valhalla_config:
       type: object
       properties:
@@ -67,6 +91,9 @@ components:
             shutdown_seconds:
               type: integer
               default: 1
+            timeout_seconds:
+              type: integer
+              default: -1
     loki:
       type: object
       properties:
@@ -88,6 +115,7 @@ components:
               "expansion",
               "centroid",
               "status",
+              "tile"
             ]
         logging:
           type: object
@@ -119,6 +147,14 @@ components:
             minimum_reachability:
               type: integer
               default: 50
+            mvt_cache_min_zoom:
+              type: integer
+              default: 11
+            mvt_min_zoom_road_class:
+              type: array
+              items:
+                type: integer
+              default: [7, 7, 8, 11, 11, 12, 13, 14]
             node_snap_tolerance:
               type: integer
               default: 5
@@ -264,6 +300,9 @@ components:
             apply_country_overrides:
               type: boolean
               default: true
+            grid_divisions_within_tile:
+              type: integer
+              default: 32
             infer_internal_intersections:
               type: boolean
               default: true
@@ -312,6 +351,18 @@ components:
         include_pedestrian:
           type: boolean
           default: true
+        include_platforms:
+          type: boolean
+          default: true
+        keep_all_osm_node_ids:
+          type: boolean
+          default: false
+        keep_osm_node_ids:
+          type: boolean
+          default: false
+        landmarks:
+          type: string
+          default: /custom_data/landmarks.sqlite
         logging:
           $ref: "#/components/schemas/logging"
         lru_mem_cache_hard_control:
@@ -347,6 +398,9 @@ components:
         transit_feeds_dir:
           type: string
           default: ""
+        transit_pbf_limit:
+          type: integer
+          default: 20000
         use_lru_mem_cache:
           type: boolean
           default: false
@@ -376,6 +430,9 @@ components:
     service_limits:
       type: object
       properties:
+        allow_hard_exclusions:
+          type: boolean
+          default: false
         auto:
           type: object
           properties:
@@ -445,6 +502,84 @@ components:
             max_locations:
               type: integer
               default: 5
+        heirarchy_limits:
+          type: object
+          properties:
+            allow_modifications:
+              type: boolean
+              default: false
+            bidirectional_astar:
+              type: object
+              properties:
+                max_allowed_up_transitions:
+                  type: object
+                  properties:
+                    1:
+                      type: integer
+                      default: 400
+                    2:
+                      type: integer
+                      default: 100
+                max_expand_within_distance:
+                  type: object
+                  properties:
+                    0:
+                      type: integer
+                      default: 100000000
+                    1:
+                      type: integer
+                      default: 20000
+                    2:
+                      type: integer
+                      default: 5000
+            costmatrix:
+              type: object
+              properties:
+                max_allowed_up_transitions:
+                  type: object
+                  properties:
+                    1:
+                      type: integer
+                      default: 400
+                    2:
+                      type: integer
+                      default: 100
+                max_expand_within_distance:
+                  type: object
+                  properties:
+                    0:
+                      type: integer
+                      default: 100000000
+                    1:
+                      type: integer
+                      default: 100000
+                    2:
+                      type: integer
+                      default: 5000
+            unidirectional_astar:
+              type: object
+              properties:
+                max_allowed_up_transitions:
+                  type: object
+                  properties:
+                    1:
+                      type: integer
+                      default: 400
+                    2:
+                      type: integer
+                      default: 100
+                max_expand_within_distance:
+                  type: object
+                  properties:
+                    0:
+                      type: integer
+                      default: 100000000
+                    1:
+                      type: integer
+                      default: 100000
+                    2:
+                      type: integer
+                      default: 5000
         isochrone:
           type: object
           properties:
@@ -466,12 +601,18 @@ components:
         max_alternates:
           type: integer
           default: 2
+        max_distance_disable_hierarchy_culling:
+          type: integer
+          default: 0
         max_exclude_locations:
           type: integer
           default: 50
         max_exclude_polygons_length:
           type: integer
           default: 10000
+        max_linear_cost_edges:
+          type: integer
+          default: 50000
         max_radius:
           type: integer
           default: 200
@@ -484,6 +625,9 @@ components:
         max_timedep_distance_matrix:
           type: integer
           default: 0
+        min_linear_cost_factor:
+          type: integer
+          default: 1
         motor_scooter:
           type: object
           properties:
@@ -643,9 +787,43 @@ components:
     thor:
       type: object
       properties:
+        bidirectional_astar:
+          type: object
+          properties:
+            alternative_cost_extend:
+              type: number
+              default: 1.0
+            alternative_iterations_delta:
+              type: integer
+              default: 100000
+            heirarchy_limits:
+              $ref: "#/components/schemas/heirarchy_limits"
+            threshold_delta:
+              type: integer
+              default: 420
         clear_reserved_memory:
           type: boolean
           default: false
+        costmatrix:
+          type: object
+          properties:
+            allow_second_pass:
+              type: boolean
+              default: false
+            check_reverse_connection:
+              type: boolean
+              default: true
+            heirarchy_limits:
+              $ref: "#/components/schemas/heirarchy_limits"
+            max_interations:
+              type: integer
+              default: 2800
+            max_reserved_locations:
+              type: integer
+              default: 25
+            min_iterations:
+              type: integer
+              default: 100
         extended_search:
           type: boolean
           default: false
@@ -664,9 +842,18 @@ components:
             type:
               type: string
               default: std_out
-        max_reserved_labels_count:
+        max_reserved_labels_count_astar:
+          type: integer
+          default: 2000000
+        max_reserved_labels_count_bidir_astar:
           type: integer
           default: 1000000
+        max_reserved_labels_count_bidir_dijkstras:
+          type: integer
+          default: 2000000
+        max_reserved_labels_count_dijkstras:
+          type: integer
+          default: 4000000
         service:
           type: object
           properties:
@@ -676,3 +863,8 @@ components:
         source_to_target_algorithm:
           type: string
           default: select_optimal
+        unidirectional_astar:
+          type: object
+          properties:
+            heirarchy_limits:
+              $ref: "#/components/schemas/heirarchy_limits"

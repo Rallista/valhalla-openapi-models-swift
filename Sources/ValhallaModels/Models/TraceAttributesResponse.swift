@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct TraceAttributesResponse: Codable, Hashable {
-    static let confidenceScoreRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let confidenceScoreRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     /** The list of edges matched along the path. */
     public var edges: [TraceEdge]?
     /** The set of administrative regions matched along the path. Rather than repeating this information for every end node, the admins in this list are referenced by index. */
@@ -67,3 +67,6 @@ public struct TraceAttributesResponse: Codable, Hashable {
         try container.encodeIfPresent(alternatePaths, forKey: .alternatePaths)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension TraceAttributesResponse: Identifiable {}
