@@ -267,3 +267,6 @@ public struct TraceEdge: Codable, Hashable {
         try container.encodeIfPresent(endNode, forKey: .endNode)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension TraceEdge: Identifiable {}

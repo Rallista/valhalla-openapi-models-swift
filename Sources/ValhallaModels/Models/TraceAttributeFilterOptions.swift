@@ -16,7 +16,7 @@ public struct TraceAttributeFilterOptions: Codable, Hashable {
         case exclude
     }
 
-    static let attributesRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let attributesRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
     public var attributes: [TraceAttributeKey]
     /** Determines whether the list of attributes will be used as a whitelist or a blacklist. */
     public var action: Action

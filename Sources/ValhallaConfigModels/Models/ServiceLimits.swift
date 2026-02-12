@@ -11,19 +11,24 @@ import Foundation
 #endif
 
 public struct ServiceLimits: Codable, Hashable {
+    public var allowHardExclusions: Bool? = false
     public var auto: ServiceLimitsAuto?
     public var bicycle: ServiceLimitsBicycle?
     public var bikeshare: ServiceLimitsBicycle?
     public var bus: ServiceLimitsBus?
     public var centroid: ServiceLimitsCentroid?
+    public var heirarchyLimits: ServiceLimitsHeirarchyLimits?
     public var isochrone: ServiceLimitsIsochrone?
     public var maxAlternates: Int? = 2
+    public var maxDistanceDisableHierarchyCulling: Int? = 0
     public var maxExcludeLocations: Int? = 50
     public var maxExcludePolygonsLength: Int? = 10000
+    public var maxLinearCostEdges: Int? = 50000
     public var maxRadius: Int? = 200
     public var maxReachability: Int? = 100
     public var maxTimedepDistance: Int? = 500_000
     public var maxTimedepDistanceMatrix: Int? = 0
+    public var minLinearCostFactor: Int? = 1
     public var motorScooter: ServiceLimitsBicycle?
     public var motorcycle: ServiceLimitsBicycle?
     public var multimodal: ServiceLimitsMultimodal?
@@ -35,20 +40,25 @@ public struct ServiceLimits: Codable, Hashable {
     public var transit: ServiceLimitsBicycle?
     public var truck: ServiceLimitsAuto?
 
-    public init(auto: ServiceLimitsAuto? = nil, bicycle: ServiceLimitsBicycle? = nil, bikeshare: ServiceLimitsBicycle? = nil, bus: ServiceLimitsBus? = nil, centroid: ServiceLimitsCentroid? = nil, isochrone: ServiceLimitsIsochrone? = nil, maxAlternates: Int? = 2, maxExcludeLocations: Int? = 50, maxExcludePolygonsLength: Int? = 10000, maxRadius: Int? = 200, maxReachability: Int? = 100, maxTimedepDistance: Int? = 500_000, maxTimedepDistanceMatrix: Int? = 0, motorScooter: ServiceLimitsBicycle? = nil, motorcycle: ServiceLimitsBicycle? = nil, multimodal: ServiceLimitsMultimodal? = nil, pedestrian: ServiceLimitsPedestrian? = nil, skadi: ServiceLimitsSkadi? = nil, status: ServiceLimitsStatus? = nil, taxi: ServiceLimitsAuto? = nil, trace: ServiceLimitsTrace? = nil, transit: ServiceLimitsBicycle? = nil, truck: ServiceLimitsAuto? = nil) {
+    public init(allowHardExclusions: Bool? = false, auto: ServiceLimitsAuto? = nil, bicycle: ServiceLimitsBicycle? = nil, bikeshare: ServiceLimitsBicycle? = nil, bus: ServiceLimitsBus? = nil, centroid: ServiceLimitsCentroid? = nil, heirarchyLimits: ServiceLimitsHeirarchyLimits? = nil, isochrone: ServiceLimitsIsochrone? = nil, maxAlternates: Int? = 2, maxDistanceDisableHierarchyCulling: Int? = 0, maxExcludeLocations: Int? = 50, maxExcludePolygonsLength: Int? = 10000, maxLinearCostEdges: Int? = 50000, maxRadius: Int? = 200, maxReachability: Int? = 100, maxTimedepDistance: Int? = 500_000, maxTimedepDistanceMatrix: Int? = 0, minLinearCostFactor: Int? = 1, motorScooter: ServiceLimitsBicycle? = nil, motorcycle: ServiceLimitsBicycle? = nil, multimodal: ServiceLimitsMultimodal? = nil, pedestrian: ServiceLimitsPedestrian? = nil, skadi: ServiceLimitsSkadi? = nil, status: ServiceLimitsStatus? = nil, taxi: ServiceLimitsAuto? = nil, trace: ServiceLimitsTrace? = nil, transit: ServiceLimitsBicycle? = nil, truck: ServiceLimitsAuto? = nil) {
+        self.allowHardExclusions = allowHardExclusions
         self.auto = auto
         self.bicycle = bicycle
         self.bikeshare = bikeshare
         self.bus = bus
         self.centroid = centroid
+        self.heirarchyLimits = heirarchyLimits
         self.isochrone = isochrone
         self.maxAlternates = maxAlternates
+        self.maxDistanceDisableHierarchyCulling = maxDistanceDisableHierarchyCulling
         self.maxExcludeLocations = maxExcludeLocations
         self.maxExcludePolygonsLength = maxExcludePolygonsLength
+        self.maxLinearCostEdges = maxLinearCostEdges
         self.maxRadius = maxRadius
         self.maxReachability = maxReachability
         self.maxTimedepDistance = maxTimedepDistance
         self.maxTimedepDistanceMatrix = maxTimedepDistanceMatrix
+        self.minLinearCostFactor = minLinearCostFactor
         self.motorScooter = motorScooter
         self.motorcycle = motorcycle
         self.multimodal = multimodal
@@ -62,19 +72,24 @@ public struct ServiceLimits: Codable, Hashable {
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case allowHardExclusions = "allow_hard_exclusions"
         case auto
         case bicycle
         case bikeshare
         case bus
         case centroid
+        case heirarchyLimits = "heirarchy_limits"
         case isochrone
         case maxAlternates = "max_alternates"
+        case maxDistanceDisableHierarchyCulling = "max_distance_disable_hierarchy_culling"
         case maxExcludeLocations = "max_exclude_locations"
         case maxExcludePolygonsLength = "max_exclude_polygons_length"
+        case maxLinearCostEdges = "max_linear_cost_edges"
         case maxRadius = "max_radius"
         case maxReachability = "max_reachability"
         case maxTimedepDistance = "max_timedep_distance"
         case maxTimedepDistanceMatrix = "max_timedep_distance_matrix"
+        case minLinearCostFactor = "min_linear_cost_factor"
         case motorScooter = "motor_scooter"
         case motorcycle
         case multimodal
@@ -91,19 +106,24 @@ public struct ServiceLimits: Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(allowHardExclusions, forKey: .allowHardExclusions)
         try container.encodeIfPresent(auto, forKey: .auto)
         try container.encodeIfPresent(bicycle, forKey: .bicycle)
         try container.encodeIfPresent(bikeshare, forKey: .bikeshare)
         try container.encodeIfPresent(bus, forKey: .bus)
         try container.encodeIfPresent(centroid, forKey: .centroid)
+        try container.encodeIfPresent(heirarchyLimits, forKey: .heirarchyLimits)
         try container.encodeIfPresent(isochrone, forKey: .isochrone)
         try container.encodeIfPresent(maxAlternates, forKey: .maxAlternates)
+        try container.encodeIfPresent(maxDistanceDisableHierarchyCulling, forKey: .maxDistanceDisableHierarchyCulling)
         try container.encodeIfPresent(maxExcludeLocations, forKey: .maxExcludeLocations)
         try container.encodeIfPresent(maxExcludePolygonsLength, forKey: .maxExcludePolygonsLength)
+        try container.encodeIfPresent(maxLinearCostEdges, forKey: .maxLinearCostEdges)
         try container.encodeIfPresent(maxRadius, forKey: .maxRadius)
         try container.encodeIfPresent(maxReachability, forKey: .maxReachability)
         try container.encodeIfPresent(maxTimedepDistance, forKey: .maxTimedepDistance)
         try container.encodeIfPresent(maxTimedepDistanceMatrix, forKey: .maxTimedepDistanceMatrix)
+        try container.encodeIfPresent(minLinearCostFactor, forKey: .minLinearCostFactor)
         try container.encodeIfPresent(motorScooter, forKey: .motorScooter)
         try container.encodeIfPresent(motorcycle, forKey: .motorcycle)
         try container.encodeIfPresent(multimodal, forKey: .multimodal)

@@ -11,13 +11,13 @@ import Foundation
 #endif
 
 public struct PedestrianCostingOptions: Codable, Hashable {
-    static let walkingSpeedRule = NumericRule<Double>(minimum: 0.5, exclusiveMinimum: false, maximum: 25, exclusiveMaximum: false, multipleOf: nil)
-    static let useFerryRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let useLivingStreetsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let useTracksRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let useHillsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let useLitRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let maxHikingDifficultyRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: 6, exclusiveMaximum: false, multipleOf: nil)
+    public static let walkingSpeedRule = NumericRule<Double>(minimum: 0.5, exclusiveMinimum: false, maximum: 25, exclusiveMaximum: false, multipleOf: nil)
+    public static let useFerryRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useLivingStreetsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useTracksRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useHillsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useLitRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let maxHikingDifficultyRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: 6, exclusiveMaximum: false, multipleOf: nil)
     /** Walking speed in kph. */
     public var walkingSpeed: Double? = 5.1
     /** A factor that multiplies the cost when walkways are encountered. */

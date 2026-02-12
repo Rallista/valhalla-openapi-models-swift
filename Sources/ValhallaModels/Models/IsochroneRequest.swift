@@ -11,8 +11,8 @@ import Foundation
 #endif
 
 public struct IsochroneRequest: Codable, Hashable {
-    static let contoursRule = ArrayRule(minItems: 1, maxItems: 4, uniqueItems: false)
-    static let denoiseRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let contoursRule = ArrayRule(minItems: 1, maxItems: 4, uniqueItems: false)
+    public static let denoiseRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     public var locations: [Coordinate]
@@ -67,3 +67,6 @@ public struct IsochroneRequest: Codable, Hashable {
         try container.encodeIfPresent(showLocations, forKey: .showLocations)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension IsochroneRequest: Identifiable {}

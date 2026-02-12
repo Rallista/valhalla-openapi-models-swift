@@ -11,40 +11,64 @@ import Foundation
 #endif
 
 public struct Thor: Codable, Hashable {
+    public var bidirectionalAstar: ThorBidirectionalAstar?
     public var clearReservedMemory: Bool? = false
+    public var costmatrix: ThorCostmatrix?
     public var extendedSearch: Bool? = false
     public var logging: ThorLogging?
-    public var maxReservedLabelsCount: Int? = 1_000_000
+    public var maxReservedLabelsCountAstar: Int? = 2_000_000
+    public var maxReservedLabelsCountBidirAstar: Int? = 1_000_000
+    public var maxReservedLabelsCountBidirDijkstras: Int? = 2_000_000
+    public var maxReservedLabelsCountDijkstras: Int? = 4_000_000
     public var service: ThorService?
     public var sourceToTargetAlgorithm: String? = "select_optimal"
+    public var unidirectionalAstar: ThorUnidirectionalAstar?
 
-    public init(clearReservedMemory: Bool? = false, extendedSearch: Bool? = false, logging: ThorLogging? = nil, maxReservedLabelsCount: Int? = 1_000_000, service: ThorService? = nil, sourceToTargetAlgorithm: String? = "select_optimal") {
+    public init(bidirectionalAstar: ThorBidirectionalAstar? = nil, clearReservedMemory: Bool? = false, costmatrix: ThorCostmatrix? = nil, extendedSearch: Bool? = false, logging: ThorLogging? = nil, maxReservedLabelsCountAstar: Int? = 2_000_000, maxReservedLabelsCountBidirAstar: Int? = 1_000_000, maxReservedLabelsCountBidirDijkstras: Int? = 2_000_000, maxReservedLabelsCountDijkstras: Int? = 4_000_000, service: ThorService? = nil, sourceToTargetAlgorithm: String? = "select_optimal", unidirectionalAstar: ThorUnidirectionalAstar? = nil) {
+        self.bidirectionalAstar = bidirectionalAstar
         self.clearReservedMemory = clearReservedMemory
+        self.costmatrix = costmatrix
         self.extendedSearch = extendedSearch
         self.logging = logging
-        self.maxReservedLabelsCount = maxReservedLabelsCount
+        self.maxReservedLabelsCountAstar = maxReservedLabelsCountAstar
+        self.maxReservedLabelsCountBidirAstar = maxReservedLabelsCountBidirAstar
+        self.maxReservedLabelsCountBidirDijkstras = maxReservedLabelsCountBidirDijkstras
+        self.maxReservedLabelsCountDijkstras = maxReservedLabelsCountDijkstras
         self.service = service
         self.sourceToTargetAlgorithm = sourceToTargetAlgorithm
+        self.unidirectionalAstar = unidirectionalAstar
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case bidirectionalAstar = "bidirectional_astar"
         case clearReservedMemory = "clear_reserved_memory"
+        case costmatrix
         case extendedSearch = "extended_search"
         case logging
-        case maxReservedLabelsCount = "max_reserved_labels_count"
+        case maxReservedLabelsCountAstar = "max_reserved_labels_count_astar"
+        case maxReservedLabelsCountBidirAstar = "max_reserved_labels_count_bidir_astar"
+        case maxReservedLabelsCountBidirDijkstras = "max_reserved_labels_count_bidir_dijkstras"
+        case maxReservedLabelsCountDijkstras = "max_reserved_labels_count_dijkstras"
         case service
         case sourceToTargetAlgorithm = "source_to_target_algorithm"
+        case unidirectionalAstar = "unidirectional_astar"
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(bidirectionalAstar, forKey: .bidirectionalAstar)
         try container.encodeIfPresent(clearReservedMemory, forKey: .clearReservedMemory)
+        try container.encodeIfPresent(costmatrix, forKey: .costmatrix)
         try container.encodeIfPresent(extendedSearch, forKey: .extendedSearch)
         try container.encodeIfPresent(logging, forKey: .logging)
-        try container.encodeIfPresent(maxReservedLabelsCount, forKey: .maxReservedLabelsCount)
+        try container.encodeIfPresent(maxReservedLabelsCountAstar, forKey: .maxReservedLabelsCountAstar)
+        try container.encodeIfPresent(maxReservedLabelsCountBidirAstar, forKey: .maxReservedLabelsCountBidirAstar)
+        try container.encodeIfPresent(maxReservedLabelsCountBidirDijkstras, forKey: .maxReservedLabelsCountBidirDijkstras)
+        try container.encodeIfPresent(maxReservedLabelsCountDijkstras, forKey: .maxReservedLabelsCountDijkstras)
         try container.encodeIfPresent(service, forKey: .service)
         try container.encodeIfPresent(sourceToTargetAlgorithm, forKey: .sourceToTargetAlgorithm)
+        try container.encodeIfPresent(unidirectionalAstar, forKey: .unidirectionalAstar)
     }
 }

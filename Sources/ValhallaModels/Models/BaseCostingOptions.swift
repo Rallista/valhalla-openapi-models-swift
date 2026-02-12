@@ -11,8 +11,8 @@ import Foundation
 #endif
 
 public struct BaseCostingOptions: Codable, Hashable {
-    static let useLivingStreetsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
-    static let useFerryRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useLivingStreetsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let useFerryRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     /** A penalty (in seconds) applied when transitioning between roads (determined by name). */
     public var maneuverPenalty: Int? = 5
     /** The estimated cost (in seconds) when a gate is encountered. */

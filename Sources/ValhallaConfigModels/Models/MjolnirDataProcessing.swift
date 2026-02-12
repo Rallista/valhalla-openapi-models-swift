@@ -13,6 +13,7 @@ import Foundation
 public struct MjolnirDataProcessing: Codable, Hashable {
     public var allowAltName: Bool? = false
     public var applyCountryOverrides: Bool? = true
+    public var gridDivisionsWithinTile: Int? = 32
     public var inferInternalIntersections: Bool? = true
     public var inferTurnChannels: Bool? = true
     public var scanTar: Bool? = false
@@ -21,9 +22,10 @@ public struct MjolnirDataProcessing: Codable, Hashable {
     public var useRestArea: Bool? = false
     public var useUrbanTag: Bool? = false
 
-    public init(allowAltName: Bool? = false, applyCountryOverrides: Bool? = true, inferInternalIntersections: Bool? = true, inferTurnChannels: Bool? = true, scanTar: Bool? = false, useAdminDb: Bool? = true, useDirectionOnWays: Bool? = false, useRestArea: Bool? = false, useUrbanTag: Bool? = false) {
+    public init(allowAltName: Bool? = false, applyCountryOverrides: Bool? = true, gridDivisionsWithinTile: Int? = 32, inferInternalIntersections: Bool? = true, inferTurnChannels: Bool? = true, scanTar: Bool? = false, useAdminDb: Bool? = true, useDirectionOnWays: Bool? = false, useRestArea: Bool? = false, useUrbanTag: Bool? = false) {
         self.allowAltName = allowAltName
         self.applyCountryOverrides = applyCountryOverrides
+        self.gridDivisionsWithinTile = gridDivisionsWithinTile
         self.inferInternalIntersections = inferInternalIntersections
         self.inferTurnChannels = inferTurnChannels
         self.scanTar = scanTar
@@ -36,6 +38,7 @@ public struct MjolnirDataProcessing: Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case allowAltName = "allow_alt_name"
         case applyCountryOverrides = "apply_country_overrides"
+        case gridDivisionsWithinTile = "grid_divisions_within_tile"
         case inferInternalIntersections = "infer_internal_intersections"
         case inferTurnChannels = "infer_turn_channels"
         case scanTar = "scan_tar"
@@ -51,6 +54,7 @@ public struct MjolnirDataProcessing: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(allowAltName, forKey: .allowAltName)
         try container.encodeIfPresent(applyCountryOverrides, forKey: .applyCountryOverrides)
+        try container.encodeIfPresent(gridDivisionsWithinTile, forKey: .gridDivisionsWithinTile)
         try container.encodeIfPresent(inferInternalIntersections, forKey: .inferInternalIntersections)
         try container.encodeIfPresent(inferTurnChannels, forKey: .inferTurnChannels)
         try container.encodeIfPresent(scanTar, forKey: .scanTar)

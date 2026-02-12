@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct TraceAttributesBaseResponse: Codable, Hashable {
-    static let confidenceScoreRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let confidenceScoreRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     /** The list of edges matched along the path. */
     public var edges: [TraceEdge]?
     /** The set of administrative regions matched along the path. Rather than repeating this information for every end node, the admins in this list are referenced by index. */

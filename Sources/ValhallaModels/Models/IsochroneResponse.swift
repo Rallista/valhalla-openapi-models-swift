@@ -40,3 +40,6 @@ public struct IsochroneResponse: Codable, Hashable {
         try container.encode(type, forKey: .type)
     }
 }
+
+@available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
+extension IsochroneResponse: Identifiable {}

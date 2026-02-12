@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct NearestRoadsRequest: Codable, Hashable {
-    static let locationsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let locationsRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
     public var locations: [Coordinate]
     public var costing: CostingModel?
     public var costingOptions: CostingOptions?
