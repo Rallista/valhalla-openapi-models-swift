@@ -386,6 +386,12 @@ components:
         tile_extract:
           type: string
           default: ""
+        tile_url:
+          type: string
+          default: ""
+        tile_url_gz:
+          type: boolean
+          default: false
         timezone:
           type: string
           default: timezones.sqlite

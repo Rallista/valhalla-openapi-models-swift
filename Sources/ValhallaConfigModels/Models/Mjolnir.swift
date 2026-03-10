@@ -34,6 +34,8 @@ public struct Mjolnir: Codable, Hashable {
     public var shortcuts: Bool? = true
     public var tileDir: String? = ""
     public var tileExtract: String? = ""
+    public var tileUrl: String? = ""
+    public var tileUrlGz: Bool? = false
     public var timezone: String? = "timezones.sqlite"
     public var trafficExtract: String? = ""
     public var transitDir: String? = ""
@@ -42,7 +44,7 @@ public struct Mjolnir: Codable, Hashable {
     public var useLruMemCache: Bool? = false
     public var useSimpleMemCache: Bool? = false
 
-    public init(admin: String? = "/custom_data/admins.sqlite", dataProcessing: MjolnirDataProcessing? = nil, globalSynchronizedCache: Bool? = false, hierarchy: Bool? = true, idTableSize: Int? = 1_300_000_000, importBikeShareStations: Bool? = false, includeBicycle: Bool? = true, includeConstruction: Bool? = false, includeDriveways: Bool? = true, includeDriving: Bool? = true, includePedestrian: Bool? = true, includePlatforms: Bool? = true, keepAllOsmNodeIds: Bool? = false, keepOsmNodeIds: Bool? = false, landmarks: String? = "/custom_data/landmarks.sqlite", logging: Logging? = nil, lruMemCacheHardControl: Bool? = false, maxCacheSize: Int? = 1_000_000_000, maxConcurrentReaderUsers: Int? = 1, reclassifyLinks: Bool? = true, shortcuts: Bool? = true, tileDir: String? = "", tileExtract: String? = "", timezone: String? = "timezones.sqlite", trafficExtract: String? = "", transitDir: String? = "", transitFeedsDir: String? = "", transitPbfLimit: Int? = 20000, useLruMemCache: Bool? = false, useSimpleMemCache: Bool? = false) {
+    public init(admin: String? = "/custom_data/admins.sqlite", dataProcessing: MjolnirDataProcessing? = nil, globalSynchronizedCache: Bool? = false, hierarchy: Bool? = true, idTableSize: Int? = 1_300_000_000, importBikeShareStations: Bool? = false, includeBicycle: Bool? = true, includeConstruction: Bool? = false, includeDriveways: Bool? = true, includeDriving: Bool? = true, includePedestrian: Bool? = true, includePlatforms: Bool? = true, keepAllOsmNodeIds: Bool? = false, keepOsmNodeIds: Bool? = false, landmarks: String? = "/custom_data/landmarks.sqlite", logging: Logging? = nil, lruMemCacheHardControl: Bool? = false, maxCacheSize: Int? = 1_000_000_000, maxConcurrentReaderUsers: Int? = 1, reclassifyLinks: Bool? = true, shortcuts: Bool? = true, tileDir: String? = "", tileExtract: String? = "", tileUrl: String? = "", tileUrlGz: Bool? = false, timezone: String? = "timezones.sqlite", trafficExtract: String? = "", transitDir: String? = "", transitFeedsDir: String? = "", transitPbfLimit: Int? = 20000, useLruMemCache: Bool? = false, useSimpleMemCache: Bool? = false) {
         self.admin = admin
         self.dataProcessing = dataProcessing
         self.globalSynchronizedCache = globalSynchronizedCache
@@ -66,6 +68,8 @@ public struct Mjolnir: Codable, Hashable {
         self.shortcuts = shortcuts
         self.tileDir = tileDir
         self.tileExtract = tileExtract
+        self.tileUrl = tileUrl
+        self.tileUrlGz = tileUrlGz
         self.timezone = timezone
         self.trafficExtract = trafficExtract
         self.transitDir = transitDir
@@ -99,6 +103,8 @@ public struct Mjolnir: Codable, Hashable {
         case shortcuts
         case tileDir = "tile_dir"
         case tileExtract = "tile_extract"
+        case tileUrl = "tile_url"
+        case tileUrlGz = "tile_url_gz"
         case timezone
         case trafficExtract = "traffic_extract"
         case transitDir = "transit_dir"
@@ -135,6 +141,8 @@ public struct Mjolnir: Codable, Hashable {
         try container.encodeIfPresent(shortcuts, forKey: .shortcuts)
         try container.encodeIfPresent(tileDir, forKey: .tileDir)
         try container.encodeIfPresent(tileExtract, forKey: .tileExtract)
+        try container.encodeIfPresent(tileUrl, forKey: .tileUrl)
+        try container.encodeIfPresent(tileUrlGz, forKey: .tileUrlGz)
         try container.encodeIfPresent(timezone, forKey: .timezone)
         try container.encodeIfPresent(trafficExtract, forKey: .trafficExtract)
         try container.encodeIfPresent(transitDir, forKey: .transitDir)
