@@ -705,10 +705,6 @@ components:
             - geojson
             - no_shape
           default: polyline6
-        banner_instructions:
-          type: boolean
-        voice_instructions:
-          type: boolean
         alternates:
           type: integer
     distanceUnit:
@@ -1313,6 +1309,10 @@ components:
           example: [[[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]]
         directions_options:
           $ref: "#/components/schemas/directionsOptions"
+        banner_instructions:
+          type: boolean
+        voice_instructions:
+          type: boolean
       required:
         - locations
         - costing
