@@ -7,10 +7,11 @@
 
 import Foundation
 #if canImport(AnyCodable)
-    import AnyCodable
+import AnyCodable
 #endif
 
 public struct RouteRequest: Codable, Hashable {
+
     public static let locationsRule = ArrayRule(minItems: 2, maxItems: nil, uniqueItems: false)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
@@ -21,8 +22,10 @@ public struct RouteRequest: Codable, Hashable {
     /** One or multiple exterior rings of polygons in the form of nested JSON arrays. Roads intersecting these rings will be avoided during path finding. Open rings will be closed automatically. */
     public var avoidPolygons: [[[Double]]]?
     public var directionsOptions: DirectionsOptions?
+    public var bannerInstructions: Bool?
+    public var voiceInstructions: Bool?
 
-    public init(id: String? = nil, locations: [RoutingWaypoint], costing: CostingModel, costingOptions: CostingOptions? = nil, avoidLocations: [RoutingWaypoint]? = nil, avoidPolygons: [[[Double]]]? = nil, directionsOptions: DirectionsOptions? = nil) {
+    public init(id: String? = nil, locations: [RoutingWaypoint], costing: CostingModel, costingOptions: CostingOptions? = nil, avoidLocations: [RoutingWaypoint]? = nil, avoidPolygons: [[[Double]]]? = nil, directionsOptions: DirectionsOptions? = nil, bannerInstructions: Bool? = nil, voiceInstructions: Bool? = nil) {
         self.id = id
         self.locations = locations
         self.costing = costing
@@ -30,6 +33,8 @@ public struct RouteRequest: Codable, Hashable {
         self.avoidLocations = avoidLocations
         self.avoidPolygons = avoidPolygons
         self.directionsOptions = directionsOptions
+        self.bannerInstructions = bannerInstructions
+        self.voiceInstructions = voiceInstructions
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -40,6 +45,8 @@ public struct RouteRequest: Codable, Hashable {
         case avoidLocations = "avoid_locations"
         case avoidPolygons = "avoid_polygons"
         case directionsOptions = "directions_options"
+        case bannerInstructions = "banner_instructions"
+        case voiceInstructions = "voice_instructions"
     }
 
     // Encodable protocol methods
@@ -53,8 +60,11 @@ public struct RouteRequest: Codable, Hashable {
         try container.encodeIfPresent(avoidLocations, forKey: .avoidLocations)
         try container.encodeIfPresent(avoidPolygons, forKey: .avoidPolygons)
         try container.encodeIfPresent(directionsOptions, forKey: .directionsOptions)
+        try container.encodeIfPresent(bannerInstructions, forKey: .bannerInstructions)
+        try container.encodeIfPresent(voiceInstructions, forKey: .voiceInstructions)
     }
 }
+
 
 @available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
 extension RouteRequest: Identifiable {}
