@@ -4,7 +4,7 @@ info:
   title: Valhalla API Definition
   contact:
     name: Valhalla
-    url: "https://github.com/valhalla/valhalla"
+    url: 'https://github.com/valhalla/valhalla'
 components:
   schemas:
     requestId:
@@ -68,7 +68,7 @@ components:
       default: en-US
     simpleRoutingWaypoint:
       allOf:
-        - $ref: "#/components/schemas/coordinate"
+        - $ref: '#/components/schemas/coordinate'
         - type: object
           properties:
             type:
@@ -86,7 +86,7 @@ components:
               default: break
     routingWaypoint:
       allOf:
-        - $ref: "#/components/schemas/simpleRoutingWaypoint"
+        - $ref: '#/components/schemas/simpleRoutingWaypoint'
         - type: object
           properties:
             heading:
@@ -183,15 +183,15 @@ components:
                   description: The lowest road class allowed
                   default: service_other
                   allOf:
-                    - $ref: "#/components/schemas/roadClass"
+                    - $ref: '#/components/schemas/roadClass'
                 max_road_class:
                   description: The highest road class allowed
                   default: motorway
                   allOf:
-                    - $ref: "#/components/schemas/roadClass"
+                    - $ref: '#/components/schemas/roadClass'
     routingResponseWaypoint:
       allOf:
-        - $ref: "#/components/schemas/simpleRoutingWaypoint"
+        - $ref: '#/components/schemas/simpleRoutingWaypoint'
         - type: object
           properties:
             original_index:
@@ -200,7 +200,7 @@ components:
               minimum: 0
     mapMatchWaypoint:
       allOf:
-        - $ref: "#/components/schemas/simpleRoutingWaypoint"
+        - $ref: '#/components/schemas/simpleRoutingWaypoint'
         - type: object
           properties:
             time:
@@ -268,21 +268,21 @@ components:
       type: object
       properties:
         auto:
-          $ref: "#/components/schemas/autoCostingOptions"
+          $ref: '#/components/schemas/autoCostingOptions'
         bus:
-          $ref: "#/components/schemas/autoCostingOptions"
+          $ref: '#/components/schemas/autoCostingOptions'
         taxi:
-          $ref: "#/components/schemas/autoCostingOptions"
+          $ref: '#/components/schemas/autoCostingOptions'
         truck:
-          $ref: "#/components/schemas/truckCostingOptions"
+          $ref: '#/components/schemas/truckCostingOptions'
         bicycle:
-          $ref: "#/components/schemas/bicycleCostingOptions"
+          $ref: '#/components/schemas/bicycleCostingOptions'
         motor_scooter:
-          $ref: "#/components/schemas/motorScooterCostingOptions"
+          $ref: '#/components/schemas/motorScooterCostingOptions'
         motorcycle:
-          $ref: "#/components/schemas/motorcycleCostingOptions"
+          $ref: '#/components/schemas/motorcycleCostingOptions'
         pedestrian:
-          $ref: "#/components/schemas/pedestrianCostingOptions"
+          $ref: '#/components/schemas/pedestrianCostingOptions'
     useFerryCostingOption:
       type: number
       format: double
@@ -365,16 +365,16 @@ components:
             the likelihood of suggesting a route with border crossings unless absolutely necessary.
           default: 0
         service_penalty:
-          $ref: "#/components/schemas/servicePenaltyCostingOption"
+          $ref: '#/components/schemas/servicePenaltyCostingOption'
         service_factor:
-          $ref: "#/components/schemas/serviceFactorCostingOption"
+          $ref: '#/components/schemas/serviceFactorCostingOption'
         use_living_streets:
-          $ref: "#/components/schemas/useLivingStreetsCostingOption"
+          $ref: '#/components/schemas/useLivingStreetsCostingOption'
         use_ferry:
-          $ref: "#/components/schemas/useFerryCostingOption"
+          $ref: '#/components/schemas/useFerryCostingOption'
     autoCostingOptions:
       allOf:
-        - $ref: "#/components/schemas/baseCostingOptions"
+        - $ref: '#/components/schemas/baseCostingOptions'
         - type: object
           properties:
             height:
@@ -422,7 +422,7 @@ components:
               minimum: 0
               maximum: 1
             use_tracks:
-              $ref: "#/components/schemas/useTracksCostingOption"
+              $ref: '#/components/schemas/useTracksCostingOption'
             top_speed:
               type: integer
               description: The top speed (in kph) that the vehicle is capable of travelling.
@@ -461,7 +461,7 @@ components:
               default: false
     truckCostingOptions:
       allOf:
-        - $ref: "#/components/schemas/autoCostingOptions"
+        - $ref: '#/components/schemas/autoCostingOptions'
         - type: object
           properties:
             height:
@@ -495,7 +495,7 @@ components:
               default: false
     bicycleCostingOptions:
       allOf:
-        - $ref: "#/components/schemas/baseCostingOptions"
+        - $ref: '#/components/schemas/baseCostingOptions'
         - type: object
           properties:
             bicycle_type:
@@ -529,7 +529,7 @@ components:
               minimum: 0
               maximum: 1
             use_hills:
-              $ref: "#/components/schemas/useHillsCostingOption"
+              $ref: '#/components/schemas/useHillsCostingOption'
             avoid_bad_surfaces:
               type: number
               format: double
@@ -553,7 +553,7 @@ components:
               default: 0
     motorScooterCostingOptions:
       allOf:
-        - $ref: "#/components/schemas/autoCostingOptions"
+        - $ref: '#/components/schemas/autoCostingOptions'
         - type: object
           properties:
             use_primary:
@@ -579,7 +579,7 @@ components:
               maximum: 1
     motorcycleCostingOptions:
       allOf:
-        - $ref: "#/components/schemas/autoCostingOptions"
+        - $ref: '#/components/schemas/autoCostingOptions'
         - type: object
           properties:
             use_highways:
@@ -606,8 +606,7 @@ components:
       type: object
       properties:
         walking_speed:
-          type: number
-          format: double
+          type: integer
           description: Walking speed in kph.
           default: 5.1
           minimum: 0.5
@@ -637,13 +636,13 @@ components:
           description: A penalty (in seconds) added to each transition onto a path with steps or stairs.
           default: 30
         use_ferry:
-          $ref: "#/components/schemas/useFerryCostingOption"
+          $ref: '#/components/schemas/useFerryCostingOption'
         use_living_streets:
-          $ref: "#/components/schemas/useLivingStreetsCostingOption"
+          $ref: '#/components/schemas/useLivingStreetsCostingOption'
         use_tracks:
-          $ref: "#/components/schemas/useTracksCostingOption"
+          $ref: '#/components/schemas/useTracksCostingOption'
         use_hills:
-          $ref: "#/components/schemas/useHillsCostingOption"
+          $ref: '#/components/schemas/useHillsCostingOption'
         use_lit:
           type: number
           format: double
@@ -656,9 +655,9 @@ components:
           minimum: 0
           maximum: 1
         service_penalty:
-          $ref: "#/components/schemas/servicePenaltyCostingOption"
+          $ref: '#/components/schemas/servicePenaltyCostingOption'
         service_factor:
-          $ref: "#/components/schemas/serviceFactorCostingOption"
+          $ref: '#/components/schemas/serviceFactorCostingOption'
         max_hiking_difficulty:
           type: integer
           description: The maximum difficulty of hiking trails allowed. This corresponds to the OSM `sac_scale`.
@@ -677,9 +676,9 @@ components:
       type: object
       properties:
         units:
-          $ref: "#/components/schemas/distanceUnit"
+          $ref: '#/components/schemas/distanceUnit'
         language:
-          $ref: "#/components/schemas/valhallaLanguages"
+          $ref: '#/components/schemas/valhallaLanguages'
         directions_type:
           type: string
           enum:
@@ -863,7 +862,7 @@ components:
         attributes:
           type: array
           items:
-            $ref: "#/components/schemas/traceAttributeKey"
+            $ref: '#/components/schemas/traceAttributeKey'
           minItems: 1
         action:
           type: string
@@ -893,7 +892,7 @@ components:
             This is affected by any number of factors such as the road service, vehicle type, etc. and not
             just the posted speed limits.
         road_class:
-          $ref: "#/components/schemas/roadClass"
+          $ref: '#/components/schemas/roadClass'
         begin_heading:
           type: integer
           description: The direction at the beginning of an edge. The units are degrees clockwise from north.
@@ -907,9 +906,9 @@ components:
           type: integer
           description: Index into the list of shape points for the end of the edge.
         traversability:
-          $ref: "#/components/schemas/traversability"
+          $ref: '#/components/schemas/traversability'
         use:
-          $ref: "#/components/schemas/edgeUse"
+          $ref: '#/components/schemas/edgeUse'
         toll:
           type: boolean
           description: True if the edge has a toll.
@@ -944,9 +943,9 @@ components:
             - impassable
           description: The type of surface for the edge.
         sign:
-          $ref: "#/components/schemas/edgeSign"
+          $ref: '#/components/schemas/edgeSign'
         travel_mode:
-          $ref: "#/components/schemas/travelMode"
+          $ref: '#/components/schemas/travelMode'
         vehicle_type:
           type: string
           enum:
@@ -1062,7 +1061,7 @@ components:
           type: boolean
           description: True if the edge is part of a truck route/network.
         end_node:
-          $ref: "#/components/schemas/endNode"
+          $ref: '#/components/schemas/endNode'
     adminRegion:
       type: object
       properties:
@@ -1127,11 +1126,11 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         shape:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
           description: REQUIRED if `encoded_polyline` is not present.
         encoded_polyline:
           type: string
@@ -1158,31 +1157,36 @@ components:
       example:
         {
           "id": "kesklinn",
-          "shape": [{ "lat": 59.436884, "lon": 24.742595 }],
+          "shape": [
+            {
+              "lat": 59.436884,
+              "lon": 24.742595
+            }
+          ],
           "shape_format": "polyline6",
           "range": false,
-          "height_precision": 0,
+          "height_precision": 0
         }
     matrixRequest:
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         sources:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
           description: The list of starting locations
           minItems: 1
         targets:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
           description: The list of ending locations
           minItems: 1
         costing:
-          $ref: "#/components/schemas/matrixCostingModel"
+          $ref: '#/components/schemas/matrixCostingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         matrix_locations:
           type: integer
           description: >-
@@ -1191,41 +1195,60 @@ components:
             equivalent to "find the closest/best locations out of the full set." This can have a dramatic
             improvement for large requests.
         directions_options:
-          $ref: "#/components/schemas/directionsOptions"
+          $ref: '#/components/schemas/directionsOptions'
       required:
         - sources
         - targets
         - costing
       example:
         {
-          "sources": [{ "lat": 40.744014, "lon": -73.990508 }],
-          "targets":
-            [
-              { "lat": 40.744014, "lon": -73.990508 },
-              { "lat": 40.739735, "lon": -73.979713 },
-              { "lat": 40.752522, "lon": -73.985015 },
-              { "lat": 40.750117, "lon": -73.983704 },
-              { "lat": 40.750552, "lon": -73.993519 },
-            ],
-          "costing": "pedestrian",
+          "sources": [
+            {
+              "lat": 40.744014,
+              "lon": -73.990508
+            }
+          ],
+          "targets": [
+            {
+              "lat": 40.744014,
+              "lon": -73.990508
+            },
+            {
+              "lat": 40.739735,
+              "lon": -73.979713
+            },
+            {
+              "lat": 40.752522,
+              "lon": -73.985015
+            },
+            {
+              "lat": 40.750117,
+              "lon": -73.983704
+            },
+            {
+              "lat": 40.750552,
+              "lon": -73.993519
+            }
+          ],
+          "costing": "pedestrian"
         }
     isochroneRequest:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         locations:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
         costing:
-          $ref: "#/components/schemas/isochroneCostingModel"
+          $ref: '#/components/schemas/isochroneCostingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         contours:
           type: array
           items:
-            $ref: "#/components/schemas/contour"
+            $ref: '#/components/schemas/contour'
           maxItems: 4
           minItems: 1
         polygons:
@@ -1283,20 +1306,20 @@ components:
     routeRequest:
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         locations:
           type: array
           items:
-            $ref: "#/components/schemas/routingWaypoint"
+            $ref: '#/components/schemas/routingWaypoint'
           minItems: 2
         costing:
-          $ref: "#/components/schemas/costingModel"
+          $ref: '#/components/schemas/costingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         avoid_locations:
           type: array
           items:
-            $ref: "#/components/schemas/routingWaypoint"
+            $ref: '#/components/schemas/routingWaypoint'
         avoid_polygons:
           type: array
           items:
@@ -1311,87 +1334,153 @@ components:
             Roads intersecting these rings will be avoided during path finding. Open rings will be
             closed automatically.
           example: [[[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]]
-        directions_options:
-          $ref: "#/components/schemas/directionsOptions"
+        units:
+          $ref: '#/components/schemas/distanceUnit'
+        language:
+          $ref: '#/components/schemas/valhallaLanguages'
+        directions_type:
+          type: string
+          enum:
+            - none
+            - maneuvers
+            - instructions
+          default: instructions
+          description: >-
+            The level of directional narrative to include. Locations and times will always be returned,
+            but narrative generation verbosity can be controlled with this parameter.
+        format:
+          type: string
+          enum:
+            - json
+            - gpx
+            - osrm
+            - pbf
+        shape_format:
+          type: string
+          enum:
+            - polyline6
+            - polyline5
+            - geojson
+            - no_shape
+          default: polyline6
+        banner_instructions:
+          type: boolean
+        voice_instructions:
+          type: boolean
+        alternates:
+          type: integer
       required:
         - locations
         - costing
       example:
         {
-          "locations":
-            [
-              { "lon": -149.543469, "lat": 60.5347155, "type": "break" },
-              { "lon": -149.5485806, "lat": 60.5349908, "type": "break" },
-            ],
+          "locations": [
+            {
+              "lon": -149.543469,
+              "lat": 60.5347155,
+              "type": "break"
+            },
+            {
+              "lon": -149.5485806,
+              "lat": 60.5349908,
+              "type": "break"
+            }
+          ],
           "costing": "auto",
-          "costing_options": { "auto": { "use_tolls": 1, "use_highways": 0 } },
-          "directions_options": { "units": "miles" },
+          "costing_options": {
+            "auto": {
+              "use_tolls": 1,
+              "use_highways": 0
+            }
+          },
+          "units": "miles"
         }
     optimizedRouteRequest:
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         locations:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
           description: >-
             The list of locations. The first and last are assumed to be the start and end points, and
             all intermediate points are locations that you want to visit along the way.
           minItems: 3
         costing:
-          $ref: "#/components/schemas/matrixCostingModel"
+          $ref: '#/components/schemas/matrixCostingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         directions_options:
-          $ref: "#/components/schemas/directionsOptions"
+          $ref: '#/components/schemas/directionsOptions'
       required:
         - locations
         - costing
       example:
         {
-          "locations":
-            [
-              { "lat": 40.042072, "lon": -76.306572 },
-              { "lat": 39.992115, "lon": -76.781559 },
-              { "lat": 39.984519, "lon": -76.6956 },
-              { "lat": 39.996586, "lon": -76.769028 },
-              { "lat": 39.984322, "lon": -76.706672 },
-            ],
+          "locations": [
+            {
+              "lat": 40.042072,
+              "lon": -76.306572
+            },
+            {
+              "lat": 39.992115,
+              "lon": -76.781559
+            },
+            {
+              "lat": 39.984519,
+              "lon": -76.6956
+            },
+            {
+              "lat": 39.996586,
+              "lon": -76.769028
+            },
+            {
+              "lat": 39.984322,
+              "lon": -76.706672
+            }
+          ],
           "costing": "auto",
-          "directions_options": { "units": "miles" },
+          "directions_options": {
+            "units": "miles"
+          }
         }
     nearestRoadsRequest:
       properties:
         locations:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
           minItems: 1
         costing:
-          $ref: "#/components/schemas/costingModel"
+          $ref: '#/components/schemas/costingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         verbose:
           type: boolean
           default: false
         directions_options:
-          $ref: "#/components/schemas/directionsOptions"
+          $ref: '#/components/schemas/directionsOptions'
       required:
         - locations
       example:
         {
-          "locations": [{ "lat": 59.436884, "lon": 24.742595 }],
-          "verbose": true,
+          "locations": [
+            {
+              "lat": 59.436884,
+              "lon": 24.742595
+            }
+          ],
+          "verbose": true
         }
     baseTraceRequest:
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         shape:
           type: array
           items:
-            $ref: "#/components/schemas/mapMatchWaypoint"
+            $ref: '#/components/schemas/mapMatchWaypoint'
           description: >-
             REQUIRED if `encoded_polyline` is not present. Note that `break` type locations are only supported
             when `shape_match` is set to `map_match`.
@@ -1402,9 +1491,9 @@ components:
             (https://developers.google.com/maps/documentation/utilities/polylinealgorithm). Note that the polyline
             must be encoded with 6 digits of precision rather than the usual 5.
         costing:
-          $ref: "#/components/schemas/mapMatchCostingModel"
+          $ref: '#/components/schemas/mapMatchCostingModel'
         costing_options:
-          $ref: "#/components/schemas/costingOptions"
+          $ref: '#/components/schemas/costingOptions'
         shape_match:
           type: string
           enum:
@@ -1421,12 +1510,12 @@ components:
             In general, you should not need to change this parameter unless you want to trace a multi-leg
             route with multiple `break` locations in the `shape`.
         directions_options:
-          $ref: "#/components/schemas/directionsOptions"
+          $ref: '#/components/schemas/directionsOptions'
       required:
         - costing
     mapMatchRequest:
       allOf:
-        - $ref: "#/components/schemas/baseTraceRequest"
+        - $ref: '#/components/schemas/baseTraceRequest'
         - type: object
           properties:
             begin_time:
@@ -1445,7 +1534,7 @@ components:
                 for each edge along the matched path rather than the routing algorithm estimates.
               default: false
             trace_options:
-              $ref: "#/components/schemas/mapMatchTraceOptions"
+              $ref: '#/components/schemas/mapMatchTraceOptions'
             linear_references:
               type: boolean
               description: >-
@@ -1458,12 +1547,14 @@ components:
           "encoded_polyline": "_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA",
           "shape_match": "map_snap",
           "costing": "pedestrian",
-          "directions_options": { "units": "miles" },
-          "linear_references": true,
+          "directions_options": {
+            "units": "miles"
+          },
+          "linear_references": true
         }
     traceAttributesRequest:
       allOf:
-        - $ref: "#/components/schemas/baseTraceRequest"
+        - $ref: '#/components/schemas/baseTraceRequest'
         - type: object
           properties:
             filters:
@@ -1471,13 +1562,15 @@ components:
                 If present, provides either a whitelist or a blacklist of keys to include/exclude in the response.
                 This key is optional, and if omitted from the request, all available info will be returned.
               allOf:
-                - $ref: "#/components/schemas/traceAttributeFilterOptions"
+                - $ref: '#/components/schemas/traceAttributeFilterOptions'
       example:
         {
           "encoded_polyline": "_grbgAh~{nhF?lBAzBFvBHxBEtBKdB?fB@dBZdBb@hBh@jBb@x@\\|@x@pB\\x@v@hBl@nBPbCXtBn@|@z@ZbAEbAa@~@q@z@QhA]pAUpAVhAPlAWtASpAAdA[dASdAQhAIlARjANnAZhAf@n@`A?lB^nCRbA\\xB`@vBf@tBTbCFbARzBZvBThBRnBNrBP`CHbCF`CNdCb@vBX`ARlAJfADhA@dAFdAP`AR`Ah@hBd@bBl@rBV|B?vB]tBCvBBhAF`CFnBXtAVxAVpAVtAb@|AZ`Bd@~BJfA@fAHdADhADhABjAGzAInAAjAB|BNbCR|BTjBZtB`@lBh@lB\\|Bl@rBXtBN`Al@g@t@?nAA~AKvACvAAlAMdAU`Ac@hAShAI`AJ`AIdAi@bAu@|@k@p@]p@a@bAc@z@g@~@Ot@Bz@f@X`BFtBXdCLbAf@zBh@fBb@xAb@nATjAKjAW`BI|AEpAHjAPdAAfAGdAFjAv@p@XlAVnA?~A?jAInAPtAVxAXnAf@tBDpBJpBXhBJfBDpAZ|Ax@pAz@h@~@lA|@bAnAd@hAj@tAR~AKxAc@xAShA]hAIdAAjA]~A[v@BhB?dBSv@Ct@CvAI~@Oz@Pv@dAz@lAj@~A^`B^|AXvAVpAXdBh@~Ap@fCh@hB\\zBN`Aj@xBFdA@jALbAPbAJdAHdAJbAHbAHfAJhALbA\\lBTvBAdC@bC@jCKjASbC?`CM`CDpB\\xAj@tB\\fA\\bAVfAJdAJbAXz@L|BO`AOdCDdA@~B\\z@l@v@l@v@l@r@j@t@b@x@b@r@z@jBVfCJdAJdANbCPfCF|BRhBS~BS`AYbAe@~BQdA",
           "shape_match": "map_snap",
           "costing": "pedestrian",
-          "directions_options": { "units": "miles" },
+          "directions_options": {
+            "units": "miles"
+          }
         }
     tzResponse:
       type: object
@@ -1506,7 +1599,7 @@ components:
         {
           "tz_id": "Europe/Zurich",
           "base_utc_offset": 3600,
-          "dst_offset": 3600,
+          "dst_offset": 3600
         }
     maneuverSignElement:
       type: object
@@ -1529,27 +1622,27 @@ components:
           type: array
           description: A list of exit number elements. This is typically just a single value.
           items:
-            $ref: "#/components/schemas/maneuverSignElement"
+            $ref: '#/components/schemas/maneuverSignElement'
         exit_branch_elements:
           type: array
           description: >-
             A list of exit branch elements. The text is a subsequent road name or route number after the sign.
           items:
-            $ref: "#/components/schemas/maneuverSignElement"
+            $ref: '#/components/schemas/maneuverSignElement'
         exit_toward_elements:
           type: array
           description: >-
             A list of exit name elements. The text is the interchange identifier (used more frequently outside
             the US).
           items:
-            $ref: "#/components/schemas/maneuverSignElement"
+            $ref: '#/components/schemas/maneuverSignElement'
         exit_name_elements:
           type: array
           description: >-
             A list of exit name elements. The text is the location where the road ahead goes
             (typically a city, but occasionally a road name or route number).
           items:
-            $ref: "#/components/schemas/maneuverSignElement"
+            $ref: '#/components/schemas/maneuverSignElement'
     travelMode:
       type: string
       enum:
@@ -1642,15 +1735,15 @@ components:
           description: >-
             True if this intersecting edge at the end node has consistent names with the path to the other edge.
         driveability:
-          $ref: "#/components/schemas/traversability"
+          $ref: '#/components/schemas/traversability'
         cyclability:
-          $ref: "#/components/schemas/traversability"
+          $ref: '#/components/schemas/traversability'
         walkability:
-          $ref: "#/components/schemas/traversability"
+          $ref: '#/components/schemas/traversability'
         use:
-          $ref: "#/components/schemas/edgeUse"
+          $ref: '#/components/schemas/edgeUse'
         road_class:
-          $ref: "#/components/schemas/roadClass"
+          $ref: '#/components/schemas/roadClass'
     nodeType:
       type: string
       enum:
@@ -1670,7 +1763,7 @@ components:
         intersecting_edges:
           type: array
           items:
-            $ref: "#/components/schemas/intersectingEdge"
+            $ref: '#/components/schemas/intersectingEdge'
           description: A set of edges intersecting this node.
         elapsed_time:
           type: number
@@ -1680,7 +1773,7 @@ components:
           type: integer
           description: The index into the `admins` list in which this node lies.
         type:
-          $ref: "#/components/schemas/nodeType"
+          $ref: '#/components/schemas/nodeType'
         fork:
           type: boolean
           description: True if this node is a fork.
@@ -1831,7 +1924,7 @@ components:
           description: True if a ferry is encountered in the course of this maneuver.
           default: false
         sign:
-          $ref: "#/components/schemas/maneuverSign"
+          $ref: '#/components/schemas/maneuverSign'
         roundabout_exit_count:
           type: integer
           description: The exit number of the roundabout to take after entering.
@@ -1852,7 +1945,7 @@ components:
           description: Text suitable for use as a verbal departure time instruction (typically used in a transit maneuver).
           example: "Arrive at 8:06 AM at City Hall"
         transit_info:
-          $ref: "#/components/schemas/transitInfo"
+          $ref: '#/components/schemas/transitInfo'
         verbal_multi_cue:
           type: boolean
           description: >-
@@ -1860,7 +1953,7 @@ components:
             of the next maneuver.
           default: false
         travel_mode:
-          $ref: "#/components/schemas/travelMode"
+          $ref: '#/components/schemas/travelMode'
         travel_type:
           type: string
           description: >-
@@ -1911,7 +2004,7 @@ components:
         maneuvers:
           type: array
           items:
-            $ref: "#/components/schemas/routeManeuver"
+            $ref: '#/components/schemas/routeManeuver'
           minItems: 1
         shape:
           type: string
@@ -1919,7 +2012,7 @@ components:
             An encoded polyline (https://developers.google.com/maps/documentation/utilities/polylinealgorithm) with
             6 digits of decimal precision.
         summary:
-          $ref: "#/components/schemas/routeSummary"
+          $ref: '#/components/schemas/routeSummary'
       required:
         - maneuvers
         - shape
@@ -1928,7 +2021,7 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         trip:
           type: object
           properties:
@@ -1939,19 +2032,19 @@ components:
               type: string
               description: The response status message
             units:
-              $ref: "#/components/schemas/valhallaLongUnits"
+              $ref: '#/components/schemas/valhallaLongUnits'
             language:
-              $ref: "#/components/schemas/valhallaLanguages"
+              $ref: '#/components/schemas/valhallaLanguages'
             locations:
               type: array
               items:
-                $ref: "#/components/schemas/routingResponseWaypoint"
+                $ref: '#/components/schemas/routingResponseWaypoint'
             legs:
               type: array
               items:
-                $ref: "#/components/schemas/routeLeg"
+                $ref: '#/components/schemas/routeLeg'
             summary:
-              $ref: "#/components/schemas/routeSummary"
+              $ref: '#/components/schemas/routeSummary'
           required:
             - status
             - status_message
@@ -1964,73 +2057,57 @@ components:
         - trip
       example:
         {
-          "trip":
-            {
-              "locations":
-                [
+          "trip": {
+            "locations": [
+              {
+                "type": "break",
+                "lat": 60.534715,
+                "lon": -149.543469,
+                "original_index": 0
+              },
+              {
+                "type": "break",
+                "lat": 60.53499,
+                "lon": -149.54858,
+                "original_index": 1
+              }
+            ],
+            "legs": [
+              {
+                "maneuvers": [
                   {
-                    "type": "break",
-                    "lat": 60.534715,
-                    "lon": -149.543469,
-                    "original_index": 0,
+                    "type": 1,
+                    "instruction": "Drive west on AK 1/Seward Highway.",
+                    "verbal_pre_transition_instruction": "Drive west on Alaska 1, Seward Highway. Then You will arrive at your destination.",
+                    "verbal_post_transition_instruction": "Continue for 900 feet.",
+                    "street_names": [
+                        "AK 1",
+                        "Seward Highway"
+                    ],
+                    "time": 11.487,
+                    "length": 0.176,
+                    "cost": 15.508,
+                    "begin_shape_index": 0,
+                    "end_shape_index": 9,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "drive",
+                    "travel_type": "car"
                   },
                   {
-                    "type": "break",
-                    "lat": 60.53499,
-                    "lon": -149.54858,
-                    "original_index": 1,
-                  },
+                    "type": 4,
+                    "instruction": "You have arrived at your destination.",
+                    "verbal_transition_alert_instruction": "You will arrive at your destination.",
+                    "verbal_pre_transition_instruction": "You have arrived at your destination.",
+                    "time": 0.0,
+                    "length": 0.0,
+                    "cost": 0.0,
+                    "begin_shape_index": 9,
+                    "end_shape_index": 9,
+                    "travel_mode": "drive",
+                    "travel_type": "car"
+                  }
                 ],
-              "legs":
-                [
-                  {
-                    "maneuvers":
-                      [
-                        {
-                          "type": 1,
-                          "instruction": "Drive west on AK 1/Seward Highway.",
-                          "verbal_pre_transition_instruction": "Drive west on Alaska 1, Seward Highway. Then You will arrive at your destination.",
-                          "verbal_post_transition_instruction": "Continue for 900 feet.",
-                          "street_names": ["AK 1", "Seward Highway"],
-                          "time": 11.487,
-                          "length": 0.176,
-                          "cost": 15.508,
-                          "begin_shape_index": 0,
-                          "end_shape_index": 9,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "drive",
-                          "travel_type": "car",
-                        },
-                        {
-                          "type": 4,
-                          "instruction": "You have arrived at your destination.",
-                          "verbal_transition_alert_instruction": "You will arrive at your destination.",
-                          "verbal_pre_transition_instruction": "You have arrived at your destination.",
-                          "time": 0.0,
-                          "length": 0.0,
-                          "cost": 0.0,
-                          "begin_shape_index": 9,
-                          "end_shape_index": 9,
-                          "travel_mode": "drive",
-                          "travel_type": "car",
-                        },
-                      ],
-                    "summary":
-                      {
-                        "has_time_restrictions": false,
-                        "min_lat": 60.534715,
-                        "min_lon": -149.54858,
-                        "max_lat": 60.535008,
-                        "max_lon": -149.543469,
-                        "time": 11.487,
-                        "length": 0.176,
-                        "cost": 15.508,
-                      },
-                    "shape": "wzvmrBxalf|GcCrX}A|Nu@jI}@pMkBtZ{@x^_Afj@Inn@`@veB",
-                  },
-                ],
-              "summary":
-                {
+                "summary": {
                   "has_time_restrictions": false,
                   "min_lat": 60.534715,
                   "min_lon": -149.54858,
@@ -2038,291 +2115,285 @@ components:
                   "max_lon": -149.543469,
                   "time": 11.487,
                   "length": 0.176,
-                  "cost": 15.508,
+                  "cost": 15.508
                 },
-              "status_message": "Found route between points",
-              "status": 0,
-              "units": "miles",
-              "language": "en-US",
+                "shape": "wzvmrBxalf|GcCrX}A|Nu@jI}@pMkBtZ{@x^_Afj@Inn@`@veB"
+              }
+            ],
+            "summary": {
+              "has_time_restrictions": false,
+              "min_lat": 60.534715,
+              "min_lon": -149.54858,
+              "max_lat": 60.535008,
+              "max_lon": -149.543469,
+              "time": 11.487,
+              "length": 0.176,
+              "cost": 15.508
             },
+            "status_message": "Found route between points",
+            "status": 0,
+            "units": "miles",
+            "language": "en-US"
+          }
         }
     nearestRoadsResponse:
       type: array
       items:
-        $ref: "#/components/schemas/locateObject"
+        $ref: '#/components/schemas/locateObject'
       example:
         [
           {
             "input_lon": 24.742595,
             "input_lat": 59.436884,
-            "nodes": [],
-            "edges":
-              [
-                {
-                  "predicted_speeds": [],
-                  "linear_reference": "KxGYOypEIXriAAAcABo6Uow=",
-                  "edge_info":
-                    {
-                      "speed_limit": 0,
-                      "shape": "{zvjpBwtden@zG`H~EdG",
-                      "names": ["Rataskaevu"],
-                      "bike_network":
-                        {
-                          "mountain": false,
-                          "local": false,
-                          "regional": false,
-                          "national": false,
-                        },
-                      "mean_elevation": 36,
-                      "way_id": 4853850,
-                    },
-                  "edge_id":
-                    {
-                      "id": 1800,
-                      "value": 60404861586,
-                      "tile_id": 860498,
-                      "level": 2,
-                    },
-                  "edge":
-                    {
-                      "sidewalk_left": false,
-                      "sidewalk_right": false,
-                      "lane_count": 1,
-                      "not_thru": false,
-                      "forward": false,
-                      "bike_network": false,
-                      "round_about": false,
-                      "access":
-                        {
-                          "truck": true,
-                          "pedestrian": true,
-                          "wheelchair": true,
-                          "taxi": true,
-                          "HOV": true,
-                          "emergency": false,
-                          "motorcycle": true,
-                          "car": true,
-                          "moped": true,
-                          "bus": true,
-                          "bicycle": true,
-                          "golf_cart": true,
-                        },
-                      "bridge": false,
-                      "tunnel": false,
-                      "destination_only": false,
-                      "seasonal": false,
-                      "classification":
-                        {
-                          "internal": false,
-                          "link": false,
-                          "surface": "paved",
-                          "use": "living_street",
-                          "classification": "service_other",
-                        },
-                      "toll": false,
-                      "has_sign": false,
-                      "country_crossing": false,
-                      "part_of_complex_restriction": false,
-                      "cycle_lane": "none",
-                      "end_restriction":
-                        {
-                          "truck": false,
-                          "pedestrian": false,
-                          "wheelchair": false,
-                          "taxi": false,
-                          "HOV": false,
-                          "emergency": false,
-                          "motorcycle": false,
-                          "car": false,
-                          "moped": false,
-                          "bus": false,
-                          "bicycle": false,
-                        },
-                      "geo_attributes":
-                        {
-                          "curvature": 5,
-                          "max_down_slope": -7.00,
-                          "max_up_slope": 0.00,
-                          "weighted_grade": -6.67,
-                          "length": 32,
-                        },
-                      "start_restriction":
-                        {
-                          "truck": false,
-                          "pedestrian": false,
-                          "wheelchair": false,
-                          "taxi": false,
-                          "HOV": false,
-                          "emergency": false,
-                          "motorcycle": false,
-                          "car": false,
-                          "moped": false,
-                          "bus": false,
-                          "bicycle": false,
-                        },
-                      "traffic_signal": false,
-                      "access_restriction": false,
-                      "truck_route": false,
-                      "speeds":
-                        {
-                          "predicted": false,
-                          "constrained_flow": 0,
-                          "free_flow": 0,
-                          "type": "classified",
-                          "default": 20,
-                        },
-                      "end_node":
-                        {
-                          "id": 2895,
-                          "value": 97146964626,
-                          "tile_id": 860498,
-                          "level": 2,
-                        },
-                    },
-                  "inbound_reach": 50,
-                  "distance": 2.2,
-                  "percent_along": 0.54802,
-                  "side_of_street": "neither",
-                  "outbound_reach": 50,
-                  "correlated_lon": 24.742630,
-                  "live_speed": {},
-                  "correlated_lat": 59.436875,
+            "nodes": [ ],
+            "edges": [
+              {
+                "predicted_speeds": [ ],
+                "linear_reference": "KxGYOypEIXriAAAcABo6Uow=",
+                "edge_info": {
+                  "speed_limit": 0,
+                  "shape": "{zvjpBwtden@zG`H~EdG",
+                  "names": [
+                    "Rataskaevu"
+                  ],
+                  "bike_network": {
+                    "mountain": false,
+                    "local": false,
+                    "regional": false,
+                    "national": false
+                  },
+                  "mean_elevation": 36,
+                  "way_id": 4853850
                 },
-                {
-                  "predicted_speeds": [],
-                  "linear_reference": "KxGYSCpELHryAP/l/+k6QnM=",
-                  "edge_info":
-                    {
-                      "speed_limit": 0,
-                      "shape": "{zvjpBwtden@zG`H~EdG",
-                      "names": ["Rataskaevu"],
-                      "bike_network":
-                        {
-                          "mountain": false,
-                          "local": false,
-                          "regional": false,
-                          "national": false,
-                        },
-                      "mean_elevation": 36,
-                      "way_id": 4853850,
-                    },
-                  "edge_id":
-                    {
-                      "id": 7368,
-                      "value": 247235938962,
-                      "tile_id": 860498,
-                      "level": 2,
-                    },
-                  "edge":
-                    {
-                      "sidewalk_left": false,
-                      "sidewalk_right": false,
-                      "lane_count": 1,
-                      "not_thru": false,
-                      "forward": true,
-                      "bike_network": false,
-                      "round_about": false,
-                      "access":
-                        {
-                          "truck": true,
-                          "pedestrian": true,
-                          "wheelchair": true,
-                          "taxi": true,
-                          "HOV": true,
-                          "emergency": false,
-                          "motorcycle": true,
-                          "car": true,
-                          "moped": true,
-                          "bus": true,
-                          "bicycle": true,
-                        },
-                      "bridge": false,
-                      "tunnel": false,
-                      "destination_only": false,
-                      "seasonal": false,
-                      "classification":
-                        {
-                          "internal": false,
-                          "link": false,
-                          "surface": "paved",
-                          "use": "living_street",
-                          "classification": "service_other",
-                        },
-                      "toll": false,
-                      "has_sign": false,
-                      "country_crossing": false,
-                      "part_of_complex_restriction": false,
-                      "cycle_lane": "none",
-                      "end_restriction":
-                        {
-                          "truck": false,
-                          "pedestrian": false,
-                          "wheelchair": false,
-                          "taxi": false,
-                          "HOV": false,
-                          "emergency": false,
-                          "motorcycle": false,
-                          "car": false,
-                          "moped": false,
-                          "bus": false,
-                          "bicycle": false,
-                        },
-                      "geo_attributes":
-                        {
-                          "curvature": 5,
-                          "max_down_slope": 0.00,
-                          "max_up_slope": 7.00,
-                          "weighted_grade": 6.67,
-                          "length": 32,
-                        },
-                      "start_restriction":
-                        {
-                          "truck": false,
-                          "pedestrian": false,
-                          "wheelchair": false,
-                          "taxi": false,
-                          "HOV": false,
-                          "emergency": false,
-                          "motorcycle": false,
-                          "car": false,
-                          "moped": false,
-                          "bus": false,
-                          "bicycle": false,
-                        },
-                      "traffic_signal": false,
-                      "access_restriction": false,
-                      "truck_route": false,
-                      "speeds":
-                        {
-                          "predicted": false,
-                          "constrained_flow": 0,
-                          "free_flow": 0,
-                          "type": "classified",
-                          "default": 20,
-                        },
-                      "end_node":
-                        {
-                          "id": 819,
-                          "value": 27487963794,
-                          "tile_id": 860498,
-                          "level": 2,
-                        },
-                    },
-                  "inbound_reach": 50,
-                  "distance": 2.2,
-                  "percent_along": 0.45198,
-                  "side_of_street": "neither",
-                  "outbound_reach": 50,
-                  "correlated_lon": 24.742630,
-                  "live_speed": {},
-                  "correlated_lat": 59.436875,
+                "edge_id": {
+                  "id": 1800,
+                  "value": 60404861586,
+                  "tile_id": 860498,
+                  "level": 2
                 },
-              ],
-          },
+                "edge": {
+                  "sidewalk_left": false,
+                  "sidewalk_right": false,
+                  "lane_count": 1,
+                  "not_thru": false,
+                  "forward": false,
+                  "bike_network": false,
+                  "round_about": false,
+                  "access": {
+                    "truck": true,
+                    "pedestrian": true,
+                    "wheelchair": true,
+                    "taxi": true,
+                    "HOV": true,
+                    "emergency": false,
+                    "motorcycle": true,
+                    "car": true,
+                    "moped": true,
+                    "bus": true,
+                    "bicycle": true,
+                    "golf_cart": true
+                  },
+                  "bridge": false,
+                  "tunnel": false,
+                  "destination_only": false,
+                  "seasonal": false,
+                  "classification": {
+                    "internal": false,
+                    "link": false,
+                    "surface": "paved",
+                    "use": "living_street",
+                    "classification": "service_other"
+                  },
+                  "toll": false,
+                  "has_sign": false,
+                  "country_crossing": false,
+                  "part_of_complex_restriction": false,
+                  "cycle_lane": "none",
+                  "end_restriction": {
+                    "truck": false,
+                    "pedestrian": false,
+                    "wheelchair": false,
+                    "taxi": false,
+                    "HOV": false,
+                    "emergency": false,
+                    "motorcycle": false,
+                    "car": false,
+                    "moped": false,
+                    "bus": false,
+                    "bicycle": false
+                  },
+                  "geo_attributes": {
+                    "curvature": 5,
+                    "max_down_slope": -7.00,
+                    "max_up_slope": 0.00,
+                    "weighted_grade": -6.67,
+                    "length": 32
+                  },
+                  "start_restriction": {
+                    "truck": false,
+                    "pedestrian": false,
+                    "wheelchair": false,
+                    "taxi": false,
+                    "HOV": false,
+                    "emergency": false,
+                    "motorcycle": false,
+                    "car": false,
+                    "moped": false,
+                    "bus": false,
+                    "bicycle": false
+                  },
+                  "traffic_signal": false,
+                  "access_restriction": false,
+                  "truck_route": false,
+                  "speeds": {
+                    "predicted": false,
+                    "constrained_flow": 0,
+                    "free_flow": 0,
+                    "type": "classified",
+                    "default": 20
+                  },
+                  "end_node": {
+                    "id": 2895,
+                    "value": 97146964626,
+                    "tile_id": 860498,
+                    "level": 2
+                  }
+                },
+                "inbound_reach": 50,
+                "distance": 2.2,
+                "percent_along": 0.54802,
+                "side_of_street": "neither",
+                "outbound_reach": 50,
+                "correlated_lon": 24.742630,
+                "live_speed": { },
+                "correlated_lat": 59.436875
+              },
+              {
+                "predicted_speeds": [ ],
+                "linear_reference": "KxGYSCpELHryAP/l/+k6QnM=",
+                "edge_info": {
+                  "speed_limit": 0,
+                  "shape": "{zvjpBwtden@zG`H~EdG",
+                  "names": [
+                    "Rataskaevu"
+                  ],
+                  "bike_network": {
+                    "mountain": false,
+                    "local": false,
+                    "regional": false,
+                    "national": false
+                  },
+                  "mean_elevation": 36,
+                  "way_id": 4853850
+                },
+                "edge_id": {
+                  "id": 7368,
+                  "value": 247235938962,
+                  "tile_id": 860498,
+                  "level": 2
+                },
+                "edge": {
+                  "sidewalk_left": false,
+                  "sidewalk_right": false,
+                  "lane_count": 1,
+                  "not_thru": false,
+                  "forward": true,
+                  "bike_network": false,
+                  "round_about": false,
+                  "access": {
+                    "truck": true,
+                    "pedestrian": true,
+                    "wheelchair": true,
+                    "taxi": true,
+                    "HOV": true,
+                    "emergency": false,
+                    "motorcycle": true,
+                    "car": true,
+                    "moped": true,
+                    "bus": true,
+                    "bicycle": true
+                  },
+                  "bridge": false,
+                  "tunnel": false,
+                  "destination_only": false,
+                  "seasonal": false,
+                  "classification": {
+                    "internal": false,
+                    "link": false,
+                    "surface": "paved",
+                    "use": "living_street",
+                    "classification": "service_other"
+                  },
+                  "toll": false,
+                  "has_sign": false,
+                  "country_crossing": false,
+                  "part_of_complex_restriction": false,
+                  "cycle_lane": "none",
+                  "end_restriction": {
+                    "truck": false,
+                    "pedestrian": false,
+                    "wheelchair": false,
+                    "taxi": false,
+                    "HOV": false,
+                    "emergency": false,
+                    "motorcycle": false,
+                    "car": false,
+                    "moped": false,
+                    "bus": false,
+                    "bicycle": false
+                  },
+                  "geo_attributes": {
+                    "curvature": 5,
+                    "max_down_slope": 0.00,
+                    "max_up_slope": 7.00,
+                    "weighted_grade": 6.67,
+                    "length": 32
+                  },
+                  "start_restriction": {
+                    "truck": false,
+                    "pedestrian": false,
+                    "wheelchair": false,
+                    "taxi": false,
+                    "HOV": false,
+                    "emergency": false,
+                    "motorcycle": false,
+                    "car": false,
+                    "moped": false,
+                    "bus": false,
+                    "bicycle": false
+                  },
+                  "traffic_signal": false,
+                  "access_restriction": false,
+                  "truck_route": false,
+                  "speeds": {
+                    "predicted": false,
+                    "constrained_flow": 0,
+                    "free_flow": 0,
+                    "type": "classified",
+                    "default": 20
+                  },
+                  "end_node": {
+                    "id": 819,
+                    "value": 27487963794,
+                    "tile_id": 860498,
+                    "level": 2
+                  }
+                },
+                "inbound_reach": 50,
+                "distance": 2.2,
+                "percent_along": 0.45198,
+                "side_of_street": "neither",
+                "outbound_reach": 50,
+                "correlated_lon": 24.742630,
+                "live_speed": { },
+                "correlated_lat": 59.436875
+              }
+            ]
+          }
         ]
     mapMatchRouteResponse:
       allOf:
-        - $ref: "#/components/schemas/routeResponse"
+        - $ref: '#/components/schemas/routeResponse'
         - type: object
           properties:
             linear_references:
@@ -2334,345 +2405,309 @@ components:
                   for a graph edge of the road network matched by the trace.
       example:
         {
-          "trip":
-            {
-              "locations":
-                [
-                  { "type": "break", "lat": 37.807744, "lon": -122.4197 },
-                  { "type": "break", "lat": 37.803694, "lon": -122.428416 },
-                ],
-              "legs":
-                [
+          "trip": {
+            "locations": [
+              {
+                "type": "break",
+                "lat": 37.807744,
+                "lon": -122.4197
+              },
+              {
+                "type": "break",
+                "lat": 37.803694,
+                "lon": -122.428416
+              }
+            ],
+            "legs": [
+              {
+                "maneuvers": [
                   {
-                    "maneuvers":
-                      [
-                        {
-                          "type": 1,
-                          "instruction": "Walk west on the walkway.",
-                          "verbal_pre_transition_instruction": "Walk west on the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 200 feet.",
-                          "time": 44.733,
-                          "length": 0.039,
-                          "cost": 44.733,
-                          "begin_shape_index": 0,
-                          "end_shape_index": 1,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left.",
-                          "verbal_transition_alert_instruction": "Turn left.",
-                          "verbal_pre_transition_instruction": "Turn left. Then Turn right onto Jefferson Street.",
-                          "verbal_post_transition_instruction": "Continue for 20 feet.",
-                          "time": 4.941,
-                          "length": 0.004,
-                          "cost": 4.941,
-                          "begin_shape_index": 1,
-                          "end_shape_index": 2,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto Jefferson Street.",
-                          "verbal_transition_alert_instruction": "Turn right onto Jefferson Street.",
-                          "verbal_pre_transition_instruction": "Turn right onto Jefferson Street.",
-                          "verbal_post_transition_instruction": "Continue for 80 feet.",
-                          "street_names": ["Jefferson Street"],
-                          "time": 16.941,
-                          "length": 0.014,
-                          "cost": 21.941,
-                          "begin_shape_index": 2,
-                          "end_shape_index": 3,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn left onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 20 feet.",
-                          "time": 4.941,
-                          "length": 0.004,
-                          "cost": 9.941,
-                          "begin_shape_index": 3,
-                          "end_shape_index": 4,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn right onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto Hyde Street.",
-                          "verbal_post_transition_instruction": "Continue for 30 feet.",
-                          "time": 6.352,
-                          "length": 0.005,
-                          "cost": 6.352,
-                          "begin_shape_index": 4,
-                          "end_shape_index": 5,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto Hyde Street.",
-                          "verbal_transition_alert_instruction": "Turn left onto Hyde Street.",
-                          "verbal_pre_transition_instruction": "Turn left onto Hyde Street.",
-                          "verbal_post_transition_instruction": "Continue for 300 feet.",
-                          "street_names": ["Hyde Street"],
-                          "time": 58.588,
-                          "length": 0.051,
-                          "cost": 63.588,
-                          "begin_shape_index": 5,
-                          "end_shape_index": 10,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn right onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 30 feet.",
-                          "time": 6.352,
-                          "length": 0.005,
-                          "cost": 11.352,
-                          "begin_shape_index": 10,
-                          "end_shape_index": 11,
-                          "rough": true,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn left onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn left onto the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 400 feet.",
-                          "time": 93.176,
-                          "length": 0.082,
-                          "cost": 93.176,
-                          "begin_shape_index": 11,
-                          "end_shape_index": 17,
-                          "rough": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn left onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto Beach Street.",
-                          "verbal_post_transition_instruction": "Continue for 40 feet.",
-                          "time": 7.764,
-                          "length": 0.006,
-                          "cost": 7.764,
-                          "begin_shape_index": 17,
-                          "end_shape_index": 18,
-                          "rough": true,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto Beach Street.",
-                          "verbal_transition_alert_instruction": "Turn right onto Beach Street.",
-                          "verbal_pre_transition_instruction": "Turn right onto Beach Street.",
-                          "verbal_post_transition_instruction": "Continue for 500 feet.",
-                          "street_names": ["Beach Street"],
-                          "time": 110.705,
-                          "length": 0.095,
-                          "cost": 115.705,
-                          "begin_shape_index": 18,
-                          "end_shape_index": 24,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto Polk Street.",
-                          "verbal_transition_alert_instruction": "Turn left onto Polk Street.",
-                          "verbal_pre_transition_instruction": "Turn left onto Polk Street.",
-                          "verbal_post_transition_instruction": "Continue for 300 feet.",
-                          "street_names": ["Polk Street"],
-                          "time": 68.058,
-                          "length": 0.059,
-                          "cost": 73.058,
-                          "begin_shape_index": 24,
-                          "end_shape_index": 27,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn right onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn right onto the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 400 feet.",
-                          "time": 98.0,
-                          "length": 0.084,
-                          "cost": 103.0,
-                          "begin_shape_index": 27,
-                          "end_shape_index": 32,
-                          "rough": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto Van Ness Avenue.",
-                          "verbal_transition_alert_instruction": "Turn left onto Van Ness Avenue.",
-                          "verbal_pre_transition_instruction": "Turn left onto Van Ness Avenue.",
-                          "verbal_post_transition_instruction": "Continue for 400 feet.",
-                          "street_names": ["Van Ness Avenue"],
-                          "time": 83.294,
-                          "length": 0.073,
-                          "cost": 98.294,
-                          "begin_shape_index": 32,
-                          "end_shape_index": 38,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn right onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto the walkway.",
-                          "verbal_post_transition_instruction": "Continue for 30 feet.",
-                          "time": 7.058,
-                          "length": 0.006,
-                          "cost": 12.058,
-                          "begin_shape_index": 38,
-                          "end_shape_index": 39,
-                          "rough": true,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto the walkway.",
-                          "verbal_transition_alert_instruction": "Turn left onto the walkway.",
-                          "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto Bay Street.",
-                          "verbal_post_transition_instruction": "Continue for 50 feet.",
-                          "time": 9.882,
-                          "length": 0.008,
-                          "cost": 9.882,
-                          "begin_shape_index": 39,
-                          "end_shape_index": 40,
-                          "rough": true,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 10,
-                          "instruction": "Turn right onto Bay Street.",
-                          "verbal_transition_alert_instruction": "Turn right onto Bay Street.",
-                          "verbal_pre_transition_instruction": "Turn right onto Bay Street.",
-                          "verbal_post_transition_instruction": "Continue for 900 feet.",
-                          "street_names": ["Bay Street"],
-                          "time": 194.823,
-                          "length": 0.171,
-                          "cost": 199.823,
-                          "begin_shape_index": 40,
-                          "end_shape_index": 45,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 15,
-                          "instruction": "Turn left onto Gough Street.",
-                          "verbal_transition_alert_instruction": "Turn left onto Gough Street.",
-                          "verbal_pre_transition_instruction": "Turn left onto Gough Street. Then You will arrive at your destination.",
-                          "verbal_post_transition_instruction": "Continue for 20 feet.",
-                          "street_names": ["Gough Street"],
-                          "time": 3.302,
-                          "length": 0.002,
-                          "cost": 8.302,
-                          "begin_shape_index": 45,
-                          "end_shape_index": 46,
-                          "verbal_multi_cue": true,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                        {
-                          "type": 4,
-                          "instruction": "You have arrived at your destination.",
-                          "verbal_transition_alert_instruction": "You will arrive at your destination.",
-                          "verbal_pre_transition_instruction": "You have arrived at your destination.",
-                          "time": 0.0,
-                          "length": 0.0,
-                          "cost": 0.0,
-                          "begin_shape_index": 46,
-                          "end_shape_index": 46,
-                          "travel_mode": "pedestrian",
-                          "travel_type": "foot",
-                        },
-                      ],
-                    "summary":
-                      {
-                        "has_time_restrictions": false,
-                        "min_lat": 37.803694,
-                        "min_lon": -122.428418,
-                        "max_lat": 37.807771,
-                        "max_lon": -122.419706,
-                        "time": 818.918,
-                        "length": 0.716,
-                        "cost": 883.918,
-                      },
-                    "shape": "uhrbgAt~{nhFrDhk@rBWfAbPvBWXfElAQhAi@dA]d[oDvIaAs@~Dp@n@r@r@^\\jAnQfDdh@lBtY`Eg@VzDXxDxAdPrD~j@zBf]TpD|C_@`\\uD|QaCZtE`Cp\\|A|UdCz^N`ClDJj@dJdDo@vGw@dKmAzWcDRdFpFq@d@dHpH`kAVbEXhEdKj_BpAO",
+                    "type": 1,
+                    "instruction": "Walk west on the walkway.",
+                    "verbal_pre_transition_instruction": "Walk west on the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 200 feet.",
+                    "time": 44.733,
+                    "length": 0.039,
+                    "cost": 44.733,
+                    "begin_shape_index": 0,
+                    "end_shape_index": 1,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
                   },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left.",
+                    "verbal_transition_alert_instruction": "Turn left.",
+                    "verbal_pre_transition_instruction": "Turn left. Then Turn right onto Jefferson Street.",
+                    "verbal_post_transition_instruction": "Continue for 20 feet.",
+                    "time": 4.941,
+                    "length": 0.004,
+                    "cost": 4.941,
+                    "begin_shape_index": 1,
+                    "end_shape_index": 2,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto Jefferson Street.",
+                    "verbal_transition_alert_instruction": "Turn right onto Jefferson Street.",
+                    "verbal_pre_transition_instruction": "Turn right onto Jefferson Street.",
+                    "verbal_post_transition_instruction": "Continue for 80 feet.",
+                    "street_names": [
+                        "Jefferson Street"
+                    ],
+                    "time": 16.941,
+                    "length": 0.014,
+                    "cost": 21.941,
+                    "begin_shape_index": 2,
+                    "end_shape_index": 3,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn left onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 20 feet.",
+                    "time": 4.941,
+                    "length": 0.004,
+                    "cost": 9.941,
+                    "begin_shape_index": 3,
+                    "end_shape_index": 4,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn right onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto Hyde Street.",
+                    "verbal_post_transition_instruction": "Continue for 30 feet.",
+                    "time": 6.352,
+                    "length": 0.005,
+                    "cost": 6.352,
+                    "begin_shape_index": 4,
+                    "end_shape_index": 5,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto Hyde Street.",
+                    "verbal_transition_alert_instruction": "Turn left onto Hyde Street.",
+                    "verbal_pre_transition_instruction": "Turn left onto Hyde Street.",
+                    "verbal_post_transition_instruction": "Continue for 300 feet.",
+                    "street_names": [
+                        "Hyde Street"
+                    ],
+                    "time": 58.588,
+                    "length": 0.051,
+                    "cost": 63.588,
+                    "begin_shape_index": 5,
+                    "end_shape_index": 10,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn right onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 30 feet.",
+                    "time": 6.352,
+                    "length": 0.005,
+                    "cost": 11.352,
+                    "begin_shape_index": 10,
+                    "end_shape_index": 11,
+                    "rough": true,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn left onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn left onto the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 400 feet.",
+                    "time": 93.176,
+                    "length": 0.082,
+                    "cost": 93.176,
+                    "begin_shape_index": 11,
+                    "end_shape_index": 17,
+                    "rough": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn left onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto Beach Street.",
+                    "verbal_post_transition_instruction": "Continue for 40 feet.",
+                    "time": 7.764,
+                    "length": 0.006,
+                    "cost": 7.764,
+                    "begin_shape_index": 17,
+                    "end_shape_index": 18,
+                    "rough": true,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto Beach Street.",
+                    "verbal_transition_alert_instruction": "Turn right onto Beach Street.",
+                    "verbal_pre_transition_instruction": "Turn right onto Beach Street.",
+                    "verbal_post_transition_instruction": "Continue for 500 feet.",
+                    "street_names": [
+                        "Beach Street"
+                    ],
+                    "time": 110.705,
+                    "length": 0.095,
+                    "cost": 115.705,
+                    "begin_shape_index": 18,
+                    "end_shape_index": 24,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto Polk Street.",
+                    "verbal_transition_alert_instruction": "Turn left onto Polk Street.",
+                    "verbal_pre_transition_instruction": "Turn left onto Polk Street.",
+                    "verbal_post_transition_instruction": "Continue for 300 feet.",
+                    "street_names": [
+                        "Polk Street"
+                    ],
+                    "time": 68.058,
+                    "length": 0.059,
+                    "cost": 73.058,
+                    "begin_shape_index": 24,
+                    "end_shape_index": 27,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn right onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn right onto the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 400 feet.",
+                    "time": 98.0,
+                    "length": 0.084,
+                    "cost": 103.0,
+                    "begin_shape_index": 27,
+                    "end_shape_index": 32,
+                    "rough": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto Van Ness Avenue.",
+                    "verbal_transition_alert_instruction": "Turn left onto Van Ness Avenue.",
+                    "verbal_pre_transition_instruction": "Turn left onto Van Ness Avenue.",
+                    "verbal_post_transition_instruction": "Continue for 400 feet.",
+                    "street_names": [
+                        "Van Ness Avenue"
+                    ],
+                    "time": 83.294,
+                    "length": 0.073,
+                    "cost": 98.294,
+                    "begin_shape_index": 32,
+                    "end_shape_index": 38,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn right onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn right onto the walkway. Then Turn left onto the walkway.",
+                    "verbal_post_transition_instruction": "Continue for 30 feet.",
+                    "time": 7.058,
+                    "length": 0.006,
+                    "cost": 12.058,
+                    "begin_shape_index": 38,
+                    "end_shape_index": 39,
+                    "rough": true,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto the walkway.",
+                    "verbal_transition_alert_instruction": "Turn left onto the walkway.",
+                    "verbal_pre_transition_instruction": "Turn left onto the walkway. Then Turn right onto Bay Street.",
+                    "verbal_post_transition_instruction": "Continue for 50 feet.",
+                    "time": 9.882,
+                    "length": 0.008,
+                    "cost": 9.882,
+                    "begin_shape_index": 39,
+                    "end_shape_index": 40,
+                    "rough": true,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 10,
+                    "instruction": "Turn right onto Bay Street.",
+                    "verbal_transition_alert_instruction": "Turn right onto Bay Street.",
+                    "verbal_pre_transition_instruction": "Turn right onto Bay Street.",
+                    "verbal_post_transition_instruction": "Continue for 900 feet.",
+                    "street_names": [
+                        "Bay Street"
+                    ],
+                    "time": 194.823,
+                    "length": 0.171,
+                    "cost": 199.823,
+                    "begin_shape_index": 40,
+                    "end_shape_index": 45,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 15,
+                    "instruction": "Turn left onto Gough Street.",
+                    "verbal_transition_alert_instruction": "Turn left onto Gough Street.",
+                    "verbal_pre_transition_instruction": "Turn left onto Gough Street. Then You will arrive at your destination.",
+                    "verbal_post_transition_instruction": "Continue for 20 feet.",
+                    "street_names": [
+                        "Gough Street"
+                    ],
+                    "time": 3.302,
+                    "length": 0.002,
+                    "cost": 8.302,
+                    "begin_shape_index": 45,
+                    "end_shape_index": 46,
+                    "verbal_multi_cue": true,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  },
+                  {
+                    "type": 4,
+                    "instruction": "You have arrived at your destination.",
+                    "verbal_transition_alert_instruction": "You will arrive at your destination.",
+                    "verbal_pre_transition_instruction": "You have arrived at your destination.",
+                    "time": 0.0,
+                    "length": 0.0,
+                    "cost": 0.0,
+                    "begin_shape_index": 46,
+                    "end_shape_index": 46,
+                    "travel_mode": "pedestrian",
+                    "travel_type": "foot"
+                  }
                 ],
-              "linear_references":
-                [
-                  "C6jyLBrisjr3Af+4//g6BA==",
-                  "C6jyCxrirjr3AAAA//s6Bw==",
-                  "C6jyDBriqyKUAP/j//0iAg==",
-                  "C6jx/xriqTr3AAAA//w6Ag==",
-                  "C6jx/xripjr0AP/2AAE6Hg==",
-                  "C6jx+xripiKUAQAM/8kiHw==",
-                  "C6jyARrijCKPAAAC/+8iBg==",
-                  "C6jyAxrihDrvAP/0AAM6BQ==",
-                  "C6jx/hrihTrzAP/5//o6Bw==",
-                  "C6jx+xrigjr1AP/h//06Bw==",
-                  "C6jx7RrigDr3Af++//k6Bw==",
-                  "C6jxzxrifDr3AP/T//w6Ag==",
-                  "C6jxuxrieTr3AAAA//g6Bw==",
-                  "C6jxvBridTLSAP/1AAAyBw==",
-                  "C6jxtxridDLSAP/2AAEyBg==",
-                  "C6jxsxridDLWAf+d//MyBw==",
-                  "C6jxhRribjLXAP/P//oyAg==",
-                  "C6jxbxriazLXAP/1//8yHw==",
-                  "C6jxaxriajLXAP////kyHw==",
-                  "C6jxaxriZjLTAAAJ/9MyHw==",
-                  "C6jxbxriUTLPAAAG/+IyBw==",
-                  "C6jxcxriQzrvAP/z//86Bw==",
-                  "C6jxbhriQjryAP/P//s6Bw==",
-                  "C6jxVxriPzr3AP/b//w6Bw==",
-                  "C6jxRhriPTr3AP/N//o6Aw==",
-                  "C6jxLxriOjr3AP/4AAA6Aw==",
-                  "C6jxLBriOTLXAP/9//kyBQ==",
-                  "C6jxKxriNSKTAP/u//8iHw==",
-                  "C6jxIxriNCKWAAAE/+siHw==",
-                  "C6jxJRriKiKPAAAE/+0iHw==",
-                  "C6jxJxriISKPAAAI/9kiAw==",
-                  "C6jxKxriDjrvAP/0AAA6AQ==",
-                  "C6jxJhriDjrzAAAB//Q6Bw==",
-                  "C6jxJxriCBpxAv9s/+8aBw==",
-                  "C6jw4xrh/xp3Av9a/+0aBQ==",
-                  "C6jwlhrh9jLXAAAA//0yBQ==",
-                ],
-              "summary":
-                {
+                "summary": {
                   "has_time_restrictions": false,
                   "min_lat": 37.803694,
                   "min_lon": -122.428418,
@@ -2680,25 +2715,76 @@ components:
                   "max_lon": -122.419706,
                   "time": 818.918,
                   "length": 0.716,
-                  "cost": 883.918,
+                  "cost": 883.918
                 },
-              "status_message": "Found route between points",
-              "status": 0,
-              "units": "miles",
-              "language": "en-US",
+                "shape": "uhrbgAt~{nhFrDhk@rBWfAbPvBWXfElAQhAi@dA]d[oDvIaAs@~Dp@n@r@r@^\\jAnQfDdh@lBtY`Eg@VzDXxDxAdPrD~j@zBf]TpD|C_@`\\uD|QaCZtE`Cp\\|A|UdCz^N`ClDJj@dJdDo@vGw@dKmAzWcDRdFpFq@d@dHpH`kAVbEXhEdKj_BpAO"
+              }
+            ],
+            "linear_references": [
+                "C6jyLBrisjr3Af+4//g6BA==",
+                "C6jyCxrirjr3AAAA//s6Bw==",
+                "C6jyDBriqyKUAP/j//0iAg==",
+                "C6jx/xriqTr3AAAA//w6Ag==",
+                "C6jx/xripjr0AP/2AAE6Hg==",
+                "C6jx+xripiKUAQAM/8kiHw==",
+                "C6jyARrijCKPAAAC/+8iBg==",
+                "C6jyAxrihDrvAP/0AAM6BQ==",
+                "C6jx/hrihTrzAP/5//o6Bw==",
+                "C6jx+xrigjr1AP/h//06Bw==",
+                "C6jx7RrigDr3Af++//k6Bw==",
+                "C6jxzxrifDr3AP/T//w6Ag==",
+                "C6jxuxrieTr3AAAA//g6Bw==",
+                "C6jxvBridTLSAP/1AAAyBw==",
+                "C6jxtxridDLSAP/2AAEyBg==",
+                "C6jxsxridDLWAf+d//MyBw==",
+                "C6jxhRribjLXAP/P//oyAg==",
+                "C6jxbxriazLXAP/1//8yHw==",
+                "C6jxaxriajLXAP////kyHw==",
+                "C6jxaxriZjLTAAAJ/9MyHw==",
+                "C6jxbxriUTLPAAAG/+IyBw==",
+                "C6jxcxriQzrvAP/z//86Bw==",
+                "C6jxbhriQjryAP/P//s6Bw==",
+                "C6jxVxriPzr3AP/b//w6Bw==",
+                "C6jxRhriPTr3AP/N//o6Aw==",
+                "C6jxLxriOjr3AP/4AAA6Aw==",
+                "C6jxLBriOTLXAP/9//kyBQ==",
+                "C6jxKxriNSKTAP/u//8iHw==",
+                "C6jxIxriNCKWAAAE/+siHw==",
+                "C6jxJRriKiKPAAAE/+0iHw==",
+                "C6jxJxriISKPAAAI/9kiAw==",
+                "C6jxKxriDjrvAP/0AAA6AQ==",
+                "C6jxJhriDjrzAAAB//Q6Bw==",
+                "C6jxJxriCBpxAv9s/+8aBw==",
+                "C6jw4xrh/xp3Av9a/+0aBQ==",
+                "C6jwlhrh9jLXAAAA//0yBQ=="
+            ],
+            "summary": {
+              "has_time_restrictions": false,
+              "min_lat": 37.803694,
+              "min_lon": -122.428418,
+              "max_lat": 37.807771,
+              "max_lon": -122.419706,
+              "time": 818.918,
+              "length": 0.716,
+              "cost": 883.918
             },
+            "status_message": "Found route between points",
+            "status": 0,
+            "units": "miles",
+            "language": "en-US"
+          }
         }
     matrixResponse:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         sources:
           type: array
           items:
             type: array
             items:
-              $ref: "#/components/schemas/coordinate"
+              $ref: '#/components/schemas/coordinate'
           description: The list of starting locations
           minItems: 1
         targets:
@@ -2706,7 +2792,7 @@ components:
           items:
             type: array
             items:
-              $ref: "#/components/schemas/coordinate"
+              $ref: '#/components/schemas/coordinate'
           description: The list of ending locations
           minItems: 1
         sources_to_targets:
@@ -2714,7 +2800,7 @@ components:
           items:
             type: array
             items:
-              $ref: "#/components/schemas/matrixDistance"
+              $ref: '#/components/schemas/matrixDistance'
           description: >-
             The matrix of starting and ending locations, along with the computed distance and travel time.
             The array is row-ordered. This means that the time and distance from the first location to all others
@@ -2724,9 +2810,9 @@ components:
         warnings:
           type: array
           items:
-            $ref: "#/components/schemas/warning"
+            $ref: '#/components/schemas/warning'
         units:
-          $ref: "#/components/schemas/valhallaLongUnits"
+          $ref: '#/components/schemas/valhallaLongUnits'
       required:
         - sources
         - targets
@@ -2734,53 +2820,73 @@ components:
         - units
       example:
         {
-          "targets":
+          "targets": [
             [
-              [
-                { "lon": -73.990508, "lat": 40.744014 },
-                { "lon": -73.979713, "lat": 40.739735 },
-                { "lon": -73.985015, "lat": 40.752522 },
-                { "lon": -73.983704, "lat": 40.750117 },
-                { "lon": -73.993519, "lat": 40.750552 },
-              ],
-            ],
-          "sources_to_targets":
+              {
+                "lon": -73.990508,
+                "lat": 40.744014
+              },
+              {
+                "lon": -73.979713,
+                "lat": 40.739735
+              },
+              {
+                "lon": -73.985015,
+                "lat": 40.752522
+              },
+              {
+                "lon": -73.983704,
+                "lat": 40.750117
+              },
+              {
+                "lon": -73.993519,
+                "lat": 40.750552
+              }
+            ]
+          ],
+          "sources_to_targets": [
             [
-              [
-                {
-                  "distance": 0.000,
-                  "time": 0,
-                  "to_index": 0,
-                  "from_index": 0,
-                },
-                {
-                  "distance": 1.115,
-                  "time": 806,
-                  "to_index": 1,
-                  "from_index": 0,
-                },
-                {
-                  "distance": 1.278,
-                  "time": 909,
-                  "to_index": 2,
-                  "from_index": 0,
-                },
-                {
-                  "distance": 1.112,
-                  "time": 792,
-                  "to_index": 3,
-                  "from_index": 0,
-                },
-                {
-                  "distance": 1.220,
-                  "time": 869,
-                  "to_index": 4,
-                  "from_index": 0,
-                },
-              ],
-            ],
-          "sources": [[{ "lon": -73.990508, "lat": 40.744014 }]],
-          "units": "kilometers",
+              {
+                "distance": 0.000,
+                "time": 0,
+                "to_index": 0,
+                "from_index": 0
+              },
+              {
+                "distance": 1.115,
+                "time": 806,
+                "to_index": 1,
+                "from_index": 0
+              },
+              {
+                "distance": 1.278,
+                "time": 909,
+                "to_index": 2,
+                "from_index": 0
+              },
+              {
+                "distance": 1.112,
+                "time": 792,
+                "to_index": 3,
+                "from_index": 0
+              },
+              {
+                "distance": 1.220,
+                "time": 869,
+                "to_index": 4,
+                "from_index": 0
+              }
+            ]
+          ],
+          "sources": [
+            [
+              {
+                "lon": -73.990508,
+                "lat": 40.744014
+              }
+            ]
+          ],
+          "units": "kilometers"
         }
     isochroneResponse:
       type: object
@@ -2793,65 +2899,124 @@ components:
         features:
           type: array
           items:
-            $ref: "#/components/schemas/isochroneFeature"
+            $ref: '#/components/schemas/isochroneFeature'
         type:
           type: string
           enum:
             - FeatureCollection
       example:
         {
-          "features":
-            [
-              {
-                "properties":
-                  {
-                    "fill": "#ff0000",
-                    "fillOpacity": 0.33,
-                    "fill-opacity": 0.33,
-                    "fillColor": "#ff0000",
-                    "color": "#ff0000",
-                    "contour": 15,
-                    "opacity": 0.33,
-                    "metric": "time",
-                  },
-                "geometry":
-                  {
-                    "coordinates":
-                      [
-                        [-73.985021, 40.753501],
-                        [-73.983892, 40.751630],
-                        [-73.982508, 40.751546],
-                        [-73.981969, 40.751014],
-                        [-73.977881, 40.739014],
-                        [-73.979577, 40.738083],
-                        [-73.980361, 40.737014],
-                        [-73.988508, 40.734670],
-                        [-73.990508, 40.733708],
-                        [-73.991514, 40.734008],
-                        [-73.994628, 40.733894],
-                        [-73.995388, 40.734134],
-                        [-73.995662, 40.734860],
-                        [-73.996508, 40.735006],
-                        [-73.998508, 40.734576],
-                        [-74.003292, 40.746014],
-                        [-74.004016, 40.749014],
-                        [-74.002508, 40.749907],
-                        [-73.993508, 40.751786],
-                        [-73.987508, 40.753970],
-                        [-73.985021, 40.753501],
-                      ],
-                    "type": "LineString",
-                  },
-                "type": "Feature",
+          "features": [
+            {
+              "properties": {
+                "fill": "#ff0000",
+                "fillOpacity": 0.33,
+                "fill-opacity": 0.33,
+                "fillColor": "#ff0000",
+                "color": "#ff0000",
+                "contour": 15,
+                "opacity": 0.33,
+                "metric": "time"
               },
-            ],
-          "type": "FeatureCollection",
+              "geometry": {
+                "coordinates": [
+                  [
+                    -73.985021,
+                    40.753501
+                  ],
+                  [
+                    -73.983892,
+                    40.751630
+                  ],
+                  [
+                    -73.982508,
+                    40.751546
+                  ],
+                  [
+                    -73.981969,
+                    40.751014
+                  ],
+                  [
+                    -73.977881,
+                    40.739014
+                  ],
+                  [
+                    -73.979577,
+                    40.738083
+                  ],
+                  [
+                    -73.980361,
+                    40.737014
+                  ],
+                  [
+                    -73.988508,
+                    40.734670
+                  ],
+                  [
+                    -73.990508,
+                    40.733708
+                  ],
+                  [
+                    -73.991514,
+                    40.734008
+                  ],
+                  [
+                    -73.994628,
+                    40.733894
+                  ],
+                  [
+                    -73.995388,
+                    40.734134
+                  ],
+                  [
+                    -73.995662,
+                    40.734860
+                  ],
+                  [
+                    -73.996508,
+                    40.735006
+                  ],
+                  [
+                    -73.998508,
+                    40.734576
+                  ],
+                  [
+                    -74.003292,
+                    40.746014
+                  ],
+                  [
+                    -74.004016,
+                    40.749014
+                  ],
+                  [
+                    -74.002508,
+                    40.749907
+                  ],
+                  [
+                    -73.993508,
+                    40.751786
+                  ],
+                  [
+                    -73.987508,
+                    40.753970
+                  ],
+                  [
+                    -73.985021,
+                    40.753501
+                  ]
+                ],
+                "type": "LineString"
+              },
+              "type": "Feature"
+            }
+          ],
+          "type": "FeatureCollection"
         }
     isochroneFeature:
       type: object
       properties:
         properties:
-          $ref: "#/components/schemas/isochroneProperties"
+          $ref: '#/components/schemas/isochroneProperties'
         geometry:
           type: object
           # Bit of a cop-out for now since many client generators choke on the complexity of GeoJSON
@@ -2887,11 +3052,11 @@ components:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         shape:
           type: array
           items:
-            $ref: "#/components/schemas/coordinate"
+            $ref: '#/components/schemas/coordinate'
         encoded_polyline:
           type: string
           description: The input polyline.
@@ -2922,8 +3087,15 @@ components:
       example:
         {
           "id": "kesklinn",
-          "shape": [{ "lat": 59.436884, "lon": 24.742595 }],
-          "height": [37],
+          "shape": [
+            {
+              "lat": 59.436884,
+              "lon": 24.742595
+            }
+          ],
+          "height": [
+            37
+          ]
         }
     traceAttributesBaseResponse:
       type: object
@@ -2931,19 +3103,19 @@ components:
         edges:
           type: array
           items:
-            $ref: "#/components/schemas/traceEdge"
+            $ref: '#/components/schemas/traceEdge'
           description: The list of edges matched along the path.
         admins:
           type: array
           items:
-            $ref: "#/components/schemas/adminRegion"
+            $ref: '#/components/schemas/adminRegion'
           description: >-
             The set of administrative regions matched along the path. Rather than repeating this information
             for every end node, the admins in this list are referenced by index.
         matched_points:
           type: array
           items:
-            $ref: "#/components/schemas/matchedPoint"
+            $ref: '#/components/schemas/matchedPoint'
           description: >-
             List of match results when using the map_snap shape match algorithm. There is a one-to-one correspondence
             with the input set of latitude, longitude coordinates and this list of match results.
@@ -2961,23 +3133,23 @@ components:
           maximum: 1
     traceAttributesResponse:
       allOf:
-        - $ref: "#/components/schemas/traceAttributesBaseResponse"
+        - $ref: '#/components/schemas/traceAttributesBaseResponse'
         - type: object
           properties:
             id:
-              $ref: "#/components/schemas/requestId"
+              $ref: '#/components/schemas/requestId'
             units:
-              $ref: "#/components/schemas/valhallaLongUnits"
+              $ref: '#/components/schemas/valhallaLongUnits'
             alternate_paths:
               type: array
               items:
-                $ref: "#/components/schemas/traceAttributesBaseResponse"
+                $ref: '#/components/schemas/traceAttributesBaseResponse'
               description: Alternate paths, if any, that were not classified as the best match.
     locateObject:
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/requestId"
+          $ref: '#/components/schemas/requestId'
         input_lat:
           type: number
           format: double
@@ -2989,28 +3161,28 @@ components:
         nodes:
           type: array
           items:
-            $ref: "#/components/schemas/locateNode"
+            $ref: '#/components/schemas/locateNode'
         edges:
           type: array
           items:
-            $ref: "#/components/schemas/locateEdge"
+            $ref: '#/components/schemas/locateEdge'
     locateNode:
       allOf:
-        - $ref: "#/components/schemas/coordinate"
+        - $ref: '#/components/schemas/coordinate'
         - type: object
           properties:
             traffic_signal:
               type: boolean
             type:
-              $ref: "#/components/schemas/nodeType"
+              $ref: '#/components/schemas/nodeType'
             node_id:
-              $ref: "#/components/schemas/nodeId"
+              $ref: '#/components/schemas/nodeId'
             access:
-              $ref: "#/components/schemas/access"
+              $ref: '#/components/schemas/access'
             edge_count:
               type: integer
             administrative:
-              $ref: "#/components/schemas/administrative"
+              $ref: '#/components/schemas/administrative'
             intersection_type:
               type: string
               enum:
@@ -3086,7 +3258,7 @@ components:
       type: object
       properties:
         edge_id:
-          $ref: "#/components/schemas/nodeId"
+          $ref: '#/components/schemas/nodeId'
         correlated_lat:
           type: number
           format: double
@@ -3126,9 +3298,9 @@ components:
             Each entry represents 5 minutes, where the first entry represents midnight on Monday, the second entry
             represents 00:05 on Monday, etc.
         edge_info:
-          $ref: "#/components/schemas/locateEdgeInfo"
+          $ref: '#/components/schemas/locateEdgeInfo'
         edge:
-          $ref: "#/components/schemas/locateDetailedEdge"
+          $ref: '#/components/schemas/locateDetailedEdge'
         warnings:
           type: array
           items:
@@ -3152,7 +3324,7 @@ components:
             type: string
           description: A list of names that the edge goes by.
         bike_network:
-          $ref: "#/components/schemas/bikeNetwork"
+          $ref: '#/components/schemas/bikeNetwork'
         way_id:
           type: integer
     locateDetailedEdge:
@@ -3189,12 +3361,12 @@ components:
           type: boolean
           description: Is the edge info forward? If false, then reverse is implied.
         end_node:
-          $ref: "#/components/schemas/nodeId"
+          $ref: '#/components/schemas/nodeId'
         truck_route:
           type: boolean
           description: Is the edge part of a truck route/network?
         speeds:
-          $ref: "#/components/schemas/speeds"
+          $ref: '#/components/schemas/speeds'
         bike_network:
           type: boolean
           description: Is the edge part of a bicycle network?
@@ -3211,9 +3383,9 @@ components:
           type: boolean
           description: Is the edge destination only? If so, it will not be routed through.
         geo_attributes:
-          $ref: "#/components/schemas/geoAttributes"
+          $ref: '#/components/schemas/geoAttributes'
         start_restriction:
-          $ref: "#/components/schemas/restrictions"
+          $ref: '#/components/schemas/restrictions'
         cycle_lane:
           type: string
           description: >-
@@ -3224,7 +3396,7 @@ components:
             - dedicated
             - separated
         end_restriction:
-          $ref: "#/components/schemas/restrictions"
+          $ref: '#/components/schemas/restrictions'
         seasonal:
           type: boolean
           description: Is access seasonal (ex. no access in winter)?
@@ -3238,12 +3410,12 @@ components:
           type: boolean
           description: Do exit signs exist for the edge?
         access:
-          $ref: "#/components/schemas/restrictions"
+          $ref: '#/components/schemas/restrictions'
         bridge:
           type: boolean
           description: Is the edge part of a bridge?
         classification:
-          $ref: "#/components/schemas/highwayClassification"
+          $ref: '#/components/schemas/highwayClassification'
         toll:
           type: boolean
           description: Is the edge part of a toll road?

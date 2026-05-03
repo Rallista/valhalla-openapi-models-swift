@@ -11,7 +11,7 @@ import Foundation
 #endif
 
 public struct PedestrianCostingOptions: Codable, Hashable {
-    public static let walkingSpeedRule = NumericRule<Double>(minimum: 0.5, exclusiveMinimum: false, maximum: 25, exclusiveMaximum: false, multipleOf: nil)
+    public static let walkingSpeedRule = NumericRule<Int>(minimum: 0, exclusiveMinimum: false, maximum: 25, exclusiveMaximum: false, multipleOf: nil)
     public static let useFerryRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     public static let useLivingStreetsRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     public static let useTracksRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
@@ -19,7 +19,7 @@ public struct PedestrianCostingOptions: Codable, Hashable {
     public static let useLitRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
     public static let maxHikingDifficultyRule = NumericRule<Int>(minimum: 1, exclusiveMinimum: false, maximum: 6, exclusiveMaximum: false, multipleOf: nil)
     /** Walking speed in kph. */
-    public var walkingSpeed: Double? = 5.1
+    public var walkingSpeed: Int?
     /** A factor that multiplies the cost when walkways are encountered. */
     public var walkwayFactor: Double? = 1
     /** A factor that multiplies the cost when sidewalks are encountered. */
@@ -51,7 +51,7 @@ public struct PedestrianCostingOptions: Codable, Hashable {
     /** A penalty (in seconds) to rent a bicycle in `bikeshare` mode. */
     public var bssRentPenalty: Int? = 0
 
-    public init(walkingSpeed: Double? = 5.1, walkwayFactor: Double? = 1, sidewalkFactor: Double? = 1, alleyFactor: Double? = 2, drivewayFactor: Double? = 5, stepPenalty: Int? = 30, useFerry: Double? = 0.5, useLivingStreets: Double? = nil, useTracks: Double? = nil, useHills: Double? = 0.5, useLit: Double? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, maxHikingDifficulty: Int? = 1, bssRentCost: Int? = 120, bssRentPenalty: Int? = 0) {
+    public init(walkingSpeed: Int? = nil, walkwayFactor: Double? = 1, sidewalkFactor: Double? = 1, alleyFactor: Double? = 2, drivewayFactor: Double? = 5, stepPenalty: Int? = 30, useFerry: Double? = 0.5, useLivingStreets: Double? = nil, useTracks: Double? = nil, useHills: Double? = 0.5, useLit: Double? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, maxHikingDifficulty: Int? = 1, bssRentCost: Int? = 120, bssRentPenalty: Int? = 0) {
         self.walkingSpeed = walkingSpeed
         self.walkwayFactor = walkwayFactor
         self.sidewalkFactor = sidewalkFactor

@@ -8,13 +8,10 @@ on:
 
 jobs:
   test:
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
       - name: Checkout valhalla-openapi-models-swift
         uses: actions/checkout@v4
-
-      - name: Generate models
-        run: ./generate_models.sh
 
       - name: Swift build
         run: swift build

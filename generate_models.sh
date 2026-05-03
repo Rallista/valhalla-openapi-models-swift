@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# Check that required tools are installed
+if ! command -v openapi-generator >/dev/null 2>&1; then
+    echo "Error: openapi-generator is not installed or not on your PATH."
+    echo "Install it with: brew install openapi-generator"
+    echo "See https://openapi-generator.tech/docs/installation for other options."
+    exit 1
+fi
+
+if ! command -v swiftformat >/dev/null 2>&1; then
+    echo "Error: swiftformat is not installed or not on your PATH."
+    echo "Install it with: brew install swiftformat"
+    exit 1
+fi
+
 # Define the source directories
 source_dirs=("Sources/ValhallaModels" "Sources/ValhallaConfigModels")
 
