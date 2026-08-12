@@ -36,12 +36,14 @@ components:
     valhallaLanguages:
       type: string
       enum:
+        - ar-SA
         - bg-BG
         - ca-ES
         - cs-CZ
         - da-DK
         - de-DE
         - el-GR
+        - en-AU
         - en-GB
         - en-US-x-pirate
         - en-US
@@ -53,6 +55,8 @@ components:
         - hu-HU
         - it-IT
         - ja-JP
+        - ko-KR
+        - mn-MN
         - nb-NO
         - nl-NL
         - pl-PL
@@ -65,6 +69,7 @@ components:
         - sv-SE
         - tr-TR
         - uk-UA
+        - vi-VN
       default: en-US
     simpleRoutingWaypoint:
       allOf:
