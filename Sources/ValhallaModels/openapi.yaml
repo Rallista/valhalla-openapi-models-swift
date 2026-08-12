@@ -337,6 +337,23 @@ components:
       default: 0.5
       minimum: 0
       maximum: 1
+    shortestCostingOption:
+      type: boolean
+      description: >-
+        If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL
+        other costing factors. Note that it does not disable hierarchy pruning, so the result may be sub-optimal
+        for some costing models. Available for every costing model except `multimodal` and `bikeshare`.
+      default: false
+    destinationOnlyPenaltyCostingOption:
+      type: integer
+      description: >-
+        A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is
+        necessary to reach the destination. The default penalty is 600.
+    privateAccessPenaltyCostingOption:
+      type: integer
+      description: >-
+        A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered.
+        The default penalty is 450 for all costing models except pedestrian, where it is 600.
     baseCostingOptions:
       type: object
       properties:
@@ -372,6 +389,10 @@ components:
           $ref: '#/components/schemas/useLivingStreetsCostingOption'
         use_ferry:
           $ref: '#/components/schemas/useFerryCostingOption'
+        destination_only_penalty:
+          $ref: '#/components/schemas/destinationOnlyPenaltyCostingOption'
+        private_access_penalty:
+          $ref: '#/components/schemas/privateAccessPenaltyCostingOption'
     autoCostingOptions:
       allOf:
         - $ref: '#/components/schemas/baseCostingOptions'
@@ -430,11 +451,7 @@ components:
               minimum: 10
               maximum: 252
             shortest:
-              type: boolean
-              description: >-
-                If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL
-                other costing factors.
-              default: false
+              $ref: '#/components/schemas/shortestCostingOption'
             ignore_closures:
               type: boolean
               description: >-
@@ -551,6 +568,8 @@ components:
               type: integer
               description: A penalty (in seconds) to return a bicycle in `bikeshare` mode.
               default: 0
+            shortest:
+              $ref: '#/components/schemas/shortestCostingOption'
     motorScooterCostingOptions:
       allOf:
         - $ref: '#/components/schemas/autoCostingOptions'
@@ -664,6 +683,12 @@ components:
           default: 1
           minimum: 1
           maximum: 6
+        destination_only_penalty:
+          $ref: '#/components/schemas/destinationOnlyPenaltyCostingOption'
+        private_access_penalty:
+          $ref: '#/components/schemas/privateAccessPenaltyCostingOption'
+        shortest:
+          $ref: '#/components/schemas/shortestCostingOption'
         bss_rent_cost:
           type: integer
           description: The estimated cost (in seconds) to rent a bicycle from a sharing station in `bikeshare` mode.

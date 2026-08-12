@@ -31,8 +31,12 @@ public struct BaseCostingOptions: Codable, Hashable {
     public var useLivingStreets: Double?
     /** A measure of willingness to take ferries. Values near 0 attempt to avoid ferries, and values near 1 will favour them. Note that as some routes may be impossible without ferries, 0 does not guarantee avoidance of them. */
     public var useFerry: Double? = 0.5
+    /** A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is necessary to reach the destination. The default penalty is 600. */
+    public var destinationOnlyPenalty: Int?
+    /** A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered. The default penalty is 450 for all costing models except pedestrian, where it is 600. */
+    public var privateAccessPenalty: Int?
 
-    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5) {
+    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, destinationOnlyPenalty: Int? = nil, privateAccessPenalty: Int? = nil) {
         self.maneuverPenalty = maneuverPenalty
         self.gateCost = gateCost
         self.gatePenalty = gatePenalty
@@ -42,6 +46,8 @@ public struct BaseCostingOptions: Codable, Hashable {
         self.serviceFactor = serviceFactor
         self.useLivingStreets = useLivingStreets
         self.useFerry = useFerry
+        self.destinationOnlyPenalty = destinationOnlyPenalty
+        self.privateAccessPenalty = privateAccessPenalty
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -54,6 +60,8 @@ public struct BaseCostingOptions: Codable, Hashable {
         case serviceFactor = "service_factor"
         case useLivingStreets = "use_living_streets"
         case useFerry = "use_ferry"
+        case destinationOnlyPenalty = "destination_only_penalty"
+        case privateAccessPenalty = "private_access_penalty"
     }
 
     // Encodable protocol methods
@@ -69,5 +77,7 @@ public struct BaseCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(serviceFactor, forKey: .serviceFactor)
         try container.encodeIfPresent(useLivingStreets, forKey: .useLivingStreets)
         try container.encodeIfPresent(useFerry, forKey: .useFerry)
+        try container.encodeIfPresent(destinationOnlyPenalty, forKey: .destinationOnlyPenalty)
+        try container.encodeIfPresent(privateAccessPenalty, forKey: .privateAccessPenalty)
     }
 }

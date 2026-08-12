@@ -46,12 +46,18 @@ public struct PedestrianCostingOptions: Codable, Hashable {
     public var serviceFactor: Double? = 1
     /** The maximum difficulty of hiking trails allowed. This corresponds to the OSM `sac_scale`. */
     public var maxHikingDifficulty: Int? = 1
+    /** A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is necessary to reach the destination. The default penalty is 600. */
+    public var destinationOnlyPenalty: Int?
+    /** A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered. The default penalty is 450 for all costing models except pedestrian, where it is 600. */
+    public var privateAccessPenalty: Int?
+    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. Note that it does not disable hierarchy pruning, so the result may be sub-optimal for some costing models. Available for every costing model except `multimodal` and `bikeshare`. */
+    public var shortest: Bool? = false
     /** The estimated cost (in seconds) to rent a bicycle from a sharing station in `bikeshare` mode. */
     public var bssRentCost: Int? = 120
     /** A penalty (in seconds) to rent a bicycle in `bikeshare` mode. */
     public var bssRentPenalty: Int? = 0
 
-    public init(walkingSpeed: Int? = nil, walkwayFactor: Double? = 1, sidewalkFactor: Double? = 1, alleyFactor: Double? = 2, drivewayFactor: Double? = 5, stepPenalty: Int? = 30, useFerry: Double? = 0.5, useLivingStreets: Double? = nil, useTracks: Double? = nil, useHills: Double? = 0.5, useLit: Double? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, maxHikingDifficulty: Int? = 1, bssRentCost: Int? = 120, bssRentPenalty: Int? = 0) {
+    public init(walkingSpeed: Int? = nil, walkwayFactor: Double? = 1, sidewalkFactor: Double? = 1, alleyFactor: Double? = 2, drivewayFactor: Double? = 5, stepPenalty: Int? = 30, useFerry: Double? = 0.5, useLivingStreets: Double? = nil, useTracks: Double? = nil, useHills: Double? = 0.5, useLit: Double? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, maxHikingDifficulty: Int? = 1, destinationOnlyPenalty: Int? = nil, privateAccessPenalty: Int? = nil, shortest: Bool? = false, bssRentCost: Int? = 120, bssRentPenalty: Int? = 0) {
         self.walkingSpeed = walkingSpeed
         self.walkwayFactor = walkwayFactor
         self.sidewalkFactor = sidewalkFactor
@@ -66,6 +72,9 @@ public struct PedestrianCostingOptions: Codable, Hashable {
         self.servicePenalty = servicePenalty
         self.serviceFactor = serviceFactor
         self.maxHikingDifficulty = maxHikingDifficulty
+        self.destinationOnlyPenalty = destinationOnlyPenalty
+        self.privateAccessPenalty = privateAccessPenalty
+        self.shortest = shortest
         self.bssRentCost = bssRentCost
         self.bssRentPenalty = bssRentPenalty
     }
@@ -85,6 +94,9 @@ public struct PedestrianCostingOptions: Codable, Hashable {
         case servicePenalty = "service_penalty"
         case serviceFactor = "service_factor"
         case maxHikingDifficulty = "max_hiking_difficulty"
+        case destinationOnlyPenalty = "destination_only_penalty"
+        case privateAccessPenalty = "private_access_penalty"
+        case shortest
         case bssRentCost = "bss_rent_cost"
         case bssRentPenalty = "bss_rent_penalty"
     }
@@ -107,6 +119,9 @@ public struct PedestrianCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(servicePenalty, forKey: .servicePenalty)
         try container.encodeIfPresent(serviceFactor, forKey: .serviceFactor)
         try container.encodeIfPresent(maxHikingDifficulty, forKey: .maxHikingDifficulty)
+        try container.encodeIfPresent(destinationOnlyPenalty, forKey: .destinationOnlyPenalty)
+        try container.encodeIfPresent(privateAccessPenalty, forKey: .privateAccessPenalty)
+        try container.encodeIfPresent(shortest, forKey: .shortest)
         try container.encodeIfPresent(bssRentCost, forKey: .bssRentCost)
         try container.encodeIfPresent(bssRentPenalty, forKey: .bssRentPenalty)
     }

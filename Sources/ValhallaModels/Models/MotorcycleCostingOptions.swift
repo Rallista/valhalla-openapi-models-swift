@@ -36,6 +36,10 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
     public var useLivingStreets: Double?
     /** A measure of willingness to take ferries. Values near 0 attempt to avoid ferries, and values near 1 will favour them. Note that as some routes may be impossible without ferries, 0 does not guarantee avoidance of them. */
     public var useFerry: Double? = 0.5
+    /** A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is necessary to reach the destination. The default penalty is 600. */
+    public var destinationOnlyPenalty: Int?
+    /** A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered. The default penalty is 450 for all costing models except pedestrian, where it is 600. */
+    public var privateAccessPenalty: Int?
     /** The height of the automobile (in meters). */
     public var height: Double? = 1.9
     /** The width of the automobile (in meters). */
@@ -54,7 +58,7 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
     public var useTracks: Double?
     /** The top speed (in kph) that the vehicle is capable of travelling. */
     public var topSpeed: Int? = 140
-    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. */
+    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. Note that it does not disable hierarchy pruning, so the result may be sub-optimal for some costing models. Available for every costing model except `multimodal` and `bikeshare`. */
     public var shortest: Bool? = false
     /** If true, ignores all known closures. This option cannot be set if `location.search_filter.exclude_closures` is also specified. */
     public var ignoreClosures: Bool? = false
@@ -67,7 +71,7 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
     /** A measure of the rider's sense of adventure. Values near 0 attempt to avoid highways and stay on roads with potentially unsuitable terrain (trails, tracks, unclassified, or bad surfaces), and values near 1 will tend to avoid major roads and route on secondary roads. */
     public var useTrails: Double? = 0.0
 
-    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, height: Double? = 1.9, width: Double? = 1.6, tollBoothCost: Int? = 15, tollBoothPenalty: Int? = 0, ferryCost: Int? = 300, useHighways: Double? = 1.0, useTolls: Double? = 0.5, useTracks: Double? = nil, topSpeed: Int? = 140, shortest: Bool? = false, ignoreClosures: Bool? = false, includeHov2: Bool? = false, includeHov3: Bool? = false, includeHot: Bool? = false, useTrails: Double? = 0.0) {
+    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, destinationOnlyPenalty: Int? = nil, privateAccessPenalty: Int? = nil, height: Double? = 1.9, width: Double? = 1.6, tollBoothCost: Int? = 15, tollBoothPenalty: Int? = 0, ferryCost: Int? = 300, useHighways: Double? = 1.0, useTolls: Double? = 0.5, useTracks: Double? = nil, topSpeed: Int? = 140, shortest: Bool? = false, ignoreClosures: Bool? = false, includeHov2: Bool? = false, includeHov3: Bool? = false, includeHot: Bool? = false, useTrails: Double? = 0.0) {
         self.maneuverPenalty = maneuverPenalty
         self.gateCost = gateCost
         self.gatePenalty = gatePenalty
@@ -77,6 +81,8 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
         self.serviceFactor = serviceFactor
         self.useLivingStreets = useLivingStreets
         self.useFerry = useFerry
+        self.destinationOnlyPenalty = destinationOnlyPenalty
+        self.privateAccessPenalty = privateAccessPenalty
         self.height = height
         self.width = width
         self.tollBoothCost = tollBoothCost
@@ -104,6 +110,8 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
         case serviceFactor = "service_factor"
         case useLivingStreets = "use_living_streets"
         case useFerry = "use_ferry"
+        case destinationOnlyPenalty = "destination_only_penalty"
+        case privateAccessPenalty = "private_access_penalty"
         case height
         case width
         case tollBoothCost = "toll_booth_cost"
@@ -134,6 +142,8 @@ public struct MotorcycleCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(serviceFactor, forKey: .serviceFactor)
         try container.encodeIfPresent(useLivingStreets, forKey: .useLivingStreets)
         try container.encodeIfPresent(useFerry, forKey: .useFerry)
+        try container.encodeIfPresent(destinationOnlyPenalty, forKey: .destinationOnlyPenalty)
+        try container.encodeIfPresent(privateAccessPenalty, forKey: .privateAccessPenalty)
         try container.encodeIfPresent(height, forKey: .height)
         try container.encodeIfPresent(width, forKey: .width)
         try container.encodeIfPresent(tollBoothCost, forKey: .tollBoothCost)
