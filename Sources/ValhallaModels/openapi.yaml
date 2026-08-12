@@ -716,6 +716,28 @@ components:
         - km
         - mi
       default: km
+    elevationInterval:
+      type: number
+      format: double
+      description: >-
+        The interval, in the requested units, at which elevation is sampled along the path. When greater
+        than zero, the response carries an `elevation` array sampled at this interval, along with the
+        interval that was applied. When omitted or zero, no elevation is returned.
+
+        The tiles must have been built with elevation data. An interval of 30 meters matches the
+        resolution of the default elevation source. Values are clamped to the range [0, 1000].
+      minimum: 0
+      maximum: 1000
+      example: 30
+    elevation:
+      type: array
+      items:
+        type: number
+        format: double
+      description: >-
+        Elevation sampled every `elevation_interval` along the path, in the response `units` (meters, or
+        feet when the units are miles). Only present when a non-zero `elevation_interval` was requested.
+      example: [329.1, 331.4, 334.0]
     matrixDistance:
       type: object
       properties:
@@ -1369,6 +1391,8 @@ components:
           type: boolean
         alternates:
           type: integer
+        elevation_interval:
+          $ref: '#/components/schemas/elevationInterval'
       required:
         - locations
         - costing
@@ -1509,6 +1533,8 @@ components:
 
             In general, you should not need to change this parameter unless you want to trace a multi-leg
             route with multiple `break` locations in the `shape`.
+        elevation_interval:
+          $ref: '#/components/schemas/elevationInterval'
         directions_options:
           $ref: '#/components/schemas/directionsOptions'
       required:
@@ -2011,6 +2037,10 @@ components:
           description: >-
             An encoded polyline (https://developers.google.com/maps/documentation/utilities/polylinealgorithm) with
             6 digits of decimal precision.
+        elevation_interval:
+          $ref: '#/components/schemas/elevationInterval'
+        elevation:
+          $ref: '#/components/schemas/elevation'
         summary:
           $ref: '#/components/schemas/routeSummary'
       required:
@@ -3131,6 +3161,10 @@ components:
           format: double
           minimum: 0
           maximum: 1
+        elevation_interval:
+          $ref: '#/components/schemas/elevationInterval'
+        elevation:
+          $ref: '#/components/schemas/elevation'
     traceAttributesResponse:
       allOf:
         - $ref: '#/components/schemas/traceAttributesBaseResponse'

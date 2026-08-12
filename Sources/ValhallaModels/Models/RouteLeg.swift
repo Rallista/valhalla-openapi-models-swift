@@ -12,20 +12,29 @@ import Foundation
 
 public struct RouteLeg: Codable, Hashable {
     public static let maneuversRule = ArrayRule(minItems: 1, maxItems: nil, uniqueItems: false)
+    public static let elevationIntervalRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1000, exclusiveMaximum: false, multipleOf: nil)
     public var maneuvers: [RouteManeuver]
     /** An encoded polyline (https://developers.google.com/maps/documentation/utilities/polylinealgorithm) with 6 digits of decimal precision. */
     public var shape: String
+    /** The interval, in the requested units, at which elevation is sampled along the path. When greater than zero, the response carries an `elevation` array sampled at this interval, along with the interval that was applied. When omitted or zero, no elevation is returned. The tiles must have been built with elevation data. An interval of 30 meters matches the resolution of the default elevation source. Values are clamped to the range [0, 1000]. */
+    public var elevationInterval: Double?
+    /** Elevation sampled every `elevation_interval` along the path, in the response `units` (meters, or feet when the units are miles). Only present when a non-zero `elevation_interval` was requested. */
+    public var elevation: [Double]?
     public var summary: RouteSummary
 
-    public init(maneuvers: [RouteManeuver], shape: String, summary: RouteSummary) {
+    public init(maneuvers: [RouteManeuver], shape: String, elevationInterval: Double? = nil, elevation: [Double]? = nil, summary: RouteSummary) {
         self.maneuvers = maneuvers
         self.shape = shape
+        self.elevationInterval = elevationInterval
+        self.elevation = elevation
         self.summary = summary
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case maneuvers
         case shape
+        case elevationInterval = "elevation_interval"
+        case elevation
         case summary
     }
 
@@ -35,6 +44,8 @@ public struct RouteLeg: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(maneuvers, forKey: .maneuvers)
         try container.encode(shape, forKey: .shape)
+        try container.encodeIfPresent(elevationInterval, forKey: .elevationInterval)
+        try container.encodeIfPresent(elevation, forKey: .elevation)
         try container.encode(summary, forKey: .summary)
     }
 }
