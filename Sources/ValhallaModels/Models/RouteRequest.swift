@@ -32,6 +32,7 @@ public struct RouteRequest: Codable, Hashable {
     }
 
     public static let locationsRule = ArrayRule(minItems: 2, maxItems: nil, uniqueItems: false)
+    public static let elevationIntervalRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1000, exclusiveMaximum: false, multipleOf: nil)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     public var locations: [RoutingWaypoint]
@@ -49,8 +50,10 @@ public struct RouteRequest: Codable, Hashable {
     public var bannerInstructions: Bool?
     public var voiceInstructions: Bool?
     public var alternates: Int?
+    /** The interval, in the requested units, at which elevation is sampled along the path. When greater than zero, the response carries an `elevation` array sampled at this interval, along with the interval that was applied. When omitted or zero, no elevation is returned. The tiles must have been built with elevation data. An interval of 30 meters matches the resolution of the default elevation source. Values are clamped to the range [0, 1000]. */
+    public var elevationInterval: Double?
 
-    public init(id: String? = nil, locations: [RoutingWaypoint], costing: CostingModel, costingOptions: CostingOptions? = nil, avoidLocations: [RoutingWaypoint]? = nil, avoidPolygons: [[[Double]]]? = nil, units: DistanceUnit? = nil, language: ValhallaLanguages? = nil, directionsType: DirectionsType? = .instructions, format: Format? = nil, shapeFormat: ShapeFormat? = .polyline6, bannerInstructions: Bool? = nil, voiceInstructions: Bool? = nil, alternates: Int? = nil) {
+    public init(id: String? = nil, locations: [RoutingWaypoint], costing: CostingModel, costingOptions: CostingOptions? = nil, avoidLocations: [RoutingWaypoint]? = nil, avoidPolygons: [[[Double]]]? = nil, units: DistanceUnit? = nil, language: ValhallaLanguages? = nil, directionsType: DirectionsType? = .instructions, format: Format? = nil, shapeFormat: ShapeFormat? = .polyline6, bannerInstructions: Bool? = nil, voiceInstructions: Bool? = nil, alternates: Int? = nil, elevationInterval: Double? = nil) {
         self.id = id
         self.locations = locations
         self.costing = costing
@@ -65,6 +68,7 @@ public struct RouteRequest: Codable, Hashable {
         self.bannerInstructions = bannerInstructions
         self.voiceInstructions = voiceInstructions
         self.alternates = alternates
+        self.elevationInterval = elevationInterval
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -82,6 +86,7 @@ public struct RouteRequest: Codable, Hashable {
         case bannerInstructions = "banner_instructions"
         case voiceInstructions = "voice_instructions"
         case alternates
+        case elevationInterval = "elevation_interval"
     }
 
     // Encodable protocol methods
@@ -102,6 +107,7 @@ public struct RouteRequest: Codable, Hashable {
         try container.encodeIfPresent(bannerInstructions, forKey: .bannerInstructions)
         try container.encodeIfPresent(voiceInstructions, forKey: .voiceInstructions)
         try container.encodeIfPresent(alternates, forKey: .alternates)
+        try container.encodeIfPresent(elevationInterval, forKey: .elevationInterval)
     }
 }
 

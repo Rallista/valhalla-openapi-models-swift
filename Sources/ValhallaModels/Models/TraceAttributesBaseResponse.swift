@@ -12,6 +12,7 @@ import Foundation
 
 public struct TraceAttributesBaseResponse: Codable, Hashable {
     public static let confidenceScoreRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1, exclusiveMaximum: false, multipleOf: nil)
+    public static let elevationIntervalRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1000, exclusiveMaximum: false, multipleOf: nil)
     /** The list of edges matched along the path. */
     public var edges: [TraceEdge]?
     /** The set of administrative regions matched along the path. Rather than repeating this information for every end node, the admins in this list are referenced by index. */
@@ -22,14 +23,20 @@ public struct TraceAttributesBaseResponse: Codable, Hashable {
     /** The encoded polyline (https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. */
     public var shape: String?
     public var confidenceScore: Double?
+    /** The interval, in the requested units, at which elevation is sampled along the path. When greater than zero, the response carries an `elevation` array sampled at this interval, along with the interval that was applied. When omitted or zero, no elevation is returned. The tiles must have been built with elevation data. An interval of 30 meters matches the resolution of the default elevation source. Values are clamped to the range [0, 1000]. */
+    public var elevationInterval: Double?
+    /** Elevation sampled every `elevation_interval` along the path, in the response `units` (meters, or feet when the units are miles). Only present when a non-zero `elevation_interval` was requested. */
+    public var elevation: [Double]?
 
-    public init(edges: [TraceEdge]? = nil, admins: [AdminRegion]? = nil, matchedPoints: [MatchedPoint]? = nil, osmChangeset: Int? = nil, shape: String? = nil, confidenceScore: Double? = nil) {
+    public init(edges: [TraceEdge]? = nil, admins: [AdminRegion]? = nil, matchedPoints: [MatchedPoint]? = nil, osmChangeset: Int? = nil, shape: String? = nil, confidenceScore: Double? = nil, elevationInterval: Double? = nil, elevation: [Double]? = nil) {
         self.edges = edges
         self.admins = admins
         self.matchedPoints = matchedPoints
         self.osmChangeset = osmChangeset
         self.shape = shape
         self.confidenceScore = confidenceScore
+        self.elevationInterval = elevationInterval
+        self.elevation = elevation
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -39,6 +46,8 @@ public struct TraceAttributesBaseResponse: Codable, Hashable {
         case osmChangeset = "osm_changeset"
         case shape
         case confidenceScore = "confidence_score"
+        case elevationInterval = "elevation_interval"
+        case elevation
     }
 
     // Encodable protocol methods
@@ -51,5 +60,7 @@ public struct TraceAttributesBaseResponse: Codable, Hashable {
         try container.encodeIfPresent(osmChangeset, forKey: .osmChangeset)
         try container.encodeIfPresent(shape, forKey: .shape)
         try container.encodeIfPresent(confidenceScore, forKey: .confidenceScore)
+        try container.encodeIfPresent(elevationInterval, forKey: .elevationInterval)
+        try container.encodeIfPresent(elevation, forKey: .elevation)
     }
 }

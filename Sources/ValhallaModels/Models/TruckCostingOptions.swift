@@ -35,6 +35,10 @@ public struct TruckCostingOptions: Codable, Hashable {
     public var useLivingStreets: Double?
     /** A measure of willingness to take ferries. Values near 0 attempt to avoid ferries, and values near 1 will favour them. Note that as some routes may be impossible without ferries, 0 does not guarantee avoidance of them. */
     public var useFerry: Double? = 0.5
+    /** A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is necessary to reach the destination. The default penalty is 600. */
+    public var destinationOnlyPenalty: Int?
+    /** A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered. The default penalty is 450 for all costing models except pedestrian, where it is 600. */
+    public var privateAccessPenalty: Int?
     /** The height of the truck (in meters). */
     public var height: Double? = 4.11
     /** The width of the truck (in meters). */
@@ -53,7 +57,7 @@ public struct TruckCostingOptions: Codable, Hashable {
     public var useTracks: Double?
     /** The top speed (in kph) that the vehicle is capable of travelling. */
     public var topSpeed: Int? = 140
-    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. */
+    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. Note that it does not disable hierarchy pruning, so the result may be sub-optimal for some costing models. Available for every costing model except `multimodal` and `bikeshare`. */
     public var shortest: Bool? = false
     /** If true, ignores all known closures. This option cannot be set if `location.search_filter.exclude_closures` is also specified. */
     public var ignoreClosures: Bool? = false
@@ -72,7 +76,7 @@ public struct TruckCostingOptions: Codable, Hashable {
     /** Whether or not the truck is carrying hazardous materials. */
     public var hazmat: Bool? = false
 
-    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, height: Double? = 4.11, width: Double? = 2.6, tollBoothCost: Int? = 15, tollBoothPenalty: Int? = 0, ferryCost: Int? = 300, useHighways: Double? = 0.5, useTolls: Double? = 0.5, useTracks: Double? = nil, topSpeed: Int? = 140, shortest: Bool? = false, ignoreClosures: Bool? = false, includeHov2: Bool? = false, includeHov3: Bool? = false, includeHot: Bool? = false, length: Double? = 21.64, weight: Double? = 21.77, axleLoad: Double? = 9.07, hazmat: Bool? = false) {
+    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, destinationOnlyPenalty: Int? = nil, privateAccessPenalty: Int? = nil, height: Double? = 4.11, width: Double? = 2.6, tollBoothCost: Int? = 15, tollBoothPenalty: Int? = 0, ferryCost: Int? = 300, useHighways: Double? = 0.5, useTolls: Double? = 0.5, useTracks: Double? = nil, topSpeed: Int? = 140, shortest: Bool? = false, ignoreClosures: Bool? = false, includeHov2: Bool? = false, includeHov3: Bool? = false, includeHot: Bool? = false, length: Double? = 21.64, weight: Double? = 21.77, axleLoad: Double? = 9.07, hazmat: Bool? = false) {
         self.maneuverPenalty = maneuverPenalty
         self.gateCost = gateCost
         self.gatePenalty = gatePenalty
@@ -82,6 +86,8 @@ public struct TruckCostingOptions: Codable, Hashable {
         self.serviceFactor = serviceFactor
         self.useLivingStreets = useLivingStreets
         self.useFerry = useFerry
+        self.destinationOnlyPenalty = destinationOnlyPenalty
+        self.privateAccessPenalty = privateAccessPenalty
         self.height = height
         self.width = width
         self.tollBoothCost = tollBoothCost
@@ -112,6 +118,8 @@ public struct TruckCostingOptions: Codable, Hashable {
         case serviceFactor = "service_factor"
         case useLivingStreets = "use_living_streets"
         case useFerry = "use_ferry"
+        case destinationOnlyPenalty = "destination_only_penalty"
+        case privateAccessPenalty = "private_access_penalty"
         case height
         case width
         case tollBoothCost = "toll_booth_cost"
@@ -145,6 +153,8 @@ public struct TruckCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(serviceFactor, forKey: .serviceFactor)
         try container.encodeIfPresent(useLivingStreets, forKey: .useLivingStreets)
         try container.encodeIfPresent(useFerry, forKey: .useFerry)
+        try container.encodeIfPresent(destinationOnlyPenalty, forKey: .destinationOnlyPenalty)
+        try container.encodeIfPresent(privateAccessPenalty, forKey: .privateAccessPenalty)
         try container.encodeIfPresent(height, forKey: .height)
         try container.encodeIfPresent(width, forKey: .width)
         try container.encodeIfPresent(tollBoothCost, forKey: .tollBoothCost)

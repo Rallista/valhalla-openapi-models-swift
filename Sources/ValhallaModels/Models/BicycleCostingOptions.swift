@@ -41,6 +41,10 @@ public struct BicycleCostingOptions: Codable, Hashable {
     public var useLivingStreets: Double?
     /** A measure of willingness to take ferries. Values near 0 attempt to avoid ferries, and values near 1 will favour them. Note that as some routes may be impossible without ferries, 0 does not guarantee avoidance of them. */
     public var useFerry: Double? = 0.5
+    /** A penalty (in seconds) applied when entering a road which is only allowed to be entered when it is necessary to reach the destination. The default penalty is 600. */
+    public var destinationOnlyPenalty: Int?
+    /** A penalty (in seconds) applied when a gate or bollard tagged `access=private` is encountered. The default penalty is 450 for all costing models except pedestrian, where it is 600. */
+    public var privateAccessPenalty: Int?
     public var bicycleType: BicycleType? = .hybrid
     /** The average comfortable travel speed (in kph) along smooth, flat roads. The costing will vary the speed based on the surface, bicycle type, elevation change, etc. This value should be the average sustainable cruising speed the cyclist can maintain over the entire route. The default speeds are as follows based on bicycle type:   * Road - 25kph   * Cross - 20kph   * Hybrid - 18kph   * Mountain - 16kph */
     public var cyclingSpeed: Int?
@@ -54,8 +58,10 @@ public struct BicycleCostingOptions: Codable, Hashable {
     public var bssReturnCost: Int? = 120
     /** A penalty (in seconds) to return a bicycle in `bikeshare` mode. */
     public var bssReturnPenalty: Int? = 0
+    /** If true changes the cost metric to be quasi-shortest (pure distance-based) costing. This will disable ALL other costing factors. Note that it does not disable hierarchy pruning, so the result may be sub-optimal for some costing models. Available for every costing model except `multimodal` and `bikeshare`. */
+    public var shortest: Bool? = false
 
-    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, bicycleType: BicycleType? = .hybrid, cyclingSpeed: Int? = nil, useRoads: Double? = 0.5, useHills: Double? = 0.5, avoidBadSurfaces: Double? = 0.25, bssReturnCost: Int? = 120, bssReturnPenalty: Int? = 0) {
+    public init(maneuverPenalty: Int? = 5, gateCost: Int? = 15, gatePenalty: Int? = 300, countryCrossingCost: Int? = 600, countryCrossingPenalty: Int? = 0, servicePenalty: Int? = nil, serviceFactor: Double? = 1, useLivingStreets: Double? = nil, useFerry: Double? = 0.5, destinationOnlyPenalty: Int? = nil, privateAccessPenalty: Int? = nil, bicycleType: BicycleType? = .hybrid, cyclingSpeed: Int? = nil, useRoads: Double? = 0.5, useHills: Double? = 0.5, avoidBadSurfaces: Double? = 0.25, bssReturnCost: Int? = 120, bssReturnPenalty: Int? = 0, shortest: Bool? = false) {
         self.maneuverPenalty = maneuverPenalty
         self.gateCost = gateCost
         self.gatePenalty = gatePenalty
@@ -65,6 +71,8 @@ public struct BicycleCostingOptions: Codable, Hashable {
         self.serviceFactor = serviceFactor
         self.useLivingStreets = useLivingStreets
         self.useFerry = useFerry
+        self.destinationOnlyPenalty = destinationOnlyPenalty
+        self.privateAccessPenalty = privateAccessPenalty
         self.bicycleType = bicycleType
         self.cyclingSpeed = cyclingSpeed
         self.useRoads = useRoads
@@ -72,6 +80,7 @@ public struct BicycleCostingOptions: Codable, Hashable {
         self.avoidBadSurfaces = avoidBadSurfaces
         self.bssReturnCost = bssReturnCost
         self.bssReturnPenalty = bssReturnPenalty
+        self.shortest = shortest
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -84,6 +93,8 @@ public struct BicycleCostingOptions: Codable, Hashable {
         case serviceFactor = "service_factor"
         case useLivingStreets = "use_living_streets"
         case useFerry = "use_ferry"
+        case destinationOnlyPenalty = "destination_only_penalty"
+        case privateAccessPenalty = "private_access_penalty"
         case bicycleType = "bicycle_type"
         case cyclingSpeed = "cycling_speed"
         case useRoads = "use_roads"
@@ -91,6 +102,7 @@ public struct BicycleCostingOptions: Codable, Hashable {
         case avoidBadSurfaces = "avoid_bad_surfaces"
         case bssReturnCost = "bss_return_cost"
         case bssReturnPenalty = "bss_return_penalty"
+        case shortest
     }
 
     // Encodable protocol methods
@@ -106,6 +118,8 @@ public struct BicycleCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(serviceFactor, forKey: .serviceFactor)
         try container.encodeIfPresent(useLivingStreets, forKey: .useLivingStreets)
         try container.encodeIfPresent(useFerry, forKey: .useFerry)
+        try container.encodeIfPresent(destinationOnlyPenalty, forKey: .destinationOnlyPenalty)
+        try container.encodeIfPresent(privateAccessPenalty, forKey: .privateAccessPenalty)
         try container.encodeIfPresent(bicycleType, forKey: .bicycleType)
         try container.encodeIfPresent(cyclingSpeed, forKey: .cyclingSpeed)
         try container.encodeIfPresent(useRoads, forKey: .useRoads)
@@ -113,5 +127,6 @@ public struct BicycleCostingOptions: Codable, Hashable {
         try container.encodeIfPresent(avoidBadSurfaces, forKey: .avoidBadSurfaces)
         try container.encodeIfPresent(bssReturnCost, forKey: .bssReturnCost)
         try container.encodeIfPresent(bssReturnPenalty, forKey: .bssReturnPenalty)
+        try container.encodeIfPresent(shortest, forKey: .shortest)
     }
 }

@@ -11,12 +11,14 @@ import Foundation
 #endif
 
 public enum ValhallaLanguages: String, Codable, CaseIterable {
+    case arSa = "ar-SA"
     case bgBg = "bg-BG"
     case caEs = "ca-ES"
     case csCz = "cs-CZ"
     case daDk = "da-DK"
     case deDe = "de-DE"
     case elGr = "el-GR"
+    case enAu = "en-AU"
     case enGb = "en-GB"
     case enUsXPirate = "en-US-x-pirate"
     case enUs = "en-US"
@@ -28,6 +30,8 @@ public enum ValhallaLanguages: String, Codable, CaseIterable {
     case huHu = "hu-HU"
     case itIt = "it-IT"
     case jaJp = "ja-JP"
+    case koKr = "ko-KR"
+    case mnMn = "mn-MN"
     case nbNo = "nb-NO"
     case nlNl = "nl-NL"
     case plPl = "pl-PL"
@@ -40,4 +44,5 @@ public enum ValhallaLanguages: String, Codable, CaseIterable {
     case svSe = "sv-SE"
     case trTr = "tr-TR"
     case ukUa = "uk-UA"
+    case viVn = "vi-VN"
 }

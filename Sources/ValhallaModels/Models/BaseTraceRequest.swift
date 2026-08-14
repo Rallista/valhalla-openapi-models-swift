@@ -17,6 +17,7 @@ public struct BaseTraceRequest: Codable, Hashable {
         case walkOrSnap = "walk_or_snap"
     }
 
+    public static let elevationIntervalRule = NumericRule<Double>(minimum: 0, exclusiveMinimum: false, maximum: 1000, exclusiveMaximum: false, multipleOf: nil)
     /** An identifier to disambiguate requests (echoed by the server). */
     public var id: String?
     /** REQUIRED if `encoded_polyline` is not present. Note that `break` type locations are only supported when `shape_match` is set to `map_match`. */
@@ -27,15 +28,18 @@ public struct BaseTraceRequest: Codable, Hashable {
     public var costingOptions: CostingOptions?
     /** Three snapping modes provide some control over how the map matching occurs. `edge_walk` is fast, but requires extremely precise data that matches the route graph almost perfectly. `map_snap` can handle significantly noisier data, but is very expensive. `walk_or_snap`, the default, tries to use edge walking first and falls back to map matching if edge walking fails. In general, you should not need to change this parameter unless you want to trace a multi-leg route with multiple `break` locations in the `shape`. */
     public var shapeMatch: ShapeMatch?
+    /** The interval, in the requested units, at which elevation is sampled along the path. When greater than zero, the response carries an `elevation` array sampled at this interval, along with the interval that was applied. When omitted or zero, no elevation is returned. The tiles must have been built with elevation data. An interval of 30 meters matches the resolution of the default elevation source. Values are clamped to the range [0, 1000]. */
+    public var elevationInterval: Double?
     public var directionsOptions: DirectionsOptions?
 
-    public init(id: String? = nil, shape: [MapMatchWaypoint]? = nil, encodedPolyline: String? = nil, costing: MapMatchCostingModel, costingOptions: CostingOptions? = nil, shapeMatch: ShapeMatch? = nil, directionsOptions: DirectionsOptions? = nil) {
+    public init(id: String? = nil, shape: [MapMatchWaypoint]? = nil, encodedPolyline: String? = nil, costing: MapMatchCostingModel, costingOptions: CostingOptions? = nil, shapeMatch: ShapeMatch? = nil, elevationInterval: Double? = nil, directionsOptions: DirectionsOptions? = nil) {
         self.id = id
         self.shape = shape
         self.encodedPolyline = encodedPolyline
         self.costing = costing
         self.costingOptions = costingOptions
         self.shapeMatch = shapeMatch
+        self.elevationInterval = elevationInterval
         self.directionsOptions = directionsOptions
     }
 
@@ -46,6 +50,7 @@ public struct BaseTraceRequest: Codable, Hashable {
         case costing
         case costingOptions = "costing_options"
         case shapeMatch = "shape_match"
+        case elevationInterval = "elevation_interval"
         case directionsOptions = "directions_options"
     }
 
@@ -59,6 +64,7 @@ public struct BaseTraceRequest: Codable, Hashable {
         try container.encode(costing, forKey: .costing)
         try container.encodeIfPresent(costingOptions, forKey: .costingOptions)
         try container.encodeIfPresent(shapeMatch, forKey: .shapeMatch)
+        try container.encodeIfPresent(elevationInterval, forKey: .elevationInterval)
         try container.encodeIfPresent(directionsOptions, forKey: .directionsOptions)
     }
 }
