@@ -19,7 +19,8 @@ public struct TraceAttributesResponse: Codable, Hashable {
     public var admins: [AdminRegion]?
     /** List of match results when using the map_snap shape match algorithm. There is a one-to-one correspondence with the input set of latitude, longitude coordinates and this list of match results. */
     public var matchedPoints: [MatchedPoint]?
-    public var osmChangeset: Int?
+    /** The identifier of the most recent OSM changeset included when the tiles were built. */
+    public var osmChangeset: Int64?
     /** The encoded polyline (https://developers.google.com/maps/documentation/utilities/polylinealgorithm) of the matched path. */
     public var shape: String?
     public var confidenceScore: Double?
@@ -33,7 +34,7 @@ public struct TraceAttributesResponse: Codable, Hashable {
     /** Alternate paths, if any, that were not classified as the best match. */
     public var alternatePaths: [TraceAttributesBaseResponse]?
 
-    public init(edges: [TraceEdge]? = nil, admins: [AdminRegion]? = nil, matchedPoints: [MatchedPoint]? = nil, osmChangeset: Int? = nil, shape: String? = nil, confidenceScore: Double? = nil, elevationInterval: Double? = nil, elevation: [Double]? = nil, id: String? = nil, units: ValhallaLongUnits? = nil, alternatePaths: [TraceAttributesBaseResponse]? = nil) {
+    public init(edges: [TraceEdge]? = nil, admins: [AdminRegion]? = nil, matchedPoints: [MatchedPoint]? = nil, osmChangeset: Int64? = nil, shape: String? = nil, confidenceScore: Double? = nil, elevationInterval: Double? = nil, elevation: [Double]? = nil, id: String? = nil, units: ValhallaLongUnits? = nil, alternatePaths: [TraceAttributesBaseResponse]? = nil) {
         self.edges = edges
         self.admins = admins
         self.matchedPoints = matchedPoints
