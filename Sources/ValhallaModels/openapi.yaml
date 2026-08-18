@@ -3181,6 +3181,9 @@ components:
             with the input set of latitude, longitude coordinates and this list of match results.
         osm_changeset:
           type: integer
+          format: int64
+          description: >-
+            The identifier of the most recent OSM changeset included when the tiles were built.
         shape:
           type: string
           description: >-
