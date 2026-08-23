@@ -3126,7 +3126,9 @@ components:
             The list of heights for each point, in meters. Present only if `range` is `false`.
             Null values indicate missing data.
           items:
-            type: integer
+            type: number
+            format: double
+            nullable: true
         range_height:
           type: array
           description: >-
@@ -3141,9 +3143,11 @@ components:
           items:
             type: array
             items:
-              type: integer
-            minLength: 2
-            maxLength: 2
+              type: number
+              format: double
+              nullable: true
+            minItems: 2
+            maxItems: 2
       example:
         {
           "id": "kesklinn",
