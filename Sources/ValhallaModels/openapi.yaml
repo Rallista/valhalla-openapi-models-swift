@@ -2842,18 +2842,14 @@ components:
         sources:
           type: array
           items:
-            type: array
-            items:
-              $ref: '#/components/schemas/coordinate'
-          description: The list of starting locations
+            $ref: '#/components/schemas/coordinate'
+          description: The list of starting locations, echoed back flat and in request order.
           minItems: 1
         targets:
           type: array
           items:
-            type: array
-            items:
-              $ref: '#/components/schemas/coordinate'
-          description: The list of ending locations
+            $ref: '#/components/schemas/coordinate'
+          description: The list of ending locations, echoed back flat and in request order.
           minItems: 1
         sources_to_targets:
           type: array
