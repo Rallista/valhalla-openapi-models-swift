@@ -17,7 +17,7 @@ public struct ServiceLimits: Codable, Hashable {
     public var bikeshare: ServiceLimitsBicycle?
     public var bus: ServiceLimitsBus?
     public var centroid: ServiceLimitsCentroid?
-    public var heirarchyLimits: ServiceLimitsHeirarchyLimits?
+    public var hierarchyLimits: ServiceLimitsHierarchyLimits?
     public var isochrone: ServiceLimitsIsochrone?
     public var maxAlternates: Int? = 2
     public var maxDistanceDisableHierarchyCulling: Int? = 0
@@ -40,14 +40,14 @@ public struct ServiceLimits: Codable, Hashable {
     public var transit: ServiceLimitsBicycle?
     public var truck: ServiceLimitsAuto?
 
-    public init(allowHardExclusions: Bool? = false, auto: ServiceLimitsAuto? = nil, bicycle: ServiceLimitsBicycle? = nil, bikeshare: ServiceLimitsBicycle? = nil, bus: ServiceLimitsBus? = nil, centroid: ServiceLimitsCentroid? = nil, heirarchyLimits: ServiceLimitsHeirarchyLimits? = nil, isochrone: ServiceLimitsIsochrone? = nil, maxAlternates: Int? = 2, maxDistanceDisableHierarchyCulling: Int? = 0, maxExcludeLocations: Int? = 50, maxExcludePolygonsLength: Int? = 10000, maxLinearCostEdges: Int? = 50000, maxRadius: Int? = 200, maxReachability: Int? = 100, maxTimedepDistance: Int? = 500_000, maxTimedepDistanceMatrix: Int? = 0, minLinearCostFactor: Int? = 1, motorScooter: ServiceLimitsBicycle? = nil, motorcycle: ServiceLimitsBicycle? = nil, multimodal: ServiceLimitsMultimodal? = nil, pedestrian: ServiceLimitsPedestrian? = nil, skadi: ServiceLimitsSkadi? = nil, status: ServiceLimitsStatus? = nil, taxi: ServiceLimitsAuto? = nil, trace: ServiceLimitsTrace? = nil, transit: ServiceLimitsBicycle? = nil, truck: ServiceLimitsAuto? = nil) {
+    public init(allowHardExclusions: Bool? = false, auto: ServiceLimitsAuto? = nil, bicycle: ServiceLimitsBicycle? = nil, bikeshare: ServiceLimitsBicycle? = nil, bus: ServiceLimitsBus? = nil, centroid: ServiceLimitsCentroid? = nil, hierarchyLimits: ServiceLimitsHierarchyLimits? = nil, isochrone: ServiceLimitsIsochrone? = nil, maxAlternates: Int? = 2, maxDistanceDisableHierarchyCulling: Int? = 0, maxExcludeLocations: Int? = 50, maxExcludePolygonsLength: Int? = 10000, maxLinearCostEdges: Int? = 50000, maxRadius: Int? = 200, maxReachability: Int? = 100, maxTimedepDistance: Int? = 500_000, maxTimedepDistanceMatrix: Int? = 0, minLinearCostFactor: Int? = 1, motorScooter: ServiceLimitsBicycle? = nil, motorcycle: ServiceLimitsBicycle? = nil, multimodal: ServiceLimitsMultimodal? = nil, pedestrian: ServiceLimitsPedestrian? = nil, skadi: ServiceLimitsSkadi? = nil, status: ServiceLimitsStatus? = nil, taxi: ServiceLimitsAuto? = nil, trace: ServiceLimitsTrace? = nil, transit: ServiceLimitsBicycle? = nil, truck: ServiceLimitsAuto? = nil) {
         self.allowHardExclusions = allowHardExclusions
         self.auto = auto
         self.bicycle = bicycle
         self.bikeshare = bikeshare
         self.bus = bus
         self.centroid = centroid
-        self.heirarchyLimits = heirarchyLimits
+        self.hierarchyLimits = hierarchyLimits
         self.isochrone = isochrone
         self.maxAlternates = maxAlternates
         self.maxDistanceDisableHierarchyCulling = maxDistanceDisableHierarchyCulling
@@ -78,7 +78,7 @@ public struct ServiceLimits: Codable, Hashable {
         case bikeshare
         case bus
         case centroid
-        case heirarchyLimits = "heirarchy_limits"
+        case hierarchyLimits = "hierarchy_limits"
         case isochrone
         case maxAlternates = "max_alternates"
         case maxDistanceDisableHierarchyCulling = "max_distance_disable_hierarchy_culling"
@@ -112,7 +112,7 @@ public struct ServiceLimits: Codable, Hashable {
         try container.encodeIfPresent(bikeshare, forKey: .bikeshare)
         try container.encodeIfPresent(bus, forKey: .bus)
         try container.encodeIfPresent(centroid, forKey: .centroid)
-        try container.encodeIfPresent(heirarchyLimits, forKey: .heirarchyLimits)
+        try container.encodeIfPresent(hierarchyLimits, forKey: .hierarchyLimits)
         try container.encodeIfPresent(isochrone, forKey: .isochrone)
         try container.encodeIfPresent(maxAlternates, forKey: .maxAlternates)
         try container.encodeIfPresent(maxDistanceDisableHierarchyCulling, forKey: .maxDistanceDisableHierarchyCulling)

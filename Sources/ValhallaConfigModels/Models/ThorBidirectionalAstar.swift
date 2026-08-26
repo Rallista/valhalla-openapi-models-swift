@@ -13,20 +13,20 @@ import Foundation
 public struct ThorBidirectionalAstar: Codable, Hashable {
     public var alternativeCostExtend: Double? = 1.0
     public var alternativeIterationsDelta: Int? = 100_000
-    public var heirarchyLimits: HeirarchyLimits?
+    public var hierarchyLimits: HierarchyLimits?
     public var thresholdDelta: Int? = 420
 
-    public init(alternativeCostExtend: Double? = 1.0, alternativeIterationsDelta: Int? = 100_000, heirarchyLimits: HeirarchyLimits? = nil, thresholdDelta: Int? = 420) {
+    public init(alternativeCostExtend: Double? = 1.0, alternativeIterationsDelta: Int? = 100_000, hierarchyLimits: HierarchyLimits? = nil, thresholdDelta: Int? = 420) {
         self.alternativeCostExtend = alternativeCostExtend
         self.alternativeIterationsDelta = alternativeIterationsDelta
-        self.heirarchyLimits = heirarchyLimits
+        self.hierarchyLimits = hierarchyLimits
         self.thresholdDelta = thresholdDelta
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case alternativeCostExtend = "alternative_cost_extend"
         case alternativeIterationsDelta = "alternative_iterations_delta"
-        case heirarchyLimits = "heirarchy_limits"
+        case hierarchyLimits = "hierarchy_limits"
         case thresholdDelta = "threshold_delta"
     }
 
@@ -36,7 +36,7 @@ public struct ThorBidirectionalAstar: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(alternativeCostExtend, forKey: .alternativeCostExtend)
         try container.encodeIfPresent(alternativeIterationsDelta, forKey: .alternativeIterationsDelta)
-        try container.encodeIfPresent(heirarchyLimits, forKey: .heirarchyLimits)
+        try container.encodeIfPresent(hierarchyLimits, forKey: .hierarchyLimits)
         try container.encodeIfPresent(thresholdDelta, forKey: .thresholdDelta)
     }
 }
