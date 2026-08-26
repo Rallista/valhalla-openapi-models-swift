@@ -11,20 +11,20 @@ import Foundation
 #endif
 
 public struct ThorUnidirectionalAstar: Codable, Hashable {
-    public var heirarchyLimits: HeirarchyLimits?
+    public var hierarchyLimits: HierarchyLimits?
 
-    public init(heirarchyLimits: HeirarchyLimits? = nil) {
-        self.heirarchyLimits = heirarchyLimits
+    public init(hierarchyLimits: HierarchyLimits? = nil) {
+        self.hierarchyLimits = hierarchyLimits
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case heirarchyLimits = "heirarchy_limits"
+        case hierarchyLimits = "hierarchy_limits"
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(heirarchyLimits, forKey: .heirarchyLimits)
+        try container.encodeIfPresent(hierarchyLimits, forKey: .hierarchyLimits)
     }
 }

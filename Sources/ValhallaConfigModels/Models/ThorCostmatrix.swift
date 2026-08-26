@@ -13,16 +13,16 @@ import Foundation
 public struct ThorCostmatrix: Codable, Hashable {
     public var allowSecondPass: Bool? = false
     public var checkReverseConnection: Bool? = true
-    public var heirarchyLimits: HeirarchyLimits?
-    public var maxInterations: Int? = 2800
+    public var hierarchyLimits: HierarchyLimits?
+    public var maxIterations: Int? = 2800
     public var maxReservedLocations: Int? = 25
     public var minIterations: Int? = 100
 
-    public init(allowSecondPass: Bool? = false, checkReverseConnection: Bool? = true, heirarchyLimits: HeirarchyLimits? = nil, maxInterations: Int? = 2800, maxReservedLocations: Int? = 25, minIterations: Int? = 100) {
+    public init(allowSecondPass: Bool? = false, checkReverseConnection: Bool? = true, hierarchyLimits: HierarchyLimits? = nil, maxIterations: Int? = 2800, maxReservedLocations: Int? = 25, minIterations: Int? = 100) {
         self.allowSecondPass = allowSecondPass
         self.checkReverseConnection = checkReverseConnection
-        self.heirarchyLimits = heirarchyLimits
-        self.maxInterations = maxInterations
+        self.hierarchyLimits = hierarchyLimits
+        self.maxIterations = maxIterations
         self.maxReservedLocations = maxReservedLocations
         self.minIterations = minIterations
     }
@@ -30,8 +30,8 @@ public struct ThorCostmatrix: Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case allowSecondPass = "allow_second_pass"
         case checkReverseConnection = "check_reverse_connection"
-        case heirarchyLimits = "heirarchy_limits"
-        case maxInterations = "max_interations"
+        case hierarchyLimits = "hierarchy_limits"
+        case maxIterations = "max_iterations"
         case maxReservedLocations = "max_reserved_locations"
         case minIterations = "min_iterations"
     }
@@ -42,8 +42,8 @@ public struct ThorCostmatrix: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(allowSecondPass, forKey: .allowSecondPass)
         try container.encodeIfPresent(checkReverseConnection, forKey: .checkReverseConnection)
-        try container.encodeIfPresent(heirarchyLimits, forKey: .heirarchyLimits)
-        try container.encodeIfPresent(maxInterations, forKey: .maxInterations)
+        try container.encodeIfPresent(hierarchyLimits, forKey: .hierarchyLimits)
+        try container.encodeIfPresent(maxIterations, forKey: .maxIterations)
         try container.encodeIfPresent(maxReservedLocations, forKey: .maxReservedLocations)
         try container.encodeIfPresent(minIterations, forKey: .minIterations)
     }

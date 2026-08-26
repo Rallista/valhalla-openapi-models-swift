@@ -19,7 +19,7 @@ components:
         type:
           type: string
           default: std_out
-    heirarchy_limits:
+    hierarchy_limits:
       type: object
       properties:
         expand_within_distance:
@@ -508,10 +508,10 @@ components:
             max_locations:
               type: integer
               default: 5
-        heirarchy_limits:
+        hierarchy_limits:
           type: object
           properties:
-            allow_modifications:
+            allow_modification:
               type: boolean
               default: false
             bidirectional_astar:
@@ -802,8 +802,8 @@ components:
             alternative_iterations_delta:
               type: integer
               default: 100000
-            heirarchy_limits:
-              $ref: "#/components/schemas/heirarchy_limits"
+            hierarchy_limits:
+              $ref: "#/components/schemas/hierarchy_limits"
             threshold_delta:
               type: integer
               default: 420
@@ -819,9 +819,9 @@ components:
             check_reverse_connection:
               type: boolean
               default: true
-            heirarchy_limits:
-              $ref: "#/components/schemas/heirarchy_limits"
-            max_interations:
+            hierarchy_limits:
+              $ref: "#/components/schemas/hierarchy_limits"
+            max_iterations:
               type: integer
               default: 2800
             max_reserved_locations:
@@ -872,5 +872,5 @@ components:
         unidirectional_astar:
           type: object
           properties:
-            heirarchy_limits:
-              $ref: "#/components/schemas/heirarchy_limits"
+            hierarchy_limits:
+              $ref: "#/components/schemas/hierarchy_limits"

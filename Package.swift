@@ -29,6 +29,7 @@ let package = Package(
 
         .testTarget(
             name: "Tests",
-            dependencies: ["ValhallaModels", "ValhallaConfigModels"])
+            dependencies: ["ValhallaModels", "ValhallaConfigModels"],
+            resources: [.process("Resources")])
     ]
 )
