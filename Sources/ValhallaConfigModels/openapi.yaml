@@ -50,6 +50,8 @@ components:
           $ref: "#/components/schemas/additional_data"
         httpd:
           $ref: "#/components/schemas/httpd"
+        logging:
+          $ref: "#/components/schemas/logging"
         loki:
           $ref: "#/components/schemas/loki"
         meili:
@@ -117,21 +119,6 @@ components:
               "status",
               "tile"
             ]
-        logging:
-          type: object
-          properties:
-            color:
-              type: boolean
-              default: true
-            file_name:
-              type: string
-              default: path_to_some_file.log
-            long_request:
-              type: integer
-              default: 100
-            type:
-              type: string
-              default: std_out
         service:
           type: object
           properties:
@@ -150,6 +137,9 @@ components:
             mvt_cache_min_zoom:
               type: integer
               default: 11
+            mvt_max_age:
+              type: string
+              default: "1800"
             mvt_min_zoom_road_class:
               type: array
               items:
@@ -256,8 +246,6 @@ components:
             size:
               type: integer
               default: 500
-        logging:
-          $ref: "#/components/schemas/logging"
         mode:
           type: string
           default: auto
@@ -298,6 +286,9 @@ components:
               type: boolean
               default: false
             apply_country_overrides:
+              type: boolean
+              default: true
+            build_bounding_circles:
               type: boolean
               default: true
             grid_divisions_within_tile:
@@ -363,8 +354,6 @@ components:
         landmarks:
           type: string
           default: /custom_data/landmarks.sqlite
-        logging:
-          $ref: "#/components/schemas/logging"
         lru_mem_cache_hard_control:
           type: boolean
           default: false
@@ -374,6 +363,9 @@ components:
         max_concurrent_reader_users:
           type: integer
           default: 1
+        pedestrian_areas:
+          type: boolean
+          default: false
         reclassify_links:
           type: boolean
           default: true
@@ -416,8 +408,6 @@ components:
     odin:
       type: object
       properties:
-        logging:
-          $ref: "#/components/schemas/logging"
         markup_formatter:
           type: object
           properties:
@@ -448,6 +438,18 @@ components:
             max_locations:
               type: integer
               default: 20
+            max_matrix_distance:
+              type: integer
+              default: 400000
+            max_matrix_location_pairs:
+              type: integer
+              default: 2500
+        auto_pedestrian:
+          type: object
+          properties:
+            max_distance:
+              type: integer
+              default: 5000000
             max_matrix_distance:
               type: integer
               default: 400000
@@ -616,6 +618,9 @@ components:
         max_exclude_polygons_length:
           type: integer
           default: 10000
+        max_exclude_polygons_vertices:
+          type: integer
+          default: 100
         max_linear_cost_edges:
           type: integer
           default: 50000
@@ -694,10 +699,10 @@ components:
             max_matrix_location_pairs:
               type: integer
               default: 2500
-            max_transit_walking_distance:
+            max_multimodal_walking_distance:
               type: integer
               default: 10000
-            min_transit_walking_distance:
+            min_multimodal_walking_distance:
               type: integer
               default: 1
         skadi:
@@ -784,6 +789,9 @@ components:
     statsd:
       type: object
       properties:
+        batch_size:
+          type: integer
+          default: 500
         port:
           type: integer
           default: 8125
@@ -819,6 +827,9 @@ components:
             check_reverse_connection:
               type: boolean
               default: true
+            dijkstra_distance:
+              type: integer
+              default: 0
             hierarchy_limits:
               $ref: "#/components/schemas/hierarchy_limits"
             max_iterations:
@@ -833,21 +844,6 @@ components:
         extended_search:
           type: boolean
           default: false
-        logging:
-          type: object
-          properties:
-            color:
-              type: boolean
-              default: true
-            file_name:
-              type: string
-              default: path_to_some_file.log
-            long_request:
-              type: integer
-              default: 110
-            type:
-              type: string
-              default: std_out
         max_reserved_labels_count_astar:
           type: integer
           default: 2000000

@@ -15,16 +15,16 @@ public struct ServiceLimitsPedestrian: Codable, Hashable {
     public var maxLocations: Int? = 50
     public var maxMatrixDistance: Int? = 200_000
     public var maxMatrixLocationPairs: Int? = 2500
-    public var maxTransitWalkingDistance: Int? = 10000
-    public var minTransitWalkingDistance: Int? = 1
+    public var maxMultimodalWalkingDistance: Int? = 10000
+    public var minMultimodalWalkingDistance: Int? = 1
 
-    public init(maxDistance: Int? = 250_000, maxLocations: Int? = 50, maxMatrixDistance: Int? = 200_000, maxMatrixLocationPairs: Int? = 2500, maxTransitWalkingDistance: Int? = 10000, minTransitWalkingDistance: Int? = 1) {
+    public init(maxDistance: Int? = 250_000, maxLocations: Int? = 50, maxMatrixDistance: Int? = 200_000, maxMatrixLocationPairs: Int? = 2500, maxMultimodalWalkingDistance: Int? = 10000, minMultimodalWalkingDistance: Int? = 1) {
         self.maxDistance = maxDistance
         self.maxLocations = maxLocations
         self.maxMatrixDistance = maxMatrixDistance
         self.maxMatrixLocationPairs = maxMatrixLocationPairs
-        self.maxTransitWalkingDistance = maxTransitWalkingDistance
-        self.minTransitWalkingDistance = minTransitWalkingDistance
+        self.maxMultimodalWalkingDistance = maxMultimodalWalkingDistance
+        self.minMultimodalWalkingDistance = minMultimodalWalkingDistance
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,8 +32,8 @@ public struct ServiceLimitsPedestrian: Codable, Hashable {
         case maxLocations = "max_locations"
         case maxMatrixDistance = "max_matrix_distance"
         case maxMatrixLocationPairs = "max_matrix_location_pairs"
-        case maxTransitWalkingDistance = "max_transit_walking_distance"
-        case minTransitWalkingDistance = "min_transit_walking_distance"
+        case maxMultimodalWalkingDistance = "max_multimodal_walking_distance"
+        case minMultimodalWalkingDistance = "min_multimodal_walking_distance"
     }
 
     // Encodable protocol methods
@@ -44,7 +44,7 @@ public struct ServiceLimitsPedestrian: Codable, Hashable {
         try container.encodeIfPresent(maxLocations, forKey: .maxLocations)
         try container.encodeIfPresent(maxMatrixDistance, forKey: .maxMatrixDistance)
         try container.encodeIfPresent(maxMatrixLocationPairs, forKey: .maxMatrixLocationPairs)
-        try container.encodeIfPresent(maxTransitWalkingDistance, forKey: .maxTransitWalkingDistance)
-        try container.encodeIfPresent(minTransitWalkingDistance, forKey: .minTransitWalkingDistance)
+        try container.encodeIfPresent(maxMultimodalWalkingDistance, forKey: .maxMultimodalWalkingDistance)
+        try container.encodeIfPresent(minMultimodalWalkingDistance, forKey: .minMultimodalWalkingDistance)
     }
 }

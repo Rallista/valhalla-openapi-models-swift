@@ -15,7 +15,6 @@ public struct Thor: Codable, Hashable {
     public var clearReservedMemory: Bool? = false
     public var costmatrix: ThorCostmatrix?
     public var extendedSearch: Bool? = false
-    public var logging: ThorLogging?
     public var maxReservedLabelsCountAstar: Int? = 2_000_000
     public var maxReservedLabelsCountBidirAstar: Int? = 1_000_000
     public var maxReservedLabelsCountBidirDijkstras: Int? = 2_000_000
@@ -24,12 +23,11 @@ public struct Thor: Codable, Hashable {
     public var sourceToTargetAlgorithm: String? = "select_optimal"
     public var unidirectionalAstar: ThorUnidirectionalAstar?
 
-    public init(bidirectionalAstar: ThorBidirectionalAstar? = nil, clearReservedMemory: Bool? = false, costmatrix: ThorCostmatrix? = nil, extendedSearch: Bool? = false, logging: ThorLogging? = nil, maxReservedLabelsCountAstar: Int? = 2_000_000, maxReservedLabelsCountBidirAstar: Int? = 1_000_000, maxReservedLabelsCountBidirDijkstras: Int? = 2_000_000, maxReservedLabelsCountDijkstras: Int? = 4_000_000, service: ThorService? = nil, sourceToTargetAlgorithm: String? = "select_optimal", unidirectionalAstar: ThorUnidirectionalAstar? = nil) {
+    public init(bidirectionalAstar: ThorBidirectionalAstar? = nil, clearReservedMemory: Bool? = false, costmatrix: ThorCostmatrix? = nil, extendedSearch: Bool? = false, maxReservedLabelsCountAstar: Int? = 2_000_000, maxReservedLabelsCountBidirAstar: Int? = 1_000_000, maxReservedLabelsCountBidirDijkstras: Int? = 2_000_000, maxReservedLabelsCountDijkstras: Int? = 4_000_000, service: ThorService? = nil, sourceToTargetAlgorithm: String? = "select_optimal", unidirectionalAstar: ThorUnidirectionalAstar? = nil) {
         self.bidirectionalAstar = bidirectionalAstar
         self.clearReservedMemory = clearReservedMemory
         self.costmatrix = costmatrix
         self.extendedSearch = extendedSearch
-        self.logging = logging
         self.maxReservedLabelsCountAstar = maxReservedLabelsCountAstar
         self.maxReservedLabelsCountBidirAstar = maxReservedLabelsCountBidirAstar
         self.maxReservedLabelsCountBidirDijkstras = maxReservedLabelsCountBidirDijkstras
@@ -44,7 +42,6 @@ public struct Thor: Codable, Hashable {
         case clearReservedMemory = "clear_reserved_memory"
         case costmatrix
         case extendedSearch = "extended_search"
-        case logging
         case maxReservedLabelsCountAstar = "max_reserved_labels_count_astar"
         case maxReservedLabelsCountBidirAstar = "max_reserved_labels_count_bidir_astar"
         case maxReservedLabelsCountBidirDijkstras = "max_reserved_labels_count_bidir_dijkstras"
@@ -62,7 +59,6 @@ public struct Thor: Codable, Hashable {
         try container.encodeIfPresent(clearReservedMemory, forKey: .clearReservedMemory)
         try container.encodeIfPresent(costmatrix, forKey: .costmatrix)
         try container.encodeIfPresent(extendedSearch, forKey: .extendedSearch)
-        try container.encodeIfPresent(logging, forKey: .logging)
         try container.encodeIfPresent(maxReservedLabelsCountAstar, forKey: .maxReservedLabelsCountAstar)
         try container.encodeIfPresent(maxReservedLabelsCountBidirAstar, forKey: .maxReservedLabelsCountBidirAstar)
         try container.encodeIfPresent(maxReservedLabelsCountBidirDijkstras, forKey: .maxReservedLabelsCountBidirDijkstras)

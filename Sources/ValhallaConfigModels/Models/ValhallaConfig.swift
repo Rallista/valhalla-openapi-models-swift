@@ -13,6 +13,7 @@ import Foundation
 public struct ValhallaConfig: Codable, Hashable {
     public var additionalData: AdditionalData?
     public var httpd: Httpd?
+    public var logging: Logging?
     public var loki: Loki?
     public var meili: Meili?
     public var mjolnir: Mjolnir?
@@ -21,9 +22,10 @@ public struct ValhallaConfig: Codable, Hashable {
     public var statsd: Statsd?
     public var thor: Thor?
 
-    public init(additionalData: AdditionalData? = nil, httpd: Httpd? = nil, loki: Loki? = nil, meili: Meili? = nil, mjolnir: Mjolnir? = nil, odin: Odin? = nil, serviceLimits: ServiceLimits? = nil, statsd: Statsd? = nil, thor: Thor? = nil) {
+    public init(additionalData: AdditionalData? = nil, httpd: Httpd? = nil, logging: Logging? = nil, loki: Loki? = nil, meili: Meili? = nil, mjolnir: Mjolnir? = nil, odin: Odin? = nil, serviceLimits: ServiceLimits? = nil, statsd: Statsd? = nil, thor: Thor? = nil) {
         self.additionalData = additionalData
         self.httpd = httpd
+        self.logging = logging
         self.loki = loki
         self.meili = meili
         self.mjolnir = mjolnir
@@ -36,6 +38,7 @@ public struct ValhallaConfig: Codable, Hashable {
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case additionalData = "additional_data"
         case httpd
+        case logging
         case loki
         case meili
         case mjolnir
@@ -51,6 +54,7 @@ public struct ValhallaConfig: Codable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(additionalData, forKey: .additionalData)
         try container.encodeIfPresent(httpd, forKey: .httpd)
+        try container.encodeIfPresent(logging, forKey: .logging)
         try container.encodeIfPresent(loki, forKey: .loki)
         try container.encodeIfPresent(meili, forKey: .meili)
         try container.encodeIfPresent(mjolnir, forKey: .mjolnir)

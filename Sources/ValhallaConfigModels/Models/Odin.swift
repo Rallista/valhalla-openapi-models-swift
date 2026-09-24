@@ -11,18 +11,15 @@ import Foundation
 #endif
 
 public struct Odin: Codable, Hashable {
-    public var logging: Logging?
     public var markupFormatter: OdinMarkupFormatter?
     public var service: OdinService?
 
-    public init(logging: Logging? = nil, markupFormatter: OdinMarkupFormatter? = nil, service: OdinService? = nil) {
-        self.logging = logging
+    public init(markupFormatter: OdinMarkupFormatter? = nil, service: OdinService? = nil) {
         self.markupFormatter = markupFormatter
         self.service = service
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case logging
         case markupFormatter = "markup_formatter"
         case service
     }
@@ -31,7 +28,6 @@ public struct Odin: Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(logging, forKey: .logging)
         try container.encodeIfPresent(markupFormatter, forKey: .markupFormatter)
         try container.encodeIfPresent(service, forKey: .service)
     }

@@ -26,10 +26,10 @@ public struct Mjolnir: Codable, Hashable {
     public var keepAllOsmNodeIds: Bool? = false
     public var keepOsmNodeIds: Bool? = false
     public var landmarks: String? = "/custom_data/landmarks.sqlite"
-    public var logging: Logging?
     public var lruMemCacheHardControl: Bool? = false
     public var maxCacheSize: Int? = 1_000_000_000
     public var maxConcurrentReaderUsers: Int? = 1
+    public var pedestrianAreas: Bool? = false
     public var reclassifyLinks: Bool? = true
     public var shortcuts: Bool? = true
     public var tileDir: String? = ""
@@ -44,7 +44,7 @@ public struct Mjolnir: Codable, Hashable {
     public var useLruMemCache: Bool? = false
     public var useSimpleMemCache: Bool? = false
 
-    public init(admin: String? = "/custom_data/admins.sqlite", dataProcessing: MjolnirDataProcessing? = nil, globalSynchronizedCache: Bool? = false, hierarchy: Bool? = true, idTableSize: Int? = 1_300_000_000, importBikeShareStations: Bool? = false, includeBicycle: Bool? = true, includeConstruction: Bool? = false, includeDriveways: Bool? = true, includeDriving: Bool? = true, includePedestrian: Bool? = true, includePlatforms: Bool? = true, keepAllOsmNodeIds: Bool? = false, keepOsmNodeIds: Bool? = false, landmarks: String? = "/custom_data/landmarks.sqlite", logging: Logging? = nil, lruMemCacheHardControl: Bool? = false, maxCacheSize: Int? = 1_000_000_000, maxConcurrentReaderUsers: Int? = 1, reclassifyLinks: Bool? = true, shortcuts: Bool? = true, tileDir: String? = "", tileExtract: String? = "", tileUrl: String? = "", tileUrlGz: Bool? = false, timezone: String? = "timezones.sqlite", trafficExtract: String? = "", transitDir: String? = "", transitFeedsDir: String? = "", transitPbfLimit: Int? = 20000, useLruMemCache: Bool? = false, useSimpleMemCache: Bool? = false) {
+    public init(admin: String? = "/custom_data/admins.sqlite", dataProcessing: MjolnirDataProcessing? = nil, globalSynchronizedCache: Bool? = false, hierarchy: Bool? = true, idTableSize: Int? = 1_300_000_000, importBikeShareStations: Bool? = false, includeBicycle: Bool? = true, includeConstruction: Bool? = false, includeDriveways: Bool? = true, includeDriving: Bool? = true, includePedestrian: Bool? = true, includePlatforms: Bool? = true, keepAllOsmNodeIds: Bool? = false, keepOsmNodeIds: Bool? = false, landmarks: String? = "/custom_data/landmarks.sqlite", lruMemCacheHardControl: Bool? = false, maxCacheSize: Int? = 1_000_000_000, maxConcurrentReaderUsers: Int? = 1, pedestrianAreas: Bool? = false, reclassifyLinks: Bool? = true, shortcuts: Bool? = true, tileDir: String? = "", tileExtract: String? = "", tileUrl: String? = "", tileUrlGz: Bool? = false, timezone: String? = "timezones.sqlite", trafficExtract: String? = "", transitDir: String? = "", transitFeedsDir: String? = "", transitPbfLimit: Int? = 20000, useLruMemCache: Bool? = false, useSimpleMemCache: Bool? = false) {
         self.admin = admin
         self.dataProcessing = dataProcessing
         self.globalSynchronizedCache = globalSynchronizedCache
@@ -60,10 +60,10 @@ public struct Mjolnir: Codable, Hashable {
         self.keepAllOsmNodeIds = keepAllOsmNodeIds
         self.keepOsmNodeIds = keepOsmNodeIds
         self.landmarks = landmarks
-        self.logging = logging
         self.lruMemCacheHardControl = lruMemCacheHardControl
         self.maxCacheSize = maxCacheSize
         self.maxConcurrentReaderUsers = maxConcurrentReaderUsers
+        self.pedestrianAreas = pedestrianAreas
         self.reclassifyLinks = reclassifyLinks
         self.shortcuts = shortcuts
         self.tileDir = tileDir
@@ -95,10 +95,10 @@ public struct Mjolnir: Codable, Hashable {
         case keepAllOsmNodeIds = "keep_all_osm_node_ids"
         case keepOsmNodeIds = "keep_osm_node_ids"
         case landmarks
-        case logging
         case lruMemCacheHardControl = "lru_mem_cache_hard_control"
         case maxCacheSize = "max_cache_size"
         case maxConcurrentReaderUsers = "max_concurrent_reader_users"
+        case pedestrianAreas = "pedestrian_areas"
         case reclassifyLinks = "reclassify_links"
         case shortcuts
         case tileDir = "tile_dir"
@@ -133,10 +133,10 @@ public struct Mjolnir: Codable, Hashable {
         try container.encodeIfPresent(keepAllOsmNodeIds, forKey: .keepAllOsmNodeIds)
         try container.encodeIfPresent(keepOsmNodeIds, forKey: .keepOsmNodeIds)
         try container.encodeIfPresent(landmarks, forKey: .landmarks)
-        try container.encodeIfPresent(logging, forKey: .logging)
         try container.encodeIfPresent(lruMemCacheHardControl, forKey: .lruMemCacheHardControl)
         try container.encodeIfPresent(maxCacheSize, forKey: .maxCacheSize)
         try container.encodeIfPresent(maxConcurrentReaderUsers, forKey: .maxConcurrentReaderUsers)
+        try container.encodeIfPresent(pedestrianAreas, forKey: .pedestrianAreas)
         try container.encodeIfPresent(reclassifyLinks, forKey: .reclassifyLinks)
         try container.encodeIfPresent(shortcuts, forKey: .shortcuts)
         try container.encodeIfPresent(tileDir, forKey: .tileDir)

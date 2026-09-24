@@ -11,15 +11,18 @@ import Foundation
 #endif
 
 public struct Statsd: Codable, Hashable {
+    public var batchSize: Int? = 500
     public var port: Int? = 8125
     public var _prefix: String? = "valhalla"
 
-    public init(port: Int? = 8125, _prefix: String? = "valhalla") {
+    public init(batchSize: Int? = 500, port: Int? = 8125, _prefix: String? = "valhalla") {
+        self.batchSize = batchSize
         self.port = port
         self._prefix = _prefix
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case batchSize = "batch_size"
         case port
         case _prefix = "prefix"
     }
@@ -28,6 +31,7 @@ public struct Statsd: Codable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(batchSize, forKey: .batchSize)
         try container.encodeIfPresent(port, forKey: .port)
         try container.encodeIfPresent(_prefix, forKey: ._prefix)
     }

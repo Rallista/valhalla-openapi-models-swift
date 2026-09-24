@@ -16,20 +16,18 @@ public struct Meili: Codable, Hashable {
     public var customizable: [String]?
     public var _default: MeiliDefault?
     public var grid: MeiliGrid?
-    public var logging: Logging?
     public var mode: String? = "auto"
     public var multimodal: MeiliMultimodal?
     public var pedestrian: MeiliPedestrian?
     public var service: MeiliService?
     public var verbose: Bool? = false
 
-    public init(auto: MeiliAuto? = nil, bicycle: MeiliBicycle? = nil, customizable: [String]? = nil, _default: MeiliDefault? = nil, grid: MeiliGrid? = nil, logging: Logging? = nil, mode: String? = "auto", multimodal: MeiliMultimodal? = nil, pedestrian: MeiliPedestrian? = nil, service: MeiliService? = nil, verbose: Bool? = false) {
+    public init(auto: MeiliAuto? = nil, bicycle: MeiliBicycle? = nil, customizable: [String]? = nil, _default: MeiliDefault? = nil, grid: MeiliGrid? = nil, mode: String? = "auto", multimodal: MeiliMultimodal? = nil, pedestrian: MeiliPedestrian? = nil, service: MeiliService? = nil, verbose: Bool? = false) {
         self.auto = auto
         self.bicycle = bicycle
         self.customizable = customizable
         self._default = _default
         self.grid = grid
-        self.logging = logging
         self.mode = mode
         self.multimodal = multimodal
         self.pedestrian = pedestrian
@@ -43,7 +41,6 @@ public struct Meili: Codable, Hashable {
         case customizable
         case _default = "default"
         case grid
-        case logging
         case mode
         case multimodal
         case pedestrian
@@ -60,7 +57,6 @@ public struct Meili: Codable, Hashable {
         try container.encodeIfPresent(customizable, forKey: .customizable)
         try container.encodeIfPresent(_default, forKey: ._default)
         try container.encodeIfPresent(grid, forKey: .grid)
-        try container.encodeIfPresent(logging, forKey: .logging)
         try container.encodeIfPresent(mode, forKey: .mode)
         try container.encodeIfPresent(multimodal, forKey: .multimodal)
         try container.encodeIfPresent(pedestrian, forKey: .pedestrian)
