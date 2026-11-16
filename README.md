@@ -4,7 +4,7 @@ A pre-generated set of Valhalla's API models and configuration models.
 
 ## Contributing
 
-Install OpenAPI Generator **7.26.0 or newer (stable release)** and SwiftFormat:
+Install OpenAPI Generator **7.26.0 or newer** and SwiftFormat:
 
 ```sh
 brew install openapi-generator swiftformat

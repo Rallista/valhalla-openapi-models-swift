@@ -14,20 +14,6 @@ if ! command -v swiftformat >/dev/null 2>&1; then
     exit 1
 fi
 
-# Version 7.26.0 fixed nullable array items in the Swift generator.
-if ! generator_version=$(openapi-generator version); then
-    echo "Error: could not determine the openapi-generator version."
-    exit 1
-fi
-
-if [[ ! "$generator_version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]] ||
-   (( 10#${BASH_REMATCH[1]} < 7 ||
-      (10#${BASH_REMATCH[1]} == 7 && 10#${BASH_REMATCH[2]} < 26) )); then
-    echo "Error: openapi-generator 7.26.0 or newer (stable release) is required; found '$generator_version'."
-    echo "Upgrade it with: brew upgrade openapi-generator"
-    exit 1
-fi
-
 # Define the source directories
 source_dirs=("Sources/ValhallaModels" "Sources/ValhallaConfigModels")
 
